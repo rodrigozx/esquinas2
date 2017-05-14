@@ -12,8 +12,8 @@ public class Partida {
     private Tablero tablero;
     private Jugador jugador1;
     private Jugador jugador2;
-    private int fichasJugador1;
-    private int fichasJugador2;
+    private int cantCubosJug1;
+    private int cantCubosJug2;
     private Jugador ganador;
     private int turno;
     private boolean vsCpu;
@@ -26,8 +26,8 @@ public class Partida {
         this.jugador2 = jugador2;
         this.turno = 1;
         this.tablero = elTablero;
-        this.fichasJugador1 = 25;
-        this.fichasJugador2 = 25;
+        this.cantCubosJug1 = 25;
+        this.cantCubosJug2 = 25;
         this.ganador = null;
         this.vsCpu = false;
     }
@@ -38,8 +38,8 @@ public class Partida {
         this.jugador2 = jugador2;
         this.turno = turno;
         this.tablero = elTablero;
-        this.fichasJugador1 = fichasJugador1;
-        this.fichasJugador2 = fichasJugador1;
+        this.cantCubosJug1 = fichasJugador1;
+        this.cantCubosJug2 = fichasJugador1;
         this.ganador = null;
         this.vsCpu = versusCpu;
     }
@@ -61,8 +61,16 @@ public class Partida {
         this.jugador2 = jugador2;
     }
 
+    public int getCantCubosJugador1() {
+        return this.cantCubosJug1;
+    }
+    
+    public int getCantCubosJugador2() {
+        return this.cantCubosJug2;
+    }
+    
     public int getTurno() {
-        return turno;
+        return this.turno;
     }
 
     public void setTurno(int turno) {
@@ -89,27 +97,33 @@ public class Partida {
 
     /* METODOS *************************************/
     /*Valida el estado de la partida.
+      si alguno de los jugadores no tiene más fichas, entonces terminó la partida.
      0-No hay ganador
      1-Ganador Jugador1
      2-Ganador Jugador2
      */
-    public int hayGanador() {
+    public int terminoPartida() {
 
-        if (!(this.jugador1.getCubosTotal() == 0 && (this.jugador2.getCubosTotal() == 0))) {
-            if (this.jugador1.getCubosTotal() == 0) {
-                this.setEstado(1);
+        int estado =0;
+        if (!(this.cantCubosJug1 == 0 && (this.cantCubosJug2 == 0))) {
+              estado =  ganadorPartida();
             }
-            if (this.jugador2.getCubosTotal() == 0) {
-                this.setEstado(2);
-            }
-        }
+        
         return estado;
     }
 
+     public int ganadorPartida(){
+        
+        //calculo las fichas en el tablero
+        int estado = 0;
+        
+        return estado;
+     }
+     
     public void sumarRestaCubo(int cantidadFichas, String tipoFicha, boolean esSuma) {
 
         Jugador jugadorAux;
-        int posFichas;
+        int posJugador;
 
         if (this.getTurno() == 1) {
             jugadorAux = this.getJugador1();
@@ -117,20 +131,7 @@ public class Partida {
             jugadorAux = this.getJugador2();
         }
 
-        //Busco en que posición guardo éste tipo de ficha y le sumo o resto la cantidad
-        posFichas = Sistema.posEnArrayTipoFicha(tipoFicha);
-        if (esSuma) {
-            jugadorAux.getCubos()[posFichas] = jugadorAux.getCubos()[posFichas] + cantidadFichas;
-        } else {
-            if (jugadorAux.getCubos()[posFichas] > 0) {
-                jugadorAux.getCubos()[posFichas] = jugadorAux.getCubos()[posFichas] - cantidadFichas;
-            } else {
-                this.error = (jugadorAux.getAlias() + " no tiene fichas " + tipoFicha);
-            }
-        }
     }
-
-
 
 
     public Jugador getJugadorDeTurno(int turno) {
@@ -144,228 +145,10 @@ public class Partida {
         return elJugador;
     }
 
-    public String validarJugada(String movimiento) {
-        String salida = "";
-        String aux;
+    public boolean validarJugada(String jugada) {
         int[] coordenadas1;
         int[] coordenadas2;
-        char ficha;
-        char ficha2;
-        /*
-         Tipos de entradas:
-         (Piedra)
-         PH A5
-         PD A4
-         (Patron)
-         PDJ B4 B5
-         PDS A3 A5 R
-         PDC A5 B3 A
-         PDD D2 C1 RC
-         */
-        //Quito los espacios en caso que existan
-        movimiento = movimiento.replaceAll("\\s+", "");
-
-        //Si la jugada es mayor a 4 caracteres, entonces es un patrón
-        if (movimiento.length() > 4) {
-            boolean movOk;
-
-            //PATRONES 
-            switch (movimiento.length()) {
-
-                case 7: //PATRON DOS PIEDRAS JUNTAS "PDJ"
-                    aux = movimiento.substring(0, 3);
-                    if (aux.equalsIgnoreCase("PDJ")) {
-
-                        //Coordenadas de primera piedra.
-                        coordenadas1 = this.ingresarCoordenadas(movimiento.substring(3, 5));
-                        if (this.getError().contains("Coordenadas OK")) {
-
-                            //Coordenadas de segunda piedra.
-                            coordenadas2 = this.ingresarCoordenadas(movimiento.substring(5, 7));
-                            if (this.getError().contains("Coordenadas OK")) {
-
-                                movOk = ingresarPatronPDJ(coordenadas1[0], coordenadas1[1], coordenadas2[0], coordenadas2[1], this.getJugadorDeTurno(this.getTurno()));
-
-                            } else {
-                                //Ya esta seteado el error
-                            }
-                        } else {
-                            //Ya esta seteado el error
-                        }
-                    } else {
-                        this.setError("El movimiento ingresado no es valido");
-                    }
-                    break;
-
-                case 8: //PATRON DOS PIEDRAS SEPARADAS "PDS"
-                    aux = movimiento.substring(0, 3);
-
-                    if (aux.equalsIgnoreCase("PDS")) {
-
-                        //Coordenadas de primera piedra.
-                        coordenadas1 = this.ingresarCoordenadas(movimiento.substring(3, 5));
-                        if (this.getError().contains("Coordenadas OK")) {
-
-                            //Coordenadas de segunda piedra.                                
-                            coordenadas2 = this.ingresarCoordenadas(movimiento.substring(5, 7));
-                            if (this.getError().contains("Coordenadas OK")) {
-                                ficha = movimiento.toUpperCase().charAt(7);
-                                movOk = ingresarPatronPDS(coordenadas1[0], coordenadas1[1], ficha, coordenadas2[0], coordenadas2[1], this.getJugadorDeTurno(this.getTurno()));
-                            } else {
-                                //Ya esta seteado el error
-                            }
-                        } else {
-                            //Ya esta seteado el error
-                        }
-
-                    } else {
-                        //PATRON DOS CABALLO "PDC"
-                        if (aux.equalsIgnoreCase("PDC")) {
-
-                            //Coordenadas de primera piedra.
-                            coordenadas1 = this.ingresarCoordenadas(movimiento.substring(3, 5));
-                            if (this.getError().contains("Coordenadas OK")) {
-
-                                //Coordenadas de segunda piedra.                                
-                                coordenadas2 = this.ingresarCoordenadas(movimiento.substring(5, 7));
-                                if (this.getError().contains("Coordenadas OK")) {
-                                    ficha = movimiento.toUpperCase().charAt(7);
-                                    movOk = ingresarPatronPDC(coordenadas1[0], coordenadas1[1], ficha, coordenadas2[0], coordenadas2[1], this.getJugadorDeTurno(this.getTurno()));
-                                } else {
-                                    //Ya esta seteado el error
-                                }
-                            } else {
-                                //Ya esta seteado el error
-                            }
-                        } else {
-                            this.setError("El movimiento ingresado no es valido");
-                        }
-                    }
-                    break;
-
-                case 9:
-                    aux = movimiento.substring(0, 3);
-                    if (aux.equalsIgnoreCase("PDD")) {
-
-                        //Coordenadas de primera piedra.
-                        coordenadas1 = this.ingresarCoordenadas(movimiento.substring(3, 5));
-                        if (this.getError().contains("Coordenadas OK")) {
-
-                            //Coordenadas de segunda piedra.                                
-                            coordenadas2 = this.ingresarCoordenadas(movimiento.substring(5, 7));
-                            if (this.getError().contains("Coordenadas OK")) {
-                                ficha = movimiento.toUpperCase().charAt(7);
-                                ficha2 = movimiento.toUpperCase().charAt(8);
-                                movOk = ingresarPatronPDD(coordenadas1[0], coordenadas1[1], ficha, ficha2, coordenadas2[0], coordenadas2[1], this.getJugadorDeTurno(this.getTurno()));
-                            } else {
-                                //Ya esta seteado el error
-                            }
-                        } else {
-                            //Ya esta seteado el error
-                        }
-                    } else {
-                        this.setError("El movimiento ingresado no es valido");
-                    }
-                    break;
-                default:
-                    this.setError("El movimiento ingresado no es valido");
-                    break;
-            }
-
-        } else { //NO ES UN PATRON
-
-            switch (movimiento.length()) {
-
-                case 1: //ABANDONAR O AYUDA
-                    aux = movimiento.substring(0);
-
-                    if (validaAbandonar(aux)) {
-                        this.setError("!!! Abandona !!!");
-
-                    } else {
-                        if (aux.equalsIgnoreCase("A")) {
-
-                            String mensaje = "";
-                            if (this.getPatronesPosibles(this.getJugadorDeTurno(this.getTurno())).size() > 0) {
-                                mensaje = "AYUDA";
-
-                            } else {
-                                if (mensaje.equalsIgnoreCase("")) {
-                                    mensaje = "\n No existen patrones posibles para este jugador";
-                                }
-                            }
-                            this.setError(mensaje);
-                        }
-                    }
-                    break;
-
-                case 2: //DESCARTA FICHA
-                    aux = movimiento.substring(0, 1);
-
-                    if (aux.equalsIgnoreCase("D")) {
-                        this.setError("Movimiento OK");
-                        switch (movimiento.substring(1, 2).toUpperCase()) {
-                            case "C":
-                                if (this.getJugadorDeTurno(this.getTurno()).getCuboColor('C') > 0) {
-                                    this.getJugadorDeTurno(this.getTurno()).setCuboColor('C', -1);
-                                } else {
-                                    this.setError("No hay mas fichas Celestes");
-                                }
-                                break;
-                            case "A":
-                                if (this.getJugadorDeTurno(this.getTurno()).getCuboColor('A') > 0) {
-                                    this.getJugadorDeTurno(this.getTurno()).setCuboColor('A', -1);
-                                } else {
-                                    this.setError("No hay mas fichas Azules");
-                                }
-                                break;
-                            case "V":
-                                if (this.getJugadorDeTurno(this.getTurno()).getCuboColor('V') > 0) {
-                                    this.getJugadorDeTurno(this.getTurno()).setCuboColor('V', -1);
-                                } else {
-                                    this.setError("No hay mas fichas Verdes");
-                                }
-                                break;
-                            case "R":
-                                if (this.getJugadorDeTurno(this.getTurno()).getCuboColor('R') > 0) {
-                                    this.getJugadorDeTurno(this.getTurno()).setCuboColor('R', -1);
-                                } else {
-                                    this.setError("No hay mas fichas Rojas");
-                                }
-                                break;
-                            default:
-                                this.setError("El movimiento ingresado no es valido.Ficha");
-                                break;
-                        }
-                    } else {
-                        this.setError("El movimiento ingresado no es valido.");
-                    }
-                    break;
-
-                case 4: // INGRESA PIEDRA EN FORMATO HORIZONTAL Y DIAGONAL
-                    aux = movimiento.substring(0, 2);
-                    int[] coordenadas; //int[2]
-                    if (aux.equalsIgnoreCase("PH") || aux.equalsIgnoreCase("PD")) {
-                        coordenadas = this.ingresarCoordenadas(movimiento.substring(2, 4));
-                        if (this.getError().contains("Coordenadas OK")) {
-                            if (this.getTurno() == 1) {
-                                this.ingresarPiedra(coordenadas[0], coordenadas[1], movimiento.substring(1, 2), jugador1, jugador2);
-                            }
-                            if (this.getTurno() == 2) {
-                                this.ingresarPiedra(coordenadas[0], coordenadas[1], movimiento.substring(1, 2), jugador2, jugador1);
-                            }
-                        }
-                    } else {
-                        this.setError("El movimiento ingresado no es valido");
-                    }
-                    break;
-                default:
-                    this.setError("El movimiento ingresado no es valido");
-                    break;
-
-            }
-        }
-        return salida;
+        return true;
     }
 
     private boolean validaAbandonar(String ingreso) {
@@ -374,7 +157,6 @@ public class Partida {
         if (ingreso.equalsIgnoreCase("X")) {
             confirmar = true;
         } else {
-            this.setError("El movimiento ingresado no es valido");
             confirmar = false;
         }
         return confirmar;
@@ -382,20 +164,15 @@ public class Partida {
 
     public void abandonar() {
 
-        //Si abandona el otro jugador queda con 0 fichas.
-        int[] fichas = new int[4];
         //Jugador 1 Abandona.
         if (this.turno == 1) {
-            this.getJugador2().setCubos(fichas);
-            this.setEstado(2);
+            this.ganador = this.jugador2;
         }
         //Jugador 2 Abandona.
         if (this.turno == 2) {
-            this.getJugador1().setCubos(fichas);
-            this.setEstado(1);
+            this.ganador = this.jugador1;
         }
 
-        this.setError("Abandona");
     }
 
     private int[] ingresarCoordenadas(String coordenada) {
@@ -451,8 +228,7 @@ public class Partida {
 
         lasCoordendas[0] = numFila;
         lasCoordendas[1] = laColumna - 1;
-        this.setError(retorno);
-        return lasCoordendas;
+       return lasCoordendas;
 
     }
 
@@ -479,82 +255,15 @@ public class Partida {
     }
 
     /*
-     Antes de usar este metodo validamos la existencia de piedras.
+     Antes de usar este metodo validamos la existencia de los cubos.
      */
-    private boolean ingresarCubo(int i, int j, String orientacion, Jugador jugadorTurno, Jugador jugadorEspera) {
+    private boolean ingresarCubo(int i, int j, Jugador jugadorTurno, Jugador jugadorEspera) {
         boolean retorno = false;
-        this.setError("Movimiento OK");
-        //Restamos Piedra.
+
         /*
-         Si no hay piedra y la partida cuenta con al menos "1" piedra.
+         Si no hay cubo en el lugar y el jugador tiene almenos 1 cubo
          */
-        if (this.getTablero().getMatrizTablero()[i][j] != '#' && this.getCantidadPiedras() > 0
-                && this.getTablero().getMatrizTablero()[i][j] != ' ') {
-            this.setCantidadPiedras(this.getCantidadPiedras() - 1);
 
-            //Toma la ficha y se la asigna al jugador.
-            jugadorTurno.setCuboColor(this.getTablero().getMatrizTablero()[i][j], 1);
-
-            //Colocamos la piedra
-            this.getTablero().getMatrizTablero()[i][j] = '#';
-            /*
-             Asignamos piedras al oponente.
-             */
-            if (orientacion.equalsIgnoreCase("H")) {
-                if (j > 0 && this.getTablero().getMatrizTablero()[i][j - 1] != '#') {
-                    jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i][j - 1], 1);
-                    this.getTablero().getMatrizTablero()[i][j - 1] = ' ';
-
-                }
-                if ((j < (this.getTablero().getMatrizTablero()[0].length - 1)) && (this.getTablero().getMatrizTablero()[i][j + 1] != '#')) {
-                    jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i][j + 1], 1);
-                    this.getTablero().getMatrizTablero()[i][j + 1] = ' ';
-                }
-                if (i > 0 && this.getTablero().getMatrizTablero()[i - 1][j] != '#') {
-                    jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i - 1][j], 1);
-                    this.getTablero().getMatrizTablero()[i - 1][j] = ' ';
-                }
-                if ((i < (this.getTablero().getMatrizTablero().length - 1)) && (this.getTablero().getMatrizTablero()[i + 1][j] != '#')) {
-                    jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i + 1][j], 1);
-                    this.getTablero().getMatrizTablero()[i + 1][j] = ' ';
-                }
-            } else {
-
-                if (orientacion.equalsIgnoreCase("D")) {
-                    if ((i > 0 && j > 0) && this.getTablero().getMatrizTablero()[i - 1][j - 1] != '#') {
-                        jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i - 1][j - 1], 1);
-                        this.getTablero().getMatrizTablero()[i - 1][j - 1] = ' ';
-                    }
-                    if ((i > 0 && j < (this.getTablero().getMatrizTablero()[0].length - 1)) && (this.getTablero().getMatrizTablero()[i - 1][j + 1] != '#')) {
-                        jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i - 1][j + 1], 1);
-                        this.getTablero().getMatrizTablero()[i - 1][j + 1] = ' ';
-                    }
-                    if (((i < this.getTablero().getMatrizTablero().length - 1)
-                            && (j < this.getTablero().getMatrizTablero()[0].length - 1)) && this.getTablero().getMatrizTablero()[i + 1][j + 1] != '#') {
-                        jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i + 1][j + 1], 1);
-                        this.getTablero().getMatrizTablero()[i + 1][j + 1] = ' ';
-                    }
-                    if ((i < this.getTablero().getMatrizTablero().length - 1)
-                            && (j > 0) && (this.getTablero().getMatrizTablero()[i + 1][j - 1] != '#')) {
-                        jugadorEspera.setCuboColor(this.getTablero().getMatrizTablero()[i + 1][j - 1], 1);
-                        this.getTablero().getMatrizTablero()[i + 1][j - 1] = ' ';
-                    }
-                }
-            }
-
-        } else {
-
-            if (this.getTablero().getMatrizTablero()[i][j] == ' ') {
-                this.setError("!!! Movimiento invalido !!!\n    No hay ficha en esa posición\n ");
-            }
-            if (this.getTablero().getMatrizTablero()[i][j] == '#') {
-                this.setError("!!! Movimiento invalido !!!\n    Hay una piedra en la posición indicada\n ");
-
-            }
-
-            if (this.getCantidadPiedras() == 0) {
-                this.setError("!!! No hay piedras disponibles !!!\n");
-            }
-        }
         return retorno;
     }
+}

@@ -375,13 +375,6 @@ public class showMenu {
 
         }
 
-        if (tipoCarga == 1) {
-            unTablero.setTableroPorDefecto();
-        }
-        if (tipoCarga == 2) {
-            unTablero.setTableroRandom();
-        }
-
     }
 
     /*Metodos pedir datos de jugada.

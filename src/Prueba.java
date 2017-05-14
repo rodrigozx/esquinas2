@@ -70,10 +70,8 @@ public class Prueba {
                         //Mostrar tablero y datos de los jugadores.
                         do {
                             //CICLO DE PARTIDA ##################################################
-                            laPartida.setError(" ");
-
                             //Dibujo del Tablero
-                            showTablero.show(laPartida.getTablero().getMatrizTablero());
+                            //showTablero.show(laPartida.getCantCubosJugador1());
 
                             //Dibujo de status de la partida.
                             showPartida.datos(laPartida);
@@ -81,35 +79,22 @@ public class Prueba {
                             //Se ingresa la jugada.
                             laPartida.validarJugada(elMenu.ingresarMovimiento(true));
 
-                            //Imprimo el status de la jugada (error, si hay error)
-                            System.out.println(laPartida.getError());
-
-                            //Mensaje de AYUDA
-                            if (laPartida.getError().contains("AYUDA")) {
-
-                                //Muestra cada Ayuda.
-                                for (int i = 0; i < laPartida.getPatronesPosibles(laPartida.getJugadorDeTurno(laPartida.getTurno())).size(); i++) {
-                                    String itemAyuda;
-                                    itemAyuda = laPartida.getPatronesPosibles(laPartida.getJugadorDeTurno(laPartida.getTurno())).get(i);
-                                    mostrarItemAyuda(itemAyuda);
-                                }
-                            }
                             //Si un jugador quiere abandonar
 
 
                             //Si nadie Abandona o no hay ganador vuelve al "do"
-                        } while ((laPartida.hayGanador() == 0));
+                        } while ((laPartida.terminoPartida() == 0));
 
                         //FIN PARTIDA #############################################################
                         /*
                          Asignamos el resultado al ranking.
                          */
-                        if (laPartida.hayGanador() == 1) {
+                        if (laPartida.terminoPartida() == 1) {
                             laPartida.getJugador1().setPartidas(1, 0);
                             laPartida.getJugador2().setPartidas(0, 1);
                             elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador1().getAlias()));
                         }
-                        if (laPartida.hayGanador() == 2) {
+                        if (laPartida.terminoPartida() == 2) {
                             laPartida.getJugador2().setPartidas(1, 0);
                             laPartida.getJugador1().setPartidas(0, 1);
                             System.out.println("\n");

@@ -16,7 +16,6 @@ public class showPartida {
 
     //Recorro la matriz y dibujo
     public static void datos(Partida unaPartida) {
-        showPartida.cantPiedras(unaPartida.getCantidadPiedras());
         showPartida.datosJugadores(unaPartida);
 
     }
@@ -34,11 +33,11 @@ public class showPartida {
     //Muestra Datos Jugadores
     private static void datosJugadores(Partida unaPartida) {
         System.out.println("Jugador 1: " + unaPartida.getJugador1().getAlias());
-        showPartida.cantFichas(unaPartida.getJugador1().getCubos());
+        //showPartida.cantFichas(unaPartida;
         System.out.println("");
         System.out.print("Jugador 2: " + unaPartida.getJugador2().getAlias());
         System.out.println("");
-        showPartida.cantFichas(unaPartida.getJugador2().getCubos());
+        //showPartida.cantFichas(unaPartida.getCantCubosJugador2());
         System.out.println("\n");
         System.out.print("JUEGA: ");
         if (unaPartida.getTurno() == 1) {
