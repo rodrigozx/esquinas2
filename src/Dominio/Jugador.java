@@ -1,6 +1,5 @@
 /*
  * @author Rodrigo Blanco 
- * @author Fernando Rivera
  */
 package Dominio;
 

@@ -1,32 +1,46 @@
 /*
  * @author Rodrigo Blanco 
- * @author Fernando Rivera
- */
+*/
+
 package Dominio;
 
 import java.util.*;
 
 public class Tablero {
 
-    //Matríz de fichas
-    private String [][] matrizTablero;
+    //Matríz de torres de cubos
+    /*
+        Los valores en cada posición de las matrices corresponden a números.
+        La codificación para identificar a que corresponde es la siguiente:
+        - el primer dígito determina el color de la torre, donde:
+            0 = no tiene color
+            1 = corresponde al color del jugador 1
+            2 = corresponde al color del jugador 2
+        
+        - el segundo digito determina la cantidad de cubos en la torre.
+            0 =corresponde a que no existen cubos.
+            5 es el valor máximo posible.
+    */
+    
+    private int [][] matrizTablero;
 
     /* CONSTRUCTOR *************************************/
     public Tablero() {
-        this.matrizTablero = new String[6][6];
+        this.matrizTablero = new int[6][6];
+
     }
 
     /* CONSTRUCTOR POR PARAMETROS *************************************/
-    public Tablero( String[][] matrizTablero ) {
+    public Tablero( int[][] matrizTablero ) {
         this.matrizTablero = matrizTablero;
     }
 
     /* GETS Y SETS *************************************/
-    public String[][] getMatrizTablero() {
+    public int[][] getMatrizTablero() {
         return matrizTablero;
     }
 
-    public void setMatrizTablero(String [][] matrizTablero) {
+    public void setMatrizTablero(int [][] matrizTablero) {
         this.matrizTablero = matrizTablero;
     }
 

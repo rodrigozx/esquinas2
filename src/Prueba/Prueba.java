@@ -1,3 +1,5 @@
+package Prueba;
+
 
 import Dominio.*;
 import Interfaz.showMenu;
