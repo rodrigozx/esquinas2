@@ -20,6 +20,9 @@ public class Tablero {
         - el segundo digito determina la cantidad de cubos en la torre.
             0 =corresponde a que no existen cubos.
             5 es el valor máximo posible.
+    
+        Para la identificación de los dígitos se divide entre 10, resultando
+        el entero = al primer dígito y el resto en el segundo.
     */
     
     private int [][] matrizTablero;
@@ -27,7 +30,6 @@ public class Tablero {
     /* CONSTRUCTOR *************************************/
     public Tablero() {
         this.matrizTablero = new int[6][6];
-
     }
 
     /* CONSTRUCTOR POR PARAMETROS *************************************/
@@ -61,7 +63,7 @@ public class Tablero {
        return jugadaOk;
    }
    
-   //valido si la jugada es posible
+   //valido si la jugada es posible.
     public boolean validarJugada(char color, String posicion){
        boolean jugadaOk;
        jugadaOk = false;
