@@ -1,45 +1,39 @@
-/*
- * @author Rodrigo Blanco 
- * @author Fernando Rivera
- */
+/*****************************************************
+    Clase: Partida
+    @author Rodrigo Blanco - 151251 - Programación II
+    **************************************************
+*/
+
 package Dominio;
 
 import java.util.*;
-import Dominio.*;
 
 public class Partida {
 
     private Tablero tablero;
     private Jugador jugador1;
     private Jugador jugador2;
-    private int cantCubosJug1;
-    private int cantCubosJug2;
     private Jugador ganador;
     private int turno;
     private boolean vsCpu;
 
 
     /* CONSTRUCTOR *************************************/
-    /* CONSTRUCTOR POR PARAMETROS *************************************/
-    public Partida(Tablero elTablero, Jugador jugador1, Jugador jugador2) {
-        this.jugador1 = jugador1;
-        this.jugador2 = jugador2;
-        this.turno = 1;
-        this.tablero = elTablero;
-        this.cantCubosJug1 = 25;
-        this.cantCubosJug2 = 25;
+    public Partida() {
+        this.jugador1 = null;
+        this.jugador2 = null;
+        this.turno = 1; //la partida siempre comienza con el turno para el jugador 1
+        this.tablero = null;
         this.ganador = null;
         this.vsCpu = false;
     }
 
     /* CONSTRUCTOR POR PARAMETROS *************************************/
-    public Partida(Jugador jugador1, Jugador jugador2, int turno, Tablero elTablero, int fichasJugador1, int fichasJugador2,boolean versusCpu) {
+    public Partida(Jugador jugador1, Jugador jugador2, int turno, Tablero elTablero, boolean versusCpu, int cantCubos) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
-        this.turno = turno;
+        this.turno = turno; //se deja abierto para posibles modificaciones.
         this.tablero = elTablero;
-        this.cantCubosJug1 = fichasJugador1;
-        this.cantCubosJug2 = fichasJugador1;
         this.ganador = null;
         this.vsCpu = versusCpu;
     }
@@ -61,14 +55,7 @@ public class Partida {
         this.jugador2 = jugador2;
     }
 
-    public int getCantCubosJugador1() {
-        return this.cantCubosJug1;
-    }
-    
-    public int getCantCubosJugador2() {
-        return this.cantCubosJug2;
-    }
-    
+
     public int getTurno() {
         return this.turno;
     }
@@ -94,22 +81,22 @@ public class Partida {
     }
 
  
-
     /* METODOS *************************************/
-    /*Valida el estado de la partida.
-      si alguno de los jugadores no tiene más fichas, entonces terminó la partida.
-     0-No hay ganador
-     1-Ganador Jugador1
-     2-Ganador Jugador2
-     */
     public int terminoPartida() {
-
-        int estado =0;
-        if (!(this.cantCubosJug1 == 0 && (this.cantCubosJug2 == 0))) {
+        /*Valida el estado de la partida.
+          si alguno de los jugadores no tiene más fichas, entonces terminó la partida.
+         0-No hay ganador
+         1-Ganador Jugador1
+         2-Ganador Jugador2
+         */
+        int estado = 0;
+        if (!(this.tablero.getCantCubosJug1() == 0 && (this.tablero.getCantCubosJug2() == 0))) {
               estado =  ganadorPartida();
             }
         
+        // si el estado permanece en 0 entonces no hay ganador.
         return estado;
+        
     }
 
      public int ganadorPartida(){
@@ -143,12 +130,6 @@ public class Partida {
         }
 
         return elJugador;
-    }
-
-    public boolean validarJugada(String jugada) {
-        int[] coordenadas1;
-        int[] coordenadas2;
-        return true;
     }
 
     private boolean validaAbandonar(String ingreso) {
@@ -266,4 +247,5 @@ public class Partida {
 
         return retorno;
     }
+  
 }

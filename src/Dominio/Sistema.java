@@ -1,7 +1,9 @@
-/*
- * @author Rodrigo Blanco 
- * @author Fernando Rivera
- */
+/*****************************************************
+    Clase: Sistema
+    @author Rodrigo Blanco - 151251 - Programación II
+    **************************************************
+*/
+
 package Dominio;
 
 import java.util.*;
@@ -45,7 +47,7 @@ public class Sistema {
 
     /*
         **********************************************
-        Metodo para ordenar Lista Jugadores segun su ranking
+        Método para ordenar Lista Jugadores segun su ranking
      */
     public ArrayList ordenarPorRanking() {
         //Internamente, utiliza el criterio definido en la instancia pasada como parámetro (CriterioDecdreciente)
@@ -59,13 +61,17 @@ public class Sistema {
         return noExisteJugador;
     }
 
-    //Metodo que valida que el sistema tenga al menos 2 Jugadores.
+    //Método que valida que el sistema tenga al menos 1 Jugador.
     public boolean numJugadoresMinimos() {
         boolean retorno = false;
-        if (this.getListaJugadores().size() >= 2) {
+        if (this.getListaJugadores().size() >= 1) {
             retorno = true;
         }
         return retorno;
     }
-    
+    //Método que devuelve cantidad de Jugadores registrados.
+    public int numJugadoresRegistrados() {
+        int retorno = this.getListaJugadores().size();
+        return retorno;
+    }    
 }

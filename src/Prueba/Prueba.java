@@ -1,170 +1,156 @@
+/** ***************************************************
+ * Clase: Prueba
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
 package Prueba;
 
-
 import Dominio.*;
-import Interfaz.showMenu;
-import Interfaz.showPartida;
-import Interfaz.showTablero;
+import Interfaz.*;
 
 public class Prueba {
 
+    //Se crea el sistema del juego
+    Sistema miSistema = new Sistema();
+
+    //Se crea el menu a mostrar
+    showMenu elMenu = new showMenu(0, true);
+    
     public static void main(String[] args) {
         int dato = 0; //Por defecto se ejecuta el menú princiapl.
-        boolean isEnable;
 
-        showMenu elMenu = new showMenu(0, true);
-
-        Sistema miSistema = new Sistema();
-        Tablero elTablero = new Tablero();
-
-        //Cargamos el Menu Principal
-        boolean repetir;//True repite el menú
-
-        elMenu.showLogo(true);
+        //Carga del Menu Principal
+        boolean repetir; //True repite el menú
+            elMenu.showLogo(true);
+        
         do {
             dato = elMenu.showMenuPrincipal(true, 4);
             repetir = false;
             switch (dato) {
+
+                //Registro de Jugador **********************************************************************
                 case 1:
-                    //Se ejecuta el metodo mostrar Cabecera de Menú.
-                    elMenu.showCabeceraMenu(true, "Menú Registrar Jugador");
-                    //Se crea el objeto Jugador con los parametros.
-                    //Luego se agrega al ArrayList de Jugadores
-
-                    Jugador elJugador = new Jugador(elMenu.registrarJugadorAlias(miSistema.getListaJugadores()),
-                            elMenu.registrarJugadorNombre(), elMenu.registrarJugadorEdad());
-
-                    System.out.println(elJugador);
-
-                    miSistema.agregarJugador((Jugador) elJugador);
-
+                    registroDeJugador();
                     repetir = true; //True Repite, False no repite menu principal.
                     break;
-                //Elegir Carga de tablero
+
+                //Jugar 1 vs 1 **********************************************************************
                 case 2:
-                    //Se ejecuta el metodo mostrar Cabecera de Menú.
-                    elMenu.showCabeceraMenu(true, " Seleccione un tipo de tablero");
-                    elMenu.setCargaTablero(true, 2, elTablero);
+                    iniciarPartida(2); //Son dos jugadores.
                     repetir = true; //True Repite, False no repite menu principal.
                     break;
 
-                //Jugar
+                //Jugar 1 vs CPU **********************************************************************
                 case 3:
-                    //Creo una partida.
-                    boolean next = false;
-                    //Selección de jugadores y arranque Partida.
-                    if (!miSistema.numJugadoresMinimos()) {
-                        System.out.println("!!! Error !!! ");
-                        System.out.println("Es necesario tener al menos dos jugadores registrados ");
-                        repetir = true; //True Repite, False no repite menu principal.
-                        next = false;
-                    } else {
-
-                        Jugador jugador1 = elMenu.seleccionarJugador("Primero",
-                                miSistema.getListaJugadores(), null);
-                        Jugador jugador2 = elMenu.seleccionarJugador("Segundo",
-                                miSistema.getListaJugadores(), jugador1);
-                        Partida laPartida = new Partida(elTablero, jugador1, jugador2);
-
-//                    Jugador jugador1 = new Jugador("fer", "Fernando", 29);
-//                    Jugador jugador2 = new Jugador("Leti", "Leticia", 25);
-                        //########################################################################
-                        //Mostrar tablero y datos de los jugadores.
-                        do {
-                            //CICLO DE PARTIDA ##################################################
-                            //Dibujo del Tablero
-                            //showTablero.show(laPartida.getCantCubosJugador1());
-
-                            //Dibujo de status de la partida.
-                            showPartida.datos(laPartida);
-
-                            //Se ingresa la jugada.
-                            laPartida.validarJugada(elMenu.ingresarMovimiento(true));
-
-                            //Si un jugador quiere abandonar
-
-
-                            //Si nadie Abandona o no hay ganador vuelve al "do"
-                        } while ((laPartida.terminoPartida() == 0));
-
-                        //FIN PARTIDA #############################################################
-                        /*
-                         Asignamos el resultado al ranking.
-                         */
-                        if (laPartida.terminoPartida() == 1) {
-                            laPartida.getJugador1().setPartidas(1, 0);
-                            laPartida.getJugador2().setPartidas(0, 1);
-                            elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador1().getAlias()));
-                        }
-                        if (laPartida.terminoPartida() == 2) {
-                            laPartida.getJugador2().setPartidas(1, 0);
-                            laPartida.getJugador1().setPartidas(0, 1);
-                            System.out.println("\n");
-                            elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador2().getAlias()));
-                            System.out.println("\n");
-                        }
-
-                    }
-                    /*
-                     Comienza el ciclo de jugadas
-                     */
-                    /*
-                     Fin Partida retorno menú principal
-                     */
-                    repetir = true; //True Repite, False no repite menu principal.
+                    iniciarPartida(1); //Es un sólo jugador.
+                    repetir = true; //True Repite, False no repite menu principal.                    
                     break;
 
+                //Muestra el Ranking de jugadores *****************************************************
                 case 4:
                     elMenu.showMenuRanking(miSistema.getListaJugadores());
                     repetir = true; //True Repite, False no repite menu principal.
                     break;
-                case 0:
 
-                    //Salir del programa.
+                //Sale del programa **********************************************************************                    
+                case 0:
                     elMenu.showSaludo(true);
                     System.exit(1);
                     break;
-
+                default:
+                    repetir = true; //True Repite, False no repite menu principal.
             }
         } while (repetir == true);
     }
+    
+    public static void registroDeJugador() {
+        //Se ejecuta el metodo mostrar Cabecera de Menú.
+        elMenu.showCabeceraMenu(true, "Menú Registrar Jugador");
 
-    private static void mostrarItemAyuda(String itemAyuda) {
-        //tipoPatron
-        char tipoPatron;
-        String patron;
-        String imprime;
+        //Se crea el objeto Jugador con los parametros.
+        //Luego se agrega al ArrayList de Jugadores
+        Jugador elJugador = new Jugador(elMenu.registrarJugadorAlias(miSistema.getListaJugadores()),
+                elMenu.registrarJugadorNombre(), elMenu.registrarJugadorEdad());
 
-        tipoPatron = itemAyuda.toUpperCase().charAt(2);
-        patron = nombrePatron(tipoPatron);
-        imprime = patron + " " + itemAyuda.toUpperCase().substring(3, 5) + " a " + itemAyuda.toUpperCase().substring(5, 7);
-        System.out.println(imprime);
+        System.out.println(elJugador);
+
+        miSistema.agregarJugador((Jugador) elJugador);
+
     }
 
-    private static String nombrePatron(char tipoPatron) {
+    public static void iniciarPartida(int cantJugadores) {
+        
+        //Creo una partida.
+        boolean next = false;
+        boolean vsCpu;
+        
+        //Veo si es un jugaor sólo
+        if (cantJugadores == 2){
+            vsCpu =false;
+        }else {vsCpu = true;}
+        
+        //Selección de jugadores y arranque Partida. ******************************************
+        //si existe menos de un jugador registrado
+        if (!this.miSistema.numJugadoresMinimos() && (vsCpu == false)) {
+            elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados");
+            if (!miSistema.numJugadoresMinimos() && (vsCpu == true)){
+                elMenu.mostrarMensaje("es de al menos uno para ésta partida");
+            }else{
+                elMenu.mostrarMensaje("es de al menos dos para este tipo de partida");
+            }
+            next = false;
+        } else {
+            if (miSistema.numJugadoresRegistrados() == 1 && (vsCpu == false)) {
+                elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados");
+                elMenu.mostrarMensaje("es de al menos dos para este tipo de partida");
+            }
+            Jugador jugador1 = elMenu.seleccionarJugador("Primero",
+                    miSistema.getListaJugadores(), null);
+            Jugador jugador2 = elMenu.seleccionarJugador("Segundo",
+                    miSistema.getListaJugadores(), jugador1);
+            Partida laPartida = new Partida(jugador1, jugador2,1, null,vsCpu, 25);
+//                    Jugador jugador1 = new Jugador("Rolo", "Rodrigo", 33);
+//                    Jugador jugador2 = new Jugador("Viky", "Virginia", 29);
+            
+            //Mostrar tablero y datos de los jugadores.
+            do {
+                //CICLO DE PARTIDA ##################################################
+                //Dibujo del Tablero
+                //showTablero.show(laPartida.getCantCubosJugador1()); ///muestro la estadística 
 
-        String nombrePatron = "";
+                //Dibujo de status de la partida.
+                showPartida.datos(laPartida);
 
-        switch (tipoPatron) {
+                //Se ingresa la jugada.
+                //laPartida(elMenu.ingresarMovimiento(true));
 
-            case 'S':
-                nombrePatron = "SEPARADAS";
-                break;
+                //Si un jugador quiere abandonar
+                //Si nadie Abandona o no hay ganador vuelve al "do"
+            } while ((laPartida.terminoPartida() == 0)); //mientra haya jugadores con fichas.
 
-            case 'J':
-                nombrePatron = "JUNTAS";
-                break;
+            //FIN PARTIDA #############################################################
+            /*
+             Asignamos el resultado al ranking.
+             */
+            if (laPartida.terminoPartida() == 1) {
+                laPartida.getJugador1().setPartidas(1, 0);
+                laPartida.getJugador2().setPartidas(0, 1);
+                elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador1().getAlias()));
+            }
+            if (laPartida.terminoPartida() == 2) {
+                laPartida.getJugador2().setPartidas(1, 0);
+                laPartida.getJugador1().setPartidas(0, 1);
+                System.out.println("\n");
+                elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador2().getAlias()));
+                System.out.println("\n");
+            }
 
-            case 'D':
-                nombrePatron = "DIAGONAL";
-                break;
-
-            case 'C':
-                nombrePatron = "CABALLO";
-                break;
         }
+        /*
+         Fin Partida retorno menú principal
+         */
 
-        return nombrePatron;
     }
 
 }

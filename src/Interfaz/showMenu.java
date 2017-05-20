@@ -1,3 +1,9 @@
+/** ***************************************************
+ * Clase: showMenu
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
 package Interfaz;
 
 import Dominio.Jugador;
@@ -18,6 +24,15 @@ public class showMenu {
     private int cantOpcionesMenu; //Defino cuantas opciones tendra el menú
     private boolean menuEnable; //Controla Si el menú puede mostrarse o no.
 
+    /*
+        Importo las definiciones de los colores de la clase Color.
+     */
+    private Color color;
+    String colorBlue = color.getColor("AZULFDOBLANCO"); //Azul y fondo blanco
+    String colorRed = color.getColor("ROJOFDOBLANCO");//Rojo y fondo blanco
+    String colorBlack = color.getColor("NEGROFDOBLANCO");//Negro y fondo blanco
+    String resetColor = color.getColor("SINFORMATO");//Sin formato ni color
+
     //Defino Constructores
     //Constructor sin parametros
     public showMenu() {
@@ -25,14 +40,12 @@ public class showMenu {
         this.setMenuNav(00);//Menú princiapl por defecto
         this.setOpcionOk(true);
         this.setMenuEnable(true);
-
     }
 
     //Constructor con parametros
     public showMenu(int unMenuNav, boolean isEnable) {
         this.setMenuNav(unMenuNav);
         this.setMenuEnable(isEnable);
-
     }
 
     //Defino los metodos de acceso y modificación
@@ -127,30 +140,22 @@ public class showMenu {
         return retorno;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void showLogo(boolean isEnable) {
 
-        String colorBlue = (char) 27 + "[34;47m"; //Azul y fondo gris
-        String colorRed = (char) 27 + "[31;47m";//Rojo y fondo gris
-        String colorBlack = (char) 27 + "[00;47m";//Negro y fondo gris
-
-        String resetColor = (char) 27 + "[00;00m";
-
-        
         if (isEnable) {
             System.out.println(""
                     + "\n" + colorBlue + "#################################################################################################"
                     + "\n" + colorBlue + "##                                                                                             ##"
-                    + "\n" + colorBlue + "##   "+ colorRed +"#######"+ colorBlack +"                                        $$                               "+ colorBlue +"#######   ##"
-                    + "\n" + colorBlue + "##   "+ colorRed +"#######"+ colorBlack +"                                        $$                               "+ colorBlue +"#######   ##"
-                    + "\n" + colorBlue + "##   "+ colorRed +"###    "+ colorBlack +" $$$$$$    $$$$$$$   $$$$$$   $$    $$      $$$$$$$    $$$$$$    $$$$$$$ "+ colorBlue +"    ###   ##"
-                    + "\n" + colorBlue + "##   "+ colorRed +"###    "+ colorBlack +"$$    $$  $$        $$    $$  $$    $$  $$  $$    $$        $$  $$       "+ colorBlue +"    ###   ##"
-                    + "\n" + colorBlue + "##          "+ colorBlack               +"$$$$$$$$   $$$$$$   $$    $$  $$    $$  $$  $$    $$   $$$$$$$   $$$$$$  "+ colorBlue +"          ##"
-                    + "\n" + colorBlue + "##   ###    "+ colorBlack               +"$$              $$  $$   $$$  $$    $$  $$  $$    $$  $$    $$        $$ "+ colorBlue +"    ###   ##"                    
-                    + "\n" + colorBlue + "##   ###    "+ colorBlack               +" $$$$$$$  $$$$$$$    $$$$$$$$  $$$$$$   $$  $$    $$   $$$$$$$  $$$$$$$  "+ colorBlue +"    ###   ##"
-                    + "\n" + colorBlue + "##   #######"+ colorBlack               +"                           $$$                                           "+ colorBlue +"#######   ##"
-                    + "\n" + colorBlue + "##   #######                                                                         #######   ##"                            
+                    + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
+                    + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
+                    + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + " $$$$$$    $$$$$$$   $$$$$$   $$    $$      $$$$$$$    $$$$$$    $$$$$$$ " + colorBlue + "    ###   ##"
+                    + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + "$$    $$  $$        $$    $$  $$    $$  $$  $$    $$        $$  $$       " + colorBlue + "    ###   ##"
+                    + "\n" + colorBlue + "##          " + colorBlack + "$$$$$$$$   $$$$$$   $$    $$  $$    $$  $$  $$    $$   $$$$$$$   $$$$$$  " + colorBlue + "          ##"
+                    + "\n" + colorBlue + "##   ###    " + colorBlack + "$$              $$  $$   $$$  $$    $$  $$  $$    $$  $$    $$        $$ " + colorBlue + "    ###   ##"
+                    + "\n" + colorBlue + "##   ###    " + colorBlack + " $$$$$$$  $$$$$$$    $$$$$$$$  $$$$$$   $$  $$    $$   $$$$$$$  $$$$$$$  " + colorBlue + "    ###   ##"
+                    + "\n" + colorBlue + "##   #######" + colorBlack + "                           $$$                                           " + colorBlue + "#######   ##"
+                    + "\n" + colorBlue + "##   #######                                                                         #######   ##"
                     + "\n" + colorBlue + "##                                                                                             ##"
                     + "\n" + colorBlue + "#################################################################################################"
                     + "\n" + colorBlue + "##                          by Rodrigo Blanco(151251) - May/2017 - v.1.0.0                     ##"
@@ -158,29 +163,24 @@ public class showMenu {
                     + "\n" + resetColor + "");
         }
     }
-                   
-                          
 
     public void showSaludo(boolean isEnable) {
         //Saludo al Salir del Juego.
-        String color = (char) 27 + "[34;47m"; //Azul y fondo blanco
-        String resetColor = (char) 27 + "[00;00m";
-
         if (isEnable) {
             System.out.println(""
-                    + "\n" + color + "#############################################################################################################################################"
-                    + "\n" + color + "##                                                                                                                                         ##"
-                    + "\n" + color + "##     ▄████  ██▀███  ▄▄▄      ▄████▄   ██▓▄▄▄        ██████     ██▓███  ▒█████   ██▀███      ▄▄▄██▀▀▀█    ██   ▄████  ▄▄▄       ██▀███    ##"
-                    + "\n" + color + "##    ██▒ ▀█▒▓██ ▒ ██▒████▄   ▒██▀ ▀█  ▓██▒████▄    ▒██    ▒    ▓██░  ██▒██▒  ██▒▓██ ▒ ██▒      ▒██   ██  ▓██▒ ██▒ ▀█▒▒████▄    ▓██ ▒ ██▒  ##"
-                    + "\n" + color + "##   ▒██░▄▄▄░▓██ ░▄█ ▒██  ▀█▄ ▒▓█    ▄ ▒██▒██  ▀█▄  ░ ▓██▄      ▓██░ ██▓▒██░  ██▒▓██ ░▄█ ▒      ░██  ▓██  ▒██░▒██░▄▄▄░▒██  ▀█▄  ▓██ ░▄█ ▒  ##"
-                    + "\n" + color + "##   ░▓█  ██▓▒██▀▀█▄ ░██▄▄▄▄██▒▓▓▄ ▄██▒░██░██▄▄▄▄██   ▒   ██▒   ▒██▄█▓▒ ▒██   ██░▒██▀▀█▄     ▓██▄██▓ ▓▓█  ░██░░▓█  ██▓░██▄▄▄▄██ ▒██▀▀█▄    ##"
-                    + "\n" + color + "##   ░▒▓███▀▒░██▓ ▒██▒▓█   ▓██▒ ▓███▀ ░░██░▓█   ▓██▒▒██████▒▒   ▒██▒ ░  ░ ████▓▒░░██▓ ▒██▒    ▓███▒  ▒▒█████▓ ░▒▓███▀▒ ▓█   ▓██▒░██▓ ▒██▒  ##"
-                    + "\n" + color + "##    ░▒   ▒ ░ ▒▓ ░▒▓░▒▒   ▓▒█░ ░▒ ▒  ░░▓  ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   ▒▓▒░ ░  ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░    ▒▓▒▒░  ░▒▓▒ ▒ ▒  ░▒   ▒  ▒▒   ▓▒█░░ ▒▓ ░▒▓░  ##"
-                    + "\n" + color + "##     ░   ░   ░▒ ░ ▒░ ▒   ▒▒ ░ ░  ▒    ▒ ░ ▒   ▒▒ ░░ ░▒  ░ ░   ░▒ ░      ░ ▒ ▒░   ░▒ ░ ▒░    ▒ ░▒░  ░░▒░ ░ ░   ░   ░   ▒   ▒▒ ░  ░▒ ░ ▒░  ##"
-                    + "\n" + color + "##   ░ ░   ░   ░░   ░  ░   ▒  ░         ▒ ░ ░   ▒   ░  ░  ░     ░░      ░ ░ ░ ▒    ░░   ░     ░ ░ ░   ░░░ ░ ░ ░ ░   ░   ░   ▒     ░░   ░   ##"
-                    + "\n" + color + "##         ░    ░          ░  ░ ░       ░       ░  ░      ░                 ░ ░     ░         ░   ░     ░           ░       ░  ░   ░       ##"
-                    + "\n" + color + "##                            ░                                                                                                            ##"
-                    + "\n" + color + "#############################################################################################################################################"
+                    + "\n" + colorBlue + "#############################################################################################################################################"
+                    + "\n" + colorBlue + "##                                                                                                                                         ##"
+                    + "\n" + colorBlue + "##     ▄████  ██▀███  ▄▄▄      ▄████▄   ██▓▄▄▄        ██████     ██▓███  ▒█████   ██▀███      ▄▄▄██▀▀▀█    ██   ▄████  ▄▄▄       ██▀███    ##"
+                    + "\n" + colorBlue + "##    ██▒ ▀█▒▓██ ▒ ██▒████▄   ▒██▀ ▀█  ▓██▒████▄    ▒██    ▒    ▓██░  ██▒██▒  ██▒▓██ ▒ ██▒      ▒██   ██  ▓██▒ ██▒ ▀█▒▒████▄    ▓██ ▒ ██▒  ##"
+                    + "\n" + colorBlue + "##   ▒██░▄▄▄░▓██ ░▄█ ▒██  ▀█▄ ▒▓█    ▄ ▒██▒██  ▀█▄  ░ ▓██▄      ▓██░ ██▓▒██░  ██▒▓██ ░▄█ ▒      ░██  ▓██  ▒██░▒██░▄▄▄░▒██  ▀█▄  ▓██ ░▄█ ▒  ##"
+                    + "\n" + colorBlue + "##   ░▓█  ██▓▒██▀▀█▄ ░██▄▄▄▄██▒▓▓▄ ▄██▒░██░██▄▄▄▄██   ▒   ██▒   ▒██▄█▓▒ ▒██   ██░▒██▀▀█▄     ▓██▄██▓ ▓▓█  ░██░░▓█  ██▓░██▄▄▄▄██ ▒██▀▀█▄    ##"
+                    + "\n" + colorBlue + "##   ░▒▓███▀▒░██▓ ▒██▒▓█   ▓██▒ ▓███▀ ░░██░▓█   ▓██▒▒██████▒▒   ▒██▒ ░  ░ ████▓▒░░██▓ ▒██▒    ▓███▒  ▒▒█████▓ ░▒▓███▀▒ ▓█   ▓██▒░██▓ ▒██▒  ##"
+                    + "\n" + colorBlue + "##    ░▒   ▒ ░ ▒▓ ░▒▓░▒▒   ▓▒█░ ░▒ ▒  ░░▓  ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   ▒▓▒░ ░  ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░    ▒▓▒▒░  ░▒▓▒ ▒ ▒  ░▒   ▒  ▒▒   ▓▒█░░ ▒▓ ░▒▓░  ##"
+                    + "\n" + colorBlue + "##     ░   ░   ░▒ ░ ▒░ ▒   ▒▒ ░ ░  ▒    ▒ ░ ▒   ▒▒ ░░ ░▒  ░ ░   ░▒ ░      ░ ▒ ▒░   ░▒ ░ ▒░    ▒ ░▒░  ░░▒░ ░ ░   ░   ░   ▒   ▒▒ ░  ░▒ ░ ▒░  ##"
+                    + "\n" + colorBlue + "##   ░ ░   ░   ░░   ░  ░   ▒  ░         ▒ ░ ░   ▒   ░  ░  ░     ░░      ░ ░ ░ ▒    ░░   ░     ░ ░ ░   ░░░ ░ ░ ░ ░   ░   ░   ▒     ░░   ░   ##"
+                    + "\n" + colorBlue + "##         ░    ░          ░  ░ ░       ░       ░  ░      ░                 ░ ░     ░         ░   ░     ░           ░       ░  ░   ░       ##"
+                    + "\n" + colorBlue + "##                            ░                                                                                                            ##"
+                    + "\n" + colorBlue + "#############################################################################################################################################"
                     + "\n" + resetColor + "");
         }
     }
@@ -188,45 +188,46 @@ public class showMenu {
     //Cabecera Menu.
     public void showCabeceraMenu(boolean isEnable, String elTitulo) {
 
-        //Centrar título
-        String titulo;
-        titulo = centrarTituloMenu(elTitulo, 54);
-        titulo = titulo.replaceAll("#", " ");
-
         //Color del título
-        String color = (char) 27 + "[34;47m"; //Azul y fondo blanco
-
         if (isEnable == true) {
-            System.out.print(""
-                    + "\n" + color + ""
-                    + "\n" + color + "##########################################################"
-                    + "\n" + color + "##" + titulo + color + "##"
-                    + "\n" + color + "##########################################################");
+            mostrarMensaje(elTitulo);
         }
     }
+    
+    public void mostrarMensaje(String mensaje) {
+
+        //Centrar mensaje
+        mensaje = centrarTituloMenu(mensaje, 54);
+        mensaje = mensaje.replaceAll("#", " ");
+        
+        System.out.print(""
+                + "\n" + colorBlue + ""
+                + "\n" + colorBlue + "##########################################################"
+                + "\n" + colorBlue + "##" + mensaje + colorBlue + "##"
+                + "\n" + colorBlue + "##########################################################");
+    }
+    
 
     public int showMenuPrincipal(boolean isEnable, int cantOpciones) {
         //Se define la cantidad de opciones que tiene el menú.
         this.setCantOpcionesMenu(cantOpciones);
 
-        String color;
-        color = (char) 27 + "[34;47m"; //Azul y fondo blanco
         String mensaje = "MENU PRINCIPAL";
         showCabeceraMenu(isEnable, mensaje);
 
         if (isEnable) {
             do {
                 System.out.print(""
-                        + "\n" + color + "##  Digite la opción deseada:                           ##"
-                        + "\n" + color + "##                                                      ##"
-                        + "\n" + color + "##  1- Registro de Jugador.                             ##"
-                        + "\n" + color + "##  2- Jugar partida manual.                            ##"
-                        + "\n" + color + "##  3- Jugar partida contra la computadora.             ##"
-                        + "\n" + color + "##  4- Ranking de Jugadores.                            ##"
-                        + "\n" + color + "##                                                      ##"
-                        + "\n" + color + "##  0- Fin.                                             ##"
-                        + "\n" + color + "##                                                      ##"
-                        + "\n" + color + "##########################################################"
+                        + "\n" + colorBlue + "##  Digite la opción deseada:                           ##"
+                        + "\n" + colorBlue + "##                                                      ##"
+                        + "\n" + colorBlue + "##  1- Registro de Jugador.                             ##"
+                        + "\n" + colorBlue + "##  2- Jugar partida manual.                            ##"
+                        + "\n" + colorBlue + "##  3- Jugar partida contra la computadora.             ##"
+                        + "\n" + colorBlue + "##  4- Ranking de Jugadores.                            ##"
+                        + "\n" + colorBlue + "##                                                      ##"
+                        + "\n" + colorBlue + "##  0- Fin.                                             ##"
+                        + "\n" + colorBlue + "##                                                      ##"
+                        + "\n" + colorBlue + "##########################################################"
                         + "\n" + "");
 
                 opcion = this.leerInt("Opción: ");
@@ -247,8 +248,7 @@ public class showMenu {
         do {
             resultado = false;
             System.out.print("\n Ingrese un Alias:" + mensaje);
-//            alias = tecladoS.nextLine();
-                        alias = leerString();
+            alias = leerString();
             for (int i = 0; i < unaListaJugadores.size(); i++) {
                 if (unaListaJugadores.get(i).getAlias().equalsIgnoreCase(alias) == true) {
                     resultado = true;
@@ -290,23 +290,20 @@ public class showMenu {
 
     public void showMenuRanking(ArrayList<Jugador> unaListaJugadores) {
         //Ranking de Jugadores
-        String color;
-        color = (char) 27 + "[34;47m"; //Azul y fondo blanco
 
-    System.out.println(""
-                + "\n" + color + "####################################################"
-                + "\n" + color + "##                                                ##"
-                + "\n" + color + "##    ┏┓┏┓┏┓ ┏━━━┓        ┏┓             ┏┓┏┓┏┓   ##"
-                + "\n" + color + "##    ┃┃┃┃┃┃ ┃┏━┓┃        ┃┃             ┃┃┃┃┃┃   ##"
-                + "\n" + color + "##    ┃┃┃┃┃┃ ┃┗━┛┃┏━━┓┏━┓ ┃┃┏┓┏┓┏━┓ ┏━━┓ ┃┃┃┃┃┃   ##"
-                + "\n" + color + "##    ┗┛┗┛┗┛ ┃┏┓┏┛┃┏┓┃┃┏┓┓┃┗┛┛┣┫┃┏┓┓┃┏┓┃ ┗┛┗┛┗┛   ##"
-                + "\n" + color + "##    ┏┓┏┓┏┓ ┃┃┃┗┓┃┏┓┃┃┃┃┃┃┏┓┓┃┃┃┃┃┃┃┗┛┃ ┏┓┏┓┏┓   ##"
-                + "\n" + color + "##    ┗┛┗┛┗┛ ┗┛┗━┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗━┓┃ ┗┛┗┛┗┛   ##"
-                + "\n" + color + "##                                  ┏━┛┃          ##"
-                + "\n" + color + "##                                  ┗━━┛          ##"
-                + "\n" + color + "####################################################"
+        System.out.println(""
+                + "\n" + colorBlue + "####################################################"
+                + "\n" + colorBlue + "##                                                ##"
+                + "\n" + colorBlue + "##    ┏┓┏┓┏┓ ┏━━━┓        ┏┓             ┏┓┏┓┏┓   ##"
+                + "\n" + colorBlue + "##    ┃┃┃┃┃┃ ┃┏━┓┃        ┃┃             ┃┃┃┃┃┃   ##"
+                + "\n" + colorBlue + "##    ┃┃┃┃┃┃ ┃┗━┛┃┏━━┓┏━┓ ┃┃┏┓┏┓┏━┓ ┏━━┓ ┃┃┃┃┃┃   ##"
+                + "\n" + colorBlue + "##    ┗┛┗┛┗┛ ┃┏┓┏┛┃┏┓┃┃┏┓┓┃┗┛┛┣┫┃┏┓┓┃┏┓┃ ┗┛┗┛┗┛   ##"
+                + "\n" + colorBlue + "##    ┏┓┏┓┏┓ ┃┃┃┗┓┃┏┓┃┃┃┃┃┃┏┓┓┃┃┃┃┃┃┃┗┛┃ ┏┓┏┓┏┓   ##"
+                + "\n" + colorBlue + "##    ┗┛┗┛┗┛ ┗┛┗━┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗━┓┃ ┗┛┗┛┗┛   ##"
+                + "\n" + colorBlue + "##                                  ┏━┛┃          ##"
+                + "\n" + colorBlue + "##                                  ┗━━┛          ##"
+                + "\n" + colorBlue + "####################################################"
                 + "\n" + "");
-
 
         if (unaListaJugadores.isEmpty()) {
             System.out.println("##    No hay jugadores ingresados en el sistema !!!");
@@ -323,9 +320,12 @@ public class showMenu {
 
     }
 
-    //Selecciono Jugador:
-    //Si no tengo al cantidad minima de jugadores en el sismtea da error y devuelve jugador=null
-    //si tengo el minimo o mas retorno el jugador seleccionado.
+    /*
+        Seleccionar Jugador:
+        --------------------
+        Si no tengo al cantidad minima de jugadores en el sismtea da error y devuelve jugador=null
+        si tengo el minimo o mas retorno el jugador seleccionado.
+    */
     public Jugador seleccionarJugador(String turno, ArrayList unaListaJugadores, Jugador otroJugador) {
         int numJugador = Integer.MIN_VALUE;//Numero del Jugador en la lista
         Jugador unJugador = null;
@@ -356,17 +356,14 @@ public class showMenu {
         //Se define la cantidad de opciones que tiene el menú.
         this.setCantOpcionesMenu(cantOpciones);
 
-        String color;
-        color = (char) 27 + "[34;47m"; //Azul y fondo blanco
-
         if (isEnable) {
             do {
                 System.out.print(""
-                        + "\n" + color + "##                                                      ##"
-                        + "\n" + color + "##  1- Tablero por defecto.                             ##"
-                        + "\n" + color + "##  2- Tablero al azar.                                 ##"
-                        + "\n" + color + "##                                                      ##"
-                        + "\n" + color + "##########################################################"
+                        + "\n" + colorBlue + "##                                                      ##"
+                        + "\n" + colorBlue + "##  1- Tablero por defecto.                             ##"
+                        + "\n" + colorBlue + "##  2- Tablero al azar.                                 ##"
+                        + "\n" + colorBlue + "##                                                      ##"
+                        + "\n" + colorBlue + "##########################################################"
                         + "\n" + "");
 
                 opcion = this.leerInt("Opción: ");
@@ -377,26 +374,14 @@ public class showMenu {
 
     }
 
-    /*Metodos pedir datos de jugada.
+    /*
+        Método para pedir datos de jugada.
      */
-    public String ingresarMovimiento(boolean isEnable) {
+    public String ingresarMovimiento() {
         String retorno = null;
-
-        String color;
-        color = (char) 27 + "[34;47m"; //Azul y fondo blanco
-        String mensaje = "Próximo Movimiento";
-        showCabeceraMenu(isEnable, mensaje);
-
-        if (isEnable) {
-            System.out.println(""
-                    + "\n" + color + "## " + "Ingrese su Jugada:");
-
-            retorno = this.tecladoS.nextLine();
-
-        }
-
+        mostrarMensaje("Ingrese su Jugada:");
+        retorno = this.tecladoS.nextLine();
         return retorno;
-
     }
 
     public String centrarTituloMenu(String elTitulo, int cantCaracteres) {
@@ -443,17 +428,15 @@ public class showMenu {
         boolean confirmacion;
         int respuesta;
         String mensajeOpciones;
-        String color;
-        color = (char) 27 + "[34;47m"; //Azul y fondo blanco
         showCabeceraMenu(true, mensaje);
 
         do {
             mensajeOpciones = (""
-                    + "\n" + color + "##                                                      ##"
-                    + "\n" + color + "##  1- Confirmar                                        ##"
-                    + "\n" + color + "##  2- Cancelar                                         ##"
-                    + "\n" + color + "##                                                      ##"
-                    + "\n" + color + "##########################################################"
+                    + "\n" + colorBlue + "##                                                      ##"
+                    + "\n" + colorBlue + "##  1- Confirmar                                        ##"
+                    + "\n" + colorBlue + "##  2- Cancelar                                         ##"
+                    + "\n" + colorBlue + "##                                                      ##"
+                    + "\n" + colorBlue + "##########################################################"
                     + "\n" + "Opción: ");
 
             respuesta = leerInt(mensajeOpciones);
@@ -463,5 +446,5 @@ public class showMenu {
         confirmacion = (respuesta == 1);// si es 1 es true
         return confirmacion;
     }
-
 }
+

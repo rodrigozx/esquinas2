@@ -1,3 +1,8 @@
+/*****************************************************
+    Clase: showPartida
+    @author Rodrigo Blanco - 151251 - Programación II
+    **************************************************
+*/
 package Interfaz;
 
 import Dominio.Partida;
@@ -48,39 +53,6 @@ public class showPartida {
         }
 
     }
-
-    //Muestra cantida de piedras
-    private static void cantFichas(int[] cantFichas) {
-        if (cantFichas != null) {
-            for (int i = 0; i < cantFichas.length; i++) {
-                for (int j = 0; j < cantFichas[i]; j++) {
-
-                    switch (i) {
-
-                        case 0:
-                            //Celeste
-                            showTablero.impFicha('C');
-                            break;
-                        case 1:
-                            //Azul
-                            showTablero.impFicha('A');
-                            break;
-                        case 2:
-                            //Rojo
-                            showTablero.impFicha('R');
-                            break;
-
-                        case 3:
-                            //Verde
-                            showTablero.impFicha('V');
-                            break;
-                        default:
-                    }
-
-                }
-
-            }
-        }
-    }
+   
 
 }
