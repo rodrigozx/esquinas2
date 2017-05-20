@@ -25,16 +25,6 @@ public class showPartida {
 
     }
 
-    //Muestra cantida de piedras
-    private static void cantPiedras(int cantPiedras) {
-        System.out.print("PIEDRAS: " + cantPiedras + " ");
-        for (int i = 0; i < cantPiedras; i++) {
-            System.out.print("#");
-
-        }
-        System.out.println("");
-    }
-
     //Muestra Datos Jugadores
     private static void datosJugadores(Partida unaPartida) {
         System.out.println("Jugador 1: " + unaPartida.getJugador1().getAlias());

@@ -141,7 +141,7 @@ public class showMenu {
     }
 
 
-    public void showLogo(boolean isEnable) {
+    public  void showLogo(boolean isEnable) {
 
         if (isEnable) {
             System.out.println(""
@@ -288,7 +288,7 @@ public class showMenu {
         return edad;
     }
 
-    public void showMenuRanking(ArrayList<Jugador> unaListaJugadores) {
+    public  void showMenuRanking(ArrayList<Jugador> unaListaJugadores) {
         //Ranking de Jugadores
 
         System.out.println(""

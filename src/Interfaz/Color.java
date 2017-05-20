@@ -8,7 +8,7 @@ package Interfaz;
 
 public class Color {
 
-    public String getColor(String nombreColor) {
+    public static String getColor(String nombreColor) {
 
         String impColor;
 

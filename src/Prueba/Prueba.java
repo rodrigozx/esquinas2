@@ -11,13 +11,15 @@ import Interfaz.*;
 
 public class Prueba {
 
+    
+    public static void main(String[] args) {
+
     //Se crea el sistema del juego
     Sistema miSistema = new Sistema();
 
     //Se crea el menu a mostrar
     showMenu elMenu = new showMenu(0, true);
     
-    public static void main(String[] args) {
         int dato = 0; //Por defecto se ejecuta el menú princiapl.
 
         //Carga del Menu Principal
@@ -31,19 +33,19 @@ public class Prueba {
 
                 //Registro de Jugador **********************************************************************
                 case 1:
-                    registroDeJugador();
+                    registroDeJugador(miSistema,elMenu);
                     repetir = true; //True Repite, False no repite menu principal.
                     break;
 
                 //Jugar 1 vs 1 **********************************************************************
                 case 2:
-                    iniciarPartida(2); //Son dos jugadores.
+                    iniciarPartida(2,miSistema,elMenu); //Son dos jugadores.
                     repetir = true; //True Repite, False no repite menu principal.
                     break;
 
                 //Jugar 1 vs CPU **********************************************************************
                 case 3:
-                    iniciarPartida(1); //Es un sólo jugador.
+                    iniciarPartida(1, miSistema, elMenu); //Es un sólo jugador.
                     repetir = true; //True Repite, False no repite menu principal.                    
                     break;
 
@@ -64,7 +66,7 @@ public class Prueba {
         } while (repetir == true);
     }
     
-    public static void registroDeJugador() {
+    public static void registroDeJugador(Sistema miSistema, showMenu elMenu) {
         //Se ejecuta el metodo mostrar Cabecera de Menú.
         elMenu.showCabeceraMenu(true, "Menú Registrar Jugador");
 
@@ -79,7 +81,7 @@ public class Prueba {
 
     }
 
-    public static void iniciarPartida(int cantJugadores) {
+    public static void iniciarPartida(int cantJugadores, Sistema miSistema, showMenu elMenu) {
         
         //Creo una partida.
         boolean next = false;
@@ -92,7 +94,7 @@ public class Prueba {
         
         //Selección de jugadores y arranque Partida. ******************************************
         //si existe menos de un jugador registrado
-        if (!this.miSistema.numJugadoresMinimos() && (vsCpu == false)) {
+        if (!miSistema.numJugadoresMinimos() && (vsCpu == false)) {
             elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados");
             if (!miSistema.numJugadoresMinimos() && (vsCpu == true)){
                 elMenu.mostrarMensaje("es de al menos uno para ésta partida");
