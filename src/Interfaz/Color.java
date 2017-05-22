@@ -14,65 +14,65 @@ public class Color {
 
         switch (nombreColor) {
             case "NEGRO":
-                impColor = "";
+                impColor = "[0";
                 break;
             case "ROJO":
-                impColor = "";
+                impColor = "[31";
                 break; //31
             case "VERDE":
-                impColor = "";
+                impColor = "[32";
                 break;  //32
             case "AMARILO":
-                impColor = "";
+                impColor = "[33";
                 break; //33 
             case "AZUL":
-                impColor = "";
+                impColor = "[34";
                 break; //34
             case "MAGENTA":
-                impColor = "";
+                impColor = "[35";
                 break;//35
             case "CYAN":
-                impColor = "";
+                impColor = "[36";
                 break;//36
             case "BLANCO":
-                impColor = "";
+                impColor = "[37";
                 break;//37
                 
             //FONDOS COLOREADOS
             case "NEGROFDO":
-                impColor = "";
+                impColor = "[37;40m";
                 break;//40 
             case "ROJOFDO":
-                impColor = "";
+                impColor = "[0;41m";
                 break;//41
             case "VERDEFDO":
-                impColor = "";
+                impColor = "[0;42m";
                 break; //42
             case "AMARILLOFDO":
-                impColor = "";
+                impColor = "[0;43m";
                 break;//43 
             case "AZULFDO":
-                impColor = "";
+                impColor = "[0;44m";
                 break; //44
             case "MAGENTAFDO":
-                impColor = "";
+                impColor = "[0;45m";
                 break; //45
             case "CYANFDO":
-                impColor = "";
+                impColor = "[0;46m";
                 break;//46
             case "BLANCOFDO":
-                impColor = "";
+                impColor = "[0;47m";
                 break;//47
                 
             //FORMATOS DE FUENTES
             case "NEGRITA":
-                impColor = "";
+                impColor = "[1";
                 break; //1
             case "NORMAL":
-                impColor = "";
+                impColor = "[21";
                 break; //21
             case "SUBRAYADO":
-                impColor = "";
+                impColor = "[4";
                 break; //4
             case "NOSUBRAYADO":
                 impColor = "";
@@ -88,7 +88,12 @@ public class Color {
             case "NEGROFDOBLANCO":
                 impColor = "[00;47m";
                 break;//; //Negrozul y fondo blanco                
-
+            case "VERDEFDOBLANCO":
+                impColor = "[32;47m";
+                break;//; //Rojo y fondo blanco
+            case "MAGFDOBLANCO":                
+                impColor = "[45;47m";
+                break;//; //Rojo y fondo blanco                
             //SIN FORMATOS NI COLORES
             case "SINFORMATO": 
                 impColor =  "[00;00m";;

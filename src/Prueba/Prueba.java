@@ -8,10 +8,10 @@ package Prueba;
 
 import Dominio.*;
 import Interfaz.*;
+import java.util.*;
 
 public class Prueba {
 
-    
     public static void main(String[] args) {
 
     //Se crea el sistema del juego
@@ -24,47 +24,63 @@ public class Prueba {
 
         //Carga del Menu Principal
         boolean repetir; //True repite el menú
-            elMenu.showLogo(true);
+        elMenu.showLogo(true);
+        repetir = true;
         
         do {
             dato = elMenu.showMenuPrincipal(true, 4);
-            repetir = false;
             switch (dato) {
 
                 //Registro de Jugador **********************************************************************
                 case 1:
-                    registroDeJugador(miSistema,elMenu);
-                    repetir = true; //True Repite, False no repite menu principal.
+                    seleccionOpcionesRegistroJugador(miSistema,elMenu);
                     break;
 
                 //Jugar 1 vs 1 **********************************************************************
                 case 2:
                     iniciarPartida(2,miSistema,elMenu); //Son dos jugadores.
-                    repetir = true; //True Repite, False no repite menu principal.
                     break;
 
                 //Jugar 1 vs CPU **********************************************************************
                 case 3:
                     iniciarPartida(1, miSistema, elMenu); //Es un sólo jugador.
-                    repetir = true; //True Repite, False no repite menu principal.                    
                     break;
 
                 //Muestra el Ranking de jugadores *****************************************************
                 case 4:
                     elMenu.showMenuRanking(miSistema.getListaJugadores());
-                    repetir = true; //True Repite, False no repite menu principal.
                     break;
 
                 //Sale del programa **********************************************************************                    
                 case 0:
                     elMenu.showSaludo(true);
                     System.exit(1);
+                    repetir =false;
                     break;
                 default:
                     repetir = true; //True Repite, False no repite menu principal.
             }
         } while (repetir == true);
     }
+    
+    public static void seleccionOpcionesRegistroJugador(Sistema miSistema, showMenu elMenu) {
+        String cabezal = "OPCIONES DE REGISTRO DE JUGADOR";
+        ArrayList <String> listaOpciones = new ArrayList();
+        int opcSelect;
+        
+        listaOpciones.add("Volver");//0 
+        listaOpciones.add("Registrar Nuevo Jugador"); //1
+        listaOpciones.add("Eliminar Jugador");        //2
+
+        //El último parámetro muestra o no la opción de volver.
+        opcSelect = elMenu.menuOpciones(cabezal,listaOpciones,true);
+        switch(opcSelect){
+            case 1: registroDeJugador(miSistema, elMenu);break;
+            case 2: eliminarJugador(miSistema, elMenu);break;
+            default: //no hace nada y vuelve al menu principal
+        }
+    }
+    
     
     public static void registroDeJugador(Sistema miSistema, showMenu elMenu) {
         //Se ejecuta el metodo mostrar Cabecera de Menú.
@@ -81,35 +97,40 @@ public class Prueba {
 
     }
 
+ public static void eliminarJugador(Sistema miSistema, showMenu elMenu) {
+
+        //Se muestra la lista de jugadores y se elimina el seleccionado;
+        Jugador elJugador = elMenu.seleccionarJugador(miSistema.getListaJugadores());
+        miSistema.eliminarJugador((Jugador) elJugador);
+        elMenu.mostrarMensaje("Jugador  " + elJugador.getAlias() + "  eliminado!" , "correcto");
+    }
+ 
     public static void iniciarPartida(int cantJugadores, Sistema miSistema, showMenu elMenu) {
         
         //Creo una partida.
-        boolean next = false;
         boolean vsCpu;
         
         //Veo si es un jugaor sólo
-        if (cantJugadores == 2){
-            vsCpu =false;
-        }else {vsCpu = true;}
+        vsCpu = cantJugadores != 2;
         
         //Selección de jugadores y arranque Partida. ******************************************
         //si existe menos de un jugador registrado
         if (!miSistema.numJugadoresMinimos() && (vsCpu == false)) {
-            elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados");
+            elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados","error");
             if (!miSistema.numJugadoresMinimos() && (vsCpu == true)){
-                elMenu.mostrarMensaje("es de al menos uno para ésta partida");
+                elMenu.mostrarMensaje("es de al menos uno para ésta partida","error");
             }else{
-                elMenu.mostrarMensaje("es de al menos dos para este tipo de partida");
+                elMenu.mostrarMensaje("es de al menos dos para este tipo de partida","error");
             }
-            next = false;
+
         } else {
             if (miSistema.numJugadoresRegistrados() == 1 && (vsCpu == false)) {
-                elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados");
-                elMenu.mostrarMensaje("es de al menos dos para este tipo de partida");
+                elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados","error");
+                elMenu.mostrarMensaje("es de al menos dos para este tipo de partida","error");
             }
-            Jugador jugador1 = elMenu.seleccionarJugador("Primero",
+            Jugador jugador1 = elMenu.seleccionarJugadoresPartida("Primero",
                     miSistema.getListaJugadores(), null);
-            Jugador jugador2 = elMenu.seleccionarJugador("Segundo",
+            Jugador jugador2 = elMenu.seleccionarJugadoresPartida("Segundo",
                     miSistema.getListaJugadores(), jugador1);
             Partida laPartida = new Partida(jugador1, jugador2,1, null,vsCpu, 25);
 //                    Jugador jugador1 = new Jugador("Rolo", "Rodrigo", 33);

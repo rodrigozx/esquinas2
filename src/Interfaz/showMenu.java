@@ -18,27 +18,23 @@ public class showMenu {
     Scanner tecladoS = new Scanner(System.in);
 
     //Definición de variables
-    private int opcion; //Referencia la opción ingresada por el usuario
     private int menuNav; //Referencia el menú seleccionado
-    private boolean opcionOk;
-    private int cantOpcionesMenu; //Defino cuantas opciones tendra el menú
     private boolean menuEnable; //Controla Si el menú puede mostrarse o no.
-
     /*
         Importo las definiciones de los colores de la clase Color.
      */
     private Color color;
     String colorBlue = color.getColor("AZULFDOBLANCO"); //Azul y fondo blanco
     String colorRed = color.getColor("ROJOFDOBLANCO");//Rojo y fondo blanco
+    String colorGreen = color.getColor("VERDEFDOBLANCO");//Rojo y fondo blanco
     String colorBlack = color.getColor("NEGROFDOBLANCO");//Negro y fondo blanco
+    String colorMag = color.getColor("MAGFDOBLANCO");//Negro y fondo blanco
     String resetColor = color.getColor("SINFORMATO");//Sin formato ni color
 
     //Defino Constructores
     //Constructor sin parametros
     public showMenu() {
-        this.setOpcion(0, true);//Menú principal por defecto
         this.setMenuNav(00);//Menú princiapl por defecto
-        this.setOpcionOk(true);
         this.setMenuEnable(true);
     }
 
@@ -46,15 +42,6 @@ public class showMenu {
     public showMenu(int unMenuNav, boolean isEnable) {
         this.setMenuNav(unMenuNav);
         this.setMenuEnable(isEnable);
-    }
-
-    //Defino los metodos de acceso y modificación
-    public void setOpcion(int unaOpcion, boolean isEnable) {
-        unaOpcion = opcion;
-    }
-
-    public int getOpcion() {
-        return opcion;
     }
 
     public void setMenuNav(int unMenuNav) {
@@ -65,14 +52,6 @@ public class showMenu {
         return menuNav;
     }
 
-    public void setOpcionOk(boolean unaOpcionOk) {
-        unaOpcionOk = opcionOk;
-    }
-
-    public boolean getOpcionOk() {
-        return opcionOk;
-    }
-
     public void setMenuEnable(boolean unMenuEnable) {
         unMenuEnable = menuEnable;
     }
@@ -81,29 +60,17 @@ public class showMenu {
         return menuEnable;
     }
 
-    public boolean inOpcionOk(int unaopcionUsuario) {
-        return unaopcionUsuario <= this.getCantOpcionesMenu();
-    }
-
-//Este metodo repite el menú en caso de que la opción no sea valida
+    //Este metodo repite el menú en caso de que la opción no sea valida
     //Parametros:
     //a-Resultado del metodo que verifica que la opción ingresada
     //este en el rango
     //b-Inidica que menú deseamos repetir
     public void repetirMenu(boolean inOpcionOk, int menuNav, String banner) {
         if (inOpcionOk = false) {
-            System.out.println("!!! La opción ingresada es incorrecta !!!");
+            mostrarMensaje("¡¡¡ La opción ingresada es INCORRECTA !!!", "error");
             System.out.println(banner);
 
         }
-    }
-
-    public void setCantOpcionesMenu(int unaCantOpciones) {
-        cantOpcionesMenu = unaCantOpciones;
-    }
-
-    public int getCantOpcionesMenu() {
-        return cantOpcionesMenu;
     }
 
     //Metodo lectura de enteros
@@ -112,11 +79,11 @@ public class showMenu {
         int flag = 0;
         while (flag == 0) {
             try {
-                System.out.print(texto);
+                System.out.print(colorBlack + texto + resetColor);
                 retorno = teclado.nextInt();
                 flag = 1;
             } catch (Exception e) {
-                System.out.println("Debe ingresar un dato numérico.");
+                System.out.println(colorRed + "Debe ingresar un dato numérico." + resetColor);
                 teclado.next();
 
             }
@@ -132,7 +99,7 @@ public class showMenu {
         retorno = tecladoS.nextLine().replaceAll("\\s+", "");
         while (retorno.isEmpty()) {
 
-            System.out.println("Debe ingresar un dato.");
+            System.out.println(colorRed + "Debe ingresar un dato." + resetColor);
             retorno = tecladoS.nextLine().replaceAll("\\s+", "");
 
         }
@@ -140,8 +107,7 @@ public class showMenu {
         return retorno;
     }
 
-
-    public  void showLogo(boolean isEnable) {
+    public void showLogo(boolean isEnable) {
 
         if (isEnable) {
             System.out.println(""
@@ -168,19 +134,18 @@ public class showMenu {
         //Saludo al Salir del Juego.
         if (isEnable) {
             System.out.println(""
-                    + "\n" + colorBlue + "#############################################################################################################################################"
-                    + "\n" + colorBlue + "##                                                                                                                                         ##"
-                    + "\n" + colorBlue + "##     ▄████  ██▀███  ▄▄▄      ▄████▄   ██▓▄▄▄        ██████     ██▓███  ▒█████   ██▀███      ▄▄▄██▀▀▀█    ██   ▄████  ▄▄▄       ██▀███    ##"
-                    + "\n" + colorBlue + "##    ██▒ ▀█▒▓██ ▒ ██▒████▄   ▒██▀ ▀█  ▓██▒████▄    ▒██    ▒    ▓██░  ██▒██▒  ██▒▓██ ▒ ██▒      ▒██   ██  ▓██▒ ██▒ ▀█▒▒████▄    ▓██ ▒ ██▒  ##"
-                    + "\n" + colorBlue + "##   ▒██░▄▄▄░▓██ ░▄█ ▒██  ▀█▄ ▒▓█    ▄ ▒██▒██  ▀█▄  ░ ▓██▄      ▓██░ ██▓▒██░  ██▒▓██ ░▄█ ▒      ░██  ▓██  ▒██░▒██░▄▄▄░▒██  ▀█▄  ▓██ ░▄█ ▒  ##"
-                    + "\n" + colorBlue + "##   ░▓█  ██▓▒██▀▀█▄ ░██▄▄▄▄██▒▓▓▄ ▄██▒░██░██▄▄▄▄██   ▒   ██▒   ▒██▄█▓▒ ▒██   ██░▒██▀▀█▄     ▓██▄██▓ ▓▓█  ░██░░▓█  ██▓░██▄▄▄▄██ ▒██▀▀█▄    ##"
-                    + "\n" + colorBlue + "##   ░▒▓███▀▒░██▓ ▒██▒▓█   ▓██▒ ▓███▀ ░░██░▓█   ▓██▒▒██████▒▒   ▒██▒ ░  ░ ████▓▒░░██▓ ▒██▒    ▓███▒  ▒▒█████▓ ░▒▓███▀▒ ▓█   ▓██▒░██▓ ▒██▒  ##"
-                    + "\n" + colorBlue + "##    ░▒   ▒ ░ ▒▓ ░▒▓░▒▒   ▓▒█░ ░▒ ▒  ░░▓  ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   ▒▓▒░ ░  ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░    ▒▓▒▒░  ░▒▓▒ ▒ ▒  ░▒   ▒  ▒▒   ▓▒█░░ ▒▓ ░▒▓░  ##"
-                    + "\n" + colorBlue + "##     ░   ░   ░▒ ░ ▒░ ▒   ▒▒ ░ ░  ▒    ▒ ░ ▒   ▒▒ ░░ ░▒  ░ ░   ░▒ ░      ░ ▒ ▒░   ░▒ ░ ▒░    ▒ ░▒░  ░░▒░ ░ ░   ░   ░   ▒   ▒▒ ░  ░▒ ░ ▒░  ##"
-                    + "\n" + colorBlue + "##   ░ ░   ░   ░░   ░  ░   ▒  ░         ▒ ░ ░   ▒   ░  ░  ░     ░░      ░ ░ ░ ▒    ░░   ░     ░ ░ ░   ░░░ ░ ░ ░ ░   ░   ░   ▒     ░░   ░   ##"
-                    + "\n" + colorBlue + "##         ░    ░          ░  ░ ░       ░       ░  ░      ░                 ░ ░     ░         ░   ░     ░           ░       ░  ░   ░       ##"
-                    + "\n" + colorBlue + "##                            ░                                                                                                            ##"
-                    + "\n" + colorBlue + "#############################################################################################################################################"
+                    + "\n" + colorBlue + "   ###############################################################################"
+                    + "\n" + colorBlue + " ##                                                                               ##"
+                    + "\n" + colorBlue + "##" + colorGreen + "            #####    #######   #######  #######  ###   #######    ###### " + colorBlue + "        ##"
+                    + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##   ##      " + colorBlue + "        ##"
+                    + "\n" + colorBlue + "##" + colorGreen + "          ###        ## ##     ##   ##  ###            ##   ##    ###    " + colorBlue + "        ##"
+                    + "\n" + colorBlue + "##" + colorGreen + "          ###  ###   ######    #######  ###      ###   #######      ###  " + colorBlue + "        ##"
+                    + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##        ## " + colorBlue + "        ##"
+                    + "\n" + colorBlue + "##" + colorGreen + "           #######   ##   ##   ##   ##  #######  ###   ##   ##   ######  " + colorBlue + "        ##"
+                    + "\n" + colorBlue + " ##                                                                               ##"
+                    + "\n" + colorBlue + "   ###############################################################################"
+                    + "\n" + colorBlue + "   #" + colorMag + "                              HASTA LA PROXIMA :)                             #"
+                    + "\n" + colorBlue + "    #############################################################################"
                     + "\n" + resetColor + "");
         }
     }
@@ -190,50 +155,57 @@ public class showMenu {
 
         //Color del título
         if (isEnable == true) {
-            mostrarMensaje(elTitulo);
+            mostrarMensaje(elTitulo, colorBlue);
         }
     }
-    
-    public void mostrarMensaje(String mensaje) {
+
+    public void mostrarMensaje(String mensaje, String msjColor) {
 
         //Centrar mensaje
         mensaje = centrarTituloMenu(mensaje, 54);
         mensaje = mensaje.replaceAll("#", " ");
-        
-        System.out.print(""
-                + "\n" + colorBlue + ""
-                + "\n" + colorBlue + "##########################################################"
-                + "\n" + colorBlue + "##" + mensaje + colorBlue + "##"
-                + "\n" + colorBlue + "##########################################################");
-    }
     
+        switch (msjColor) {
+            case "error":
+                msjColor = colorRed;;
+                break;
+            case "":
+                msjColor = colorBlue;
+                break;
+            case "correcto":
+                msjColor = colorGreen;
+                break;
+            case "negrita":
+                msjColor = colorBlack;
+                break;                
+            default:
+                msjColor = colorBlue;
+            }
+
+        System.out.print(""
+                + "\n" + msjColor + ""
+                + "\n" + msjColor + "##########################################################"
+                + "\n" + msjColor + "##" + mensaje + msjColor + "##"
+                + "\n" + msjColor + "##########################################################");
+    }
 
     public int showMenuPrincipal(boolean isEnable, int cantOpciones) {
         //Se define la cantidad de opciones que tiene el menú.
-        this.setCantOpcionesMenu(cantOpciones);
 
-        String mensaje = "MENU PRINCIPAL";
-        showCabeceraMenu(isEnable, mensaje);
+        String cabezal = "MENU PRINCIPAL";
+        ArrayList<String> listaOpciones = new ArrayList();
+        int opcSelect;
 
-        if (isEnable) {
-            do {
-                System.out.print(""
-                        + "\n" + colorBlue + "##  Digite la opción deseada:                           ##"
-                        + "\n" + colorBlue + "##                                                      ##"
-                        + "\n" + colorBlue + "##  1- Registro de Jugador.                             ##"
-                        + "\n" + colorBlue + "##  2- Jugar partida manual.                            ##"
-                        + "\n" + colorBlue + "##  3- Jugar partida contra la computadora.             ##"
-                        + "\n" + colorBlue + "##  4- Ranking de Jugadores.                            ##"
-                        + "\n" + colorBlue + "##                                                      ##"
-                        + "\n" + colorBlue + "##  0- Fin.                                             ##"
-                        + "\n" + colorBlue + "##                                                      ##"
-                        + "\n" + colorBlue + "##########################################################"
-                        + "\n" + "");
+        listaOpciones.add("FIN");//0 
+        listaOpciones.add("Registro de Jugador"); //1
+        listaOpciones.add("Jugar partida manual");//2
+        listaOpciones.add("Jugar partida contra la computadora");//3
+        listaOpciones.add("Ranking de Jugadores");//4
 
-                opcion = this.leerInt("Opción: ");
-            } while (this.inOpcionOk(opcion) == false);
-        }
-        return opcion;
+        //El último parámetro muestra o no la opción de volver.
+        opcSelect = menuOpciones(cabezal, listaOpciones, true);
+
+        return opcSelect;
     }
 
     /*
@@ -242,30 +214,28 @@ public class showMenu {
     //El metodo recibe el arraylist de Jugadores para validar el alias.
     public String registrarJugadorAlias(ArrayList<Jugador> unaListaJugadores) {
         String alias;
-        String mensaje = "";
         boolean resultado = false;
 
         do {
             resultado = false;
-            System.out.print("\n Ingrese un Alias:" + mensaje);
+            System.out.print("\n" + colorBlack + "Ingrese un Alias:");
             alias = leerString();
             for (int i = 0; i < unaListaJugadores.size(); i++) {
                 if (unaListaJugadores.get(i).getAlias().equalsIgnoreCase(alias) == true) {
                     resultado = true;
-                    mensaje = ", diferente !!!";
+                    mostrarMensaje(alias + " ya está registrado!!!", "error");
                 }
             }
         } while (resultado == true);
         return alias;
     }
 
-//El metodo recibe el arraylist de Jugadores para validar el alias.
+    //El metodo recibe el arraylist de Jugadores para validar el alias.
     public String registrarJugadorNombre() {
         String nombre;
         do {
-            System.out.print(" Ingrese su Nombre:");
+            System.out.print(colorBlack + "Ingrese su Nombre:");
             nombre = tecladoS.nextLine();;
-
         } while (nombre == null);
         return nombre;
     }
@@ -273,71 +243,66 @@ public class showMenu {
     public int registrarJugadorEdad() {
         int edad = 0;
         boolean resultado = false;
-
         do {
             edad = this.leerInt("Ingrese su Edad: ");
-            if (edad >= 5) {
+            if (edad >= 1 && edad <= 100) {
                 resultado = true;
                 System.out.println("");//salto de línea
             } else {
-                System.out.println("##  El juego esta permitido para mayores a 5 años !!!");
+                System.out.println(colorRed + "Edades permitidas de 1 a 100 !!!");
             }
-
         } while (resultado != true);
-
         return edad;
     }
 
-    public  void showMenuRanking(ArrayList<Jugador> unaListaJugadores) {
+    public void showMenuRanking(ArrayList<Jugador> unaListaJugadores) {
         //Ranking de Jugadores
 
         System.out.println(""
-                + "\n" + colorBlue + "####################################################"
-                + "\n" + colorBlue + "##                                                ##"
-                + "\n" + colorBlue + "##    ┏┓┏┓┏┓ ┏━━━┓        ┏┓             ┏┓┏┓┏┓   ##"
-                + "\n" + colorBlue + "##    ┃┃┃┃┃┃ ┃┏━┓┃        ┃┃             ┃┃┃┃┃┃   ##"
-                + "\n" + colorBlue + "##    ┃┃┃┃┃┃ ┃┗━┛┃┏━━┓┏━┓ ┃┃┏┓┏┓┏━┓ ┏━━┓ ┃┃┃┃┃┃   ##"
-                + "\n" + colorBlue + "##    ┗┛┗┛┗┛ ┃┏┓┏┛┃┏┓┃┃┏┓┓┃┗┛┛┣┫┃┏┓┓┃┏┓┃ ┗┛┗┛┗┛   ##"
-                + "\n" + colorBlue + "##    ┏┓┏┓┏┓ ┃┃┃┗┓┃┏┓┃┃┃┃┃┃┏┓┓┃┃┃┃┃┃┃┗┛┃ ┏┓┏┓┏┓   ##"
-                + "\n" + colorBlue + "##    ┗┛┗┛┗┛ ┗┛┗━┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗┛┗━┓┃ ┗┛┗┛┗┛   ##"
-                + "\n" + colorBlue + "##                                  ┏━┛┃          ##"
-                + "\n" + colorBlue + "##                                  ┗━━┛          ##"
-                + "\n" + colorBlue + "####################################################"
-                + "\n" + "");
+                + "\n" + colorBlue + "   ##################################################################################"
+                + "\n" + colorBlue + " ##                                                                                  ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          #######   #######   ##    ##   ##   ##  ###   ##    ##    ######   " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ##   ##   ##   ##   ###   ##   ##  ##   ###   ###   ##   ###       " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ## ##     ##   ##   ## #  ##   ## ##          ## #  ##   ###       " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ######    #######   ##  # ##   #####    ###   ##  # ##   ###  ###  " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ##   ##   ##   ##   ##   ###   ##  ##   ###   ##   ###   ###   ##  " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ##   ##   ##   ##   ##    ##   ##   ##  ###   ##    ##    #######  " + colorBlue + "       ##"
+                + "\n" + colorBlue + " ##                                                                                  ##"
+                + "\n" + colorBlue + "   ##################################################################################"
+                + "\n" + resetColor + "");
 
         if (unaListaJugadores.isEmpty()) {
-            System.out.println("##    No hay jugadores ingresados en el sistema !!!");
+            mostrarMensaje("No hay jugadores ingresados en el sistema !!!", "error");
 
         } else {
-            System.out.println("## Posición - Alias - Ganadas - Perdidas               ##");
-            for (int i = 0; i < unaListaJugadores.size(); i++) {
-                System.out.println("##    " + (i + 1) + "     -    " + unaListaJugadores.get(i).getAlias()
-                        + "   -    " + unaListaJugadores.get(i).getPartidas()[0]
-                        + "   -    " + unaListaJugadores.get(i).getPartidas()[1]);
-
-            }
+            mostrarListaJugadores(unaListaJugadores);
         }
 
     }
 
+    public void mostrarListaJugadores(ArrayList<Jugador> unaListaJugadores) {
+        mostrarMensaje("Posición  -  Alias  -  Ganadas  -  Perdidas", "");
+        for (int i = 0; i < unaListaJugadores.size(); i++) {
+            System.out.println("##    " + (i + 1) + "     -    " + unaListaJugadores.get(i).getAlias()
+                    + "   -    " + unaListaJugadores.get(i).getPartidas()[0]
+                    + "   -    " + unaListaJugadores.get(i).getPartidas()[1]);
+        }
+    }
+
     /*
-        Seleccionar Jugador:
-        --------------------
+        Seleccionar Jugadores para Partida:
+        -----------------------------------
         Si no tengo al cantidad minima de jugadores en el sismtea da error y devuelve jugador=null
         si tengo el minimo o mas retorno el jugador seleccionado.
-    */
-    public Jugador seleccionarJugador(String turno, ArrayList unaListaJugadores, Jugador otroJugador) {
+     */
+    public Jugador seleccionarJugadoresPartida(String turno, ArrayList unaListaJugadores, Jugador otroJugador) {
         int numJugador = Integer.MIN_VALUE;//Numero del Jugador en la lista
         Jugador unJugador = null;
 
-        for (int i = 0; i < unaListaJugadores.size(); i++) {
-            unJugador = (Jugador) unaListaJugadores.get(i);
-            System.out.println(i + 1 + "-" + unJugador.getAlias());
-        }
+        mostrarListaJugadores(unaListaJugadores);
 
         do {
-            System.out.println("##");
-            System.out.println("## Digite el número del Jugador " + turno);
+            mostrarMensaje("Digite el número del Jugador " + turno, colorBlack);
             numJugador = this.leerInt("Opción: ");
             unJugador = (Jugador) unaListaJugadores.get(numJugador - 1);
 
@@ -351,26 +316,32 @@ public class showMenu {
         return unJugador;
     }
 
-    public void setCargaTablero(boolean isEnable, int cantOpciones, Tablero unTablero) {
-        int tipoCarga = 1;
-        //Se define la cantidad de opciones que tiene el menú.
-        this.setCantOpcionesMenu(cantOpciones);
+    /*
+        Seleccionar Jugador:
+        -----------------------------------
+        Selección de jugador del sistema;
+     */
+    public Jugador seleccionarJugador(ArrayList<Jugador> unaListaJugadores) {
+        Jugador unJugador;
+        int numJugador;
+        mostrarListaJugadores(unaListaJugadores);
+        boolean error = false;
+        String mensaje;
+        mostrarMensaje("Digite el número del Jugador a eliminar: ", colorBlack);
+        mensaje = "\n" + colorBlack + "Opción: ";
 
-        if (isEnable) {
-            do {
-                System.out.print(""
-                        + "\n" + colorBlue + "##                                                      ##"
-                        + "\n" + colorBlue + "##  1- Tablero por defecto.                             ##"
-                        + "\n" + colorBlue + "##  2- Tablero al azar.                                 ##"
-                        + "\n" + colorBlue + "##                                                      ##"
-                        + "\n" + colorBlue + "##########################################################"
-                        + "\n" + "");
+        do {
+            error = false;
+            numJugador = this.leerInt(mensaje);
+            if (numJugador < 1 || numJugador > unaListaJugadores.size()) {
+                mostrarMensaje("Opción inválida", "error");
+                error = true;
+            }
+        } while (error);
 
-                opcion = this.leerInt("Opción: ");
+        unJugador = (Jugador) unaListaJugadores.get(numJugador - 1);
 
-            } while (this.inOpcionOk(opcion) == false);
-
-        }
+        return unJugador;
 
     }
 
@@ -379,7 +350,7 @@ public class showMenu {
      */
     public String ingresarMovimiento() {
         String retorno = null;
-        mostrarMensaje("Ingrese su Jugada:");
+        mostrarMensaje("Ingrese su Jugada:", colorGreen);
         retorno = this.tecladoS.nextLine();
         return retorno;
     }
@@ -424,7 +395,7 @@ public class showMenu {
         return elTitulo;
     }
 
-    public boolean confimaMensaje(String mensaje) {
+    public boolean confimaMensaje(String mensaje, String msjColor) {
         boolean confirmacion;
         int respuesta;
         String mensajeOpciones;
@@ -437,7 +408,7 @@ public class showMenu {
                     + "\n" + colorBlue + "##  2- Cancelar                                         ##"
                     + "\n" + colorBlue + "##                                                      ##"
                     + "\n" + colorBlue + "##########################################################"
-                    + "\n" + "Opción: ");
+                    + "\n" + colorBlack + "Opción: ");
 
             respuesta = leerInt(mensajeOpciones);
 
@@ -446,5 +417,53 @@ public class showMenu {
         confirmacion = (respuesta == 1);// si es 1 es true
         return confirmacion;
     }
-}
 
+    public int menuOpciones(String cabezal, ArrayList<String> opciones, boolean salir) {
+
+        int opcion;
+        boolean error = false;
+        String lineaOpcion;
+        String mensaje;
+        int cantOpciones = opciones.size();
+        int espacios;
+
+        //Muestro el cabezal
+        if (cabezal.length() > 0) {
+            showCabeceraMenu(true, cabezal);
+        }
+
+        //Se crea el texto con los datos del ArrayList
+        mensaje = (""
+                + "\n" + colorBlue + "##                                                      ##");
+
+        for (int i = 1; i < cantOpciones; i++) {
+            lineaOpcion = " " + Integer.toString(i) + " - " + opciones.get(i).toString();
+            espacios = (54 - lineaOpcion.length() + 1);
+            lineaOpcion = padLString(lineaOpcion, espacios);
+            mensaje += ("\n" + colorBlue + "##" + lineaOpcion + "#");
+        }
+
+        if (salir) {
+            mensaje += ("\n" + colorBlue + "##                                                      ##");
+            lineaOpcion = " " + Integer.toString(0) + " - " + opciones.get(0).toString();
+            espacios = (54 - (lineaOpcion.length()) + 1);
+            lineaOpcion = padLString(lineaOpcion, espacios);
+            mensaje += ("\n" + colorBlue + "##" + lineaOpcion + "#");
+        }
+        mensaje += ("\n" + colorBlue + "##                                                      ##");
+        mensaje += ("\n" + colorBlue + "##########################################################"
+                + "\n" + colorBlack + "Opción: ");
+
+        do {
+            error = false;
+            opcion = this.leerInt(mensaje);
+            if (opcion < 1 || opcion > cantOpciones - 1) {
+                mostrarMensaje("Opción inválida", "error");
+                error = true;
+            }
+        } while (error);
+
+        return opcion;
+    }
+
+}

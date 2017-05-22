@@ -32,7 +32,7 @@ public class Partida {
     public Partida(Jugador jugador1, Jugador jugador2, int turno, Tablero elTablero, boolean versusCpu, int cantCubos) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
-        this.turno = turno; //se deja abierto para posibles modificaciones.
+        this.turno = turno;
         this.tablero = elTablero;
         this.ganador = null;
         this.vsCpu = versusCpu;
@@ -107,15 +107,24 @@ public class Partida {
         return estado;
      }
      
-    public void sumarRestaCubo(int cantidadFichas, String tipoFicha, boolean esSuma) {
+    public void restaCubos(int cantCubos, boolean esResta) {
 
-        Jugador jugadorAux;
-        int posJugador;
-
-        if (this.getTurno() == 1) {
-            jugadorAux = this.getJugador1();
-        } else {
-            jugadorAux = this.getJugador2();
+        int cantCubosActual;
+        //Me fijo de quien es el turno
+        if (this.getTurno() == 1) { //jugador 1
+            cantCubosActual = this.getTablero().getCantCubosJug1();
+            if (esResta){
+                this.getTablero().setCantCubosJug1(cantCubosActual - cantCubos);
+            }else{ //si no los resta, los está sumando
+                this.getTablero().setCantCubosJug1(cantCubosActual + cantCubos);
+            }
+        } else { // es el jugador 2
+            cantCubosActual = this.getTablero().getCantCubosJug2();
+            if (esResta){
+                this.getTablero().setCantCubosJug2(cantCubosActual - cantCubos);
+            }else{ //si no los resta, los está sumando
+                this.getTablero().setCantCubosJug2(cantCubosActual + cantCubos);
+            }
         }
 
     }

@@ -45,9 +45,13 @@ public class Sistema {
         this.getListaJugadores().add(unJugador);
     }
 
+    public void eliminarJugador(Jugador unJugador) {
+        this.getListaJugadores().remove(unJugador);
+    }
+
     /*
         **********************************************
-        Método para ordenar Lista Jugadores segun su ranking
+        Método para ordenar Lista Jugadores según su ranking
      */
     public ArrayList ordenarPorRanking() {
         //Internamente, utiliza el criterio definido en la instancia pasada como parámetro (CriterioDecdreciente)
