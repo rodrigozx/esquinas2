@@ -135,10 +135,20 @@ public class Prueba {
                 elMenu.mostrarMensaje("Error! la cantidad de jugadores registrados", "error");
                 elMenu.mostrarMensaje("es de al menos dos para este tipo de partida", "error");
             }
-            Jugador jugador1 = elMenu.seleccionarJugadoresPartida("Primer",
+            Jugador jugador1;
+            Jugador jugador2;
+                    
+            if (vsCpu) {
+            jugador1 = elMenu.seleccionarJugadoresPartida("Primer",
                     miSistema.getListaJugadores(), null);
-            Jugador jugador2 = elMenu.seleccionarJugadoresPartida("Segundo",
+            jugador2 = new Jugador ("CPU","CPU",1);
+            
+            }else{
+                jugador1 = elMenu.seleccionarJugadoresPartida("Primer",
+                    miSistema.getListaJugadores(), null);
+                jugador2 = elMenu.seleccionarJugadoresPartida("Segundo",
                     miSistema.getListaJugadores(), jugador1);
+            }
             Partida laPartida = new Partida(jugador1, jugador2, 1, vsCpu, 25);
 
             //Mostrar tablero y datos de los jugadores.
@@ -152,7 +162,11 @@ public class Prueba {
                 showPartida.datos(laPartida);
 
                 //Se ingresa la jugada.
-                pedirJugada(miSistema, laPartida, elMenu);
+                if (laPartida.getTurno()==2 && vsCpu){
+                    laPartida.getTablero().jugadaCpu();
+                }else {
+                    pedirJugada(miSistema, laPartida, elMenu);
+                }
 
                 //Si un jugador quiere abandonar
                 //Si nadie Abandona o no hay ganador vuelve al "do"

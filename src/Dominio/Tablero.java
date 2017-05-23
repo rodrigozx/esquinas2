@@ -352,6 +352,21 @@ public class Tablero {
         return cubosIngresados;
     }
     
+    public void jugadaCpu(){
+        int maximo;
+        maximo=0;
+        String control;
+        int cantCalc;
+        for (int i = 0; i < this.getMatrizTablero().length; i++) {
+            for (int j = 0; j < this.getMatrizTablero().length; j++) {
+               control = this.controlCuadrados(i, j);
+               if ((control).equals("ok")){
+                   cantCalc = this.ingresoCubosEsquinas(i, maximo, j, true);
+               }
+            }
+        }
+    }
+    
     public void setCuboAdicional(int fila, int columna, int turno){
         int torre;
         torre = this.getMatrizTablero()[fila][columna];
