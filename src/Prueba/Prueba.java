@@ -28,10 +28,10 @@ public class Prueba {
         boolean salir = false;
 
         Jugador jugador1 = new Jugador("Rolo", "Rodrigo", 33);
-        Jugador jugador2 = new Jugador("Viky", "Virginia", 29);        
+        Jugador jugador2 = new Jugador("Viky", "Virginia", 29);
         miSistema.agregarJugador(jugador1);
         miSistema.agregarJugador(jugador2);
-        
+
         do {
             dato = elMenu.showMenuPrincipal(4); //existen 4 opciones
             switch (dato) {
@@ -92,7 +92,7 @@ public class Prueba {
 
     public static void registroDeJugador(Sistema miSistema, showMenu elMenu) {
         //Se ejecuta el metodo mostrar Cabecera de Menú.
-        elMenu.showCabeceraMenu(true, "Menú Registrar Jugador");
+        elMenu.showCabeceraMenu("Menú Registrar Jugador");
 
         //Se crea el objeto Jugador con los parametros.
         //Luego se agrega al ArrayList de Jugadores
@@ -141,12 +141,11 @@ public class Prueba {
                     miSistema.getListaJugadores(), jugador1);
             Partida laPartida = new Partida(jugador1, jugador2, 1, vsCpu, 25);
 
-
             //Mostrar tablero y datos de los jugadores.
             do {
                 //CICLO DE PARTIDA ##################################################
                 //Dibujo del Tablero
-                elMenu.mostrarMensaje("Tablero - Esquinas ","");                
+                elMenu.mostrarMensaje("Tablero - Esquinas ", "");
                 showTablero.show(laPartida.getTablero().getMatrizTablero());//muestro la estadística
 
                 //Dibujo de status de la partida.
@@ -154,7 +153,7 @@ public class Prueba {
 
                 //Se ingresa la jugada.
                 pedirJugada(miSistema, laPartida, elMenu);
-                
+
                 //Si un jugador quiere abandonar
                 //Si nadie Abandona o no hay ganador vuelve al "do"
             } while ((laPartida.terminoPartida() == 0)); //mientra haya jugadores con fichas.
@@ -166,13 +165,13 @@ public class Prueba {
             if (laPartida.terminoPartida() == 1) {
                 laPartida.getJugador1().setPartidas(1, 0);
                 laPartida.getJugador2().setPartidas(0, 1);
-                elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador1().getAlias()));
+                elMenu.showCabeceraMenu("EL GANADOR ES: " + (laPartida.getJugador1().getAlias()));
             }
             if (laPartida.terminoPartida() == 2) {
                 laPartida.getJugador2().setPartidas(1, 0);
                 laPartida.getJugador1().setPartidas(0, 1);
                 System.out.println("\n");
-                elMenu.showCabeceraMenu(true, "EL GANADOR ES: " + (laPartida.getJugador2().getAlias()));
+                elMenu.showCabeceraMenu("EL GANADOR ES: " + (laPartida.getJugador2().getAlias()));
                 System.out.println("\n");
             }
 
@@ -182,12 +181,63 @@ public class Prueba {
          */
 
     }
-    
-    public static void pedirJugada(Sistema miSistema, Partida laPartida, showMenu elMenu){
+
+    public static void pedirJugada(Sistema miSistema, Partida laPartida, showMenu elMenu) {
         String jugada;
-        int[] lasCoordendas = new int[2];
+        int[] lasCoordenadas = new int[2];
+        String entradaOk;
+        boolean salir = false;
+
         jugada = elMenu.ingresarMovimiento();
-        lasCoordendas = laPartida.ingresarCoordenadas(jugada);
+        jugada = jugada.toUpperCase();
+        entradaOk = validaEntradaJugada(jugada, laPartida);
+        
+        if (entradaOk.equals("Ok")){
+            lasCoordenadas = laPartida.ingresarCoordenadas(jugada);
+            if (laPartida.getEstado().equalsIgnoreCase("OK")){
+                
+                //se intenta realizar la jugada
+                entradaOk = laPartida.getTablero().colocarCubo(lasCoordenadas[0],lasCoordenadas[1], laPartida.getTurno());
+                laPartida.setEstado(entradaOk);
+                if (laPartida.getEstado().equalsIgnoreCase("Ok")){
+                    laPartida.cambioTurno();
+                    laPartida.restaCubos(1, true);
+                }else{
+                    elMenu.mostrarMensaje(laPartida.getEstado(), "error");                    
+                }
+            }else{
+                elMenu.mostrarMensaje(laPartida.getEstado(), "error");
+            }
+        }else{
+
+            if(entradaOk.equals("ABANDONA")){
+                salir = elMenu.confimaMensaje("¿Está seguro que desea abandonar?", "error");
+
+                if(salir){
+                    //Doy la partida ganada al otro jugador
+                    laPartida.abandonar();
+                    //Sale al menu Principal
+                }
+            }else{
+                //error al ingresar Jugada
+                elMenu.mostrarMensaje(entradaOk,"error");
+            }
+        }
+    }
+
+    public static String validaEntradaJugada(String jugada, Partida laPartida) {
+        String entradaOk;
+
+        if (jugada.trim().length() > 2 || jugada.trim().length() < 1) {
+            entradaOk = "Largo de jugada inválido";
+        } else {
+            if (jugada.trim().equals("X")) {
+                entradaOk = "ABANDONA";
+            } else {
+            
+                entradaOk = "Ok";
+            }
+        }
+        return entradaOk;
     }
 }
- 

@@ -145,12 +145,9 @@ public class showMenu {
     }
 
     //Cabecera Menu.
-    public void showCabeceraMenu(boolean isEnable, String elTitulo) {
+    public void showCabeceraMenu(String elTitulo) {
 
-        //Color del título
-        if (isEnable == true) {
-            mostrarMensaje(elTitulo, colorBlue);
-        }
+        mostrarMensaje(elTitulo, colorBlue);
     }
 
     public void mostrarMensaje(String mensaje, String msjColor) {
@@ -427,7 +424,7 @@ public class showMenu {
         boolean confirmacion;
         int respuesta;
         String mensajeOpciones;
-        showCabeceraMenu(true, mensaje);
+        showCabeceraMenu(mensaje);
 
         do {
             mensajeOpciones = (""
@@ -457,7 +454,7 @@ public class showMenu {
 
         //Muestro el cabezal
         if (cabezal.length() > 0) {
-            showCabeceraMenu(true, cabezal);
+            showCabeceraMenu(cabezal);
         }
 
         //Se crea el texto con los datos del ArrayList

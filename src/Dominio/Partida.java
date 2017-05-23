@@ -17,6 +17,8 @@ public class Partida {
     private Jugador ganador;
     private int turno;
     private boolean vsCpu;
+    public String estado;
+    
 
     /* CONSTRUCTOR *************************************/
     public Partida() {
@@ -26,6 +28,8 @@ public class Partida {
         this.tablero = new Tablero();
         this.ganador = null;
         this.vsCpu = false;
+        this.tablero.setCantCubosJug1(25);
+        this.tablero.setCantCubosJug2(25);
     }
 
     /* CONSTRUCTOR POR PARAMETROS *************************************/
@@ -36,6 +40,8 @@ public class Partida {
         this.tablero = new Tablero();
         this.ganador = null;
         this.vsCpu = versusCpu;
+        this.tablero.setCantCubosJug1(25);
+        this.tablero.setCantCubosJug2(25);
     }
 
     /* GETS Y SETS *************************************/
@@ -75,6 +81,14 @@ public class Partida {
         return ganador;
     }
 
+    public void setEstado(String elEstado) {
+        this.estado = elEstado;
+    }
+    
+    public String getEstado() {
+        return estado;
+    }
+    
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
     }
@@ -87,22 +101,33 @@ public class Partida {
          1-Ganador Jugador1
          2-Ganador Jugador2
          */
-        int estado = 0;
-        if (!(this.tablero.getCantCubosJug1() == 0 && (this.tablero.getCantCubosJug2() == 0))) {
-            estado = ganadorPartida();
+        int hayGanador = 0;
+        if ((this.tablero.getCantCubosJug1() == 0 && (this.tablero.getCantCubosJug2() == 0))) {
+               hayGanador = ganadorPartida();
+        }else{
+            //Si habandonaron
+            if(this.getGanador()!= null){
+               hayGanador = ganadorPartida();
+            }
         }
-
+        
         // si el estado permanece en 0 entonces no hay ganador.
-        return estado;
+        return hayGanador;
 
     }
 
     public int ganadorPartida() {
 
         //calculo las fichas en el tablero
-        int estado = 0;
-
-        return estado;
+        int elGanador;
+        
+        if(jugador1.equals(ganador)){
+            elGanador = 1;
+        }else{
+            elGanador = 2;
+        }
+        
+        return elGanador;
     }
 
     public void restaCubos(int cantCubos, boolean esResta) {
@@ -137,18 +162,16 @@ public class Partida {
 
         return elJugador;
     }
+    
+    public void cambioTurno() {
 
-    private boolean validaAbandonar(String ingreso) {
-
-        boolean confirmar;
-        if (ingreso.equalsIgnoreCase("X")) {
-            confirmar = true;
+        if (this.getTurno() == 1) {
+            this.setTurno(2);
         } else {
-            confirmar = false;
+            this.setTurno(1);
         }
-        return confirmar;
     }
-
+    
     public void abandonar() {
 
         //Jugador 1 Abandona.
@@ -166,7 +189,7 @@ public class Partida {
          0-Filas
          1-Columnas
          */
-        int[] lasCoordendas = new int[2];
+        int[] lasCoordenadas = new int[2];
         int cantFilas = this.getTablero().getMatrizTablero().length;
         int cantColumnas = this.getTablero().getMatrizTablero()[0].length;
         
@@ -176,7 +199,7 @@ public class Partida {
         int laColumna = Integer.MIN_VALUE;
         int numFila = 0;
         boolean letraOk = false;
-        boolean numOk = true;
+
         HashMap<Integer, String> mapLetras = new HashMap<>();
         mapLetras.put(0, "A");
         mapLetras.put(1, "B");
@@ -196,7 +219,7 @@ public class Partida {
             }
         }
         if (!letraOk) {
-            retorno = "!!! El valor de la fila es Incorrecto !!!";
+            retorno = "El valor de la fila es Incorrecto!";
         }
 
         //Valido el segundo caracter sea un número y que sea valido.
@@ -204,17 +227,19 @@ public class Partida {
             laColumna = Integer.parseInt(coordenada.trim().substring(1, 2));
 
         } catch (Exception e) {
-            retorno = retorno + " !!! El valor de la columna debe ser númerico !!!";
-            numOk = false;
-        }
-        if ((laColumna < 1) || (laColumna > cantColumnas)) {
-            retorno = " !!! El valor de la columna esta fuera de rango !!!";
-            numOk = false;
+            retorno = retorno + "El valor de la columna debe ser númerico!";
         }
 
-        lasCoordendas[0] = numFila;
-        lasCoordendas[1] = laColumna - 1;
-        return lasCoordendas;
+        if ((laColumna < 1) || (laColumna > cantColumnas)) {
+            retorno = "El valor de la columna esta fuera de rango!";
+
+        }
+            
+        this.setEstado(retorno);
+        
+        lasCoordenadas[0] = numFila;
+        lasCoordenadas[1] = laColumna - 1;
+        return lasCoordenadas;
 
     }
 

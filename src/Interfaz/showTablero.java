@@ -74,13 +74,13 @@ public class showTablero {
 
             System.out.print(lineaAux +"\n");
             showTablero.abcIzquierda(i / 2);
-//            System.out.print("\n" + lineaAux + "\n");
+
         }
 
         //Separadores *
         if ((i % 2 == 0) && (j % 2 == 0) && (j < mat.length*2 -1)) {
             if (j == 0) {
-                if (i > 2){
+                if (i > 1){
                     System.out.print( lineaAux +"\n");
                 }
                 System.out.print(colorBlack + "  ");
@@ -120,9 +120,11 @@ public class showTablero {
             
             //si la torre es del jugador1
             if(torre/10 == 1){
-                impresTorre = colorRed + Integer.toString(torre%10);
+                //el segundo dígito es la cantidad
+                impresTorre = colorRed + " "  + Integer.toString(torre%10)+ " " ;
             }else{//si la torre es del jugador2
-                impresTorre = colorBlue + Integer.toString(torre%10);
+                //el segundo dígito es la cantidad
+                impresTorre = colorBlue + " " +Integer.toString(torre%10)+ " " ;
             }
         }else{
             impresTorre = colorBlack + "   ";
