@@ -69,7 +69,6 @@ public class Tablero {
         this.cantCubosJug2 = cantCubosJug2;
     }
    
-    
     /* METODOS *************************************/
     public int getPuntosJugador(Jugador jugador) {
         int puntos = 0;
@@ -107,4 +106,12 @@ public class Tablero {
         return jugadaOk;
     }
 
+    public void tableroInicial(){
+        for (int i = 0; i < this.matrizTablero.length; i++) {
+            for (int j = 0; j < this.matrizTablero[i].length; j++) {
+                this.matrizTablero[i][j] = 0;
+            }
+        }
+    }
+    
 }

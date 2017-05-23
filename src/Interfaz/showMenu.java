@@ -1,5 +1,6 @@
-/** ***************************************************
- * Clase: showMenu
+/**
+ * ***************************************************
+ * Clase: showPartida
  *
  * @author Rodrigo Blanco - 151251 - Programación II
  * *************************************************
@@ -21,7 +22,7 @@ public class showMenu {
     private int menuNav; //Referencia el menú seleccionado
     private boolean menuEnable; //Controla Si el menú puede mostrarse o no.
     /*
-        Importo las definiciones de los colores de la clase Color.
+     Importo las definiciones de los colores de la clase Color.
      */
     private Color color;
     String colorBlue = color.getColor("AZULFDOBLANCO"); //Azul y fondo blanco
@@ -85,11 +86,8 @@ public class showMenu {
             } catch (Exception e) {
                 System.out.println(colorRed + "Debe ingresar un dato numérico." + resetColor);
                 teclado.next();
-
             }
-
         }
-
         return retorno;
     }
 
@@ -101,54 +99,49 @@ public class showMenu {
 
             System.out.println(colorRed + "Debe ingresar un dato." + resetColor);
             retorno = tecladoS.nextLine().replaceAll("\\s+", "");
-
         }
-
         return retorno;
     }
 
     public void showLogo() {
 
-
         System.out.println(""
-            + "\n" + colorBlue + "#################################################################################################"
-            + "\n" + colorBlue + "##                                                                                             ##"
-            + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
-            + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
-            + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + " $$$$$$    $$$$$$$   $$$$$$   $$    $$      $$$$$$$    $$$$$$    $$$$$$$ " + colorBlue + "    ###   ##"
-            + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + "$$    $$  $$        $$    $$  $$    $$  $$  $$    $$        $$  $$       " + colorBlue + "    ###   ##"
-            + "\n" + colorBlue + "##          " + colorBlack + "$$$$$$$$   $$$$$$   $$    $$  $$    $$  $$  $$    $$   $$$$$$$   $$$$$$  " + colorBlue + "          ##"
-            + "\n" + colorBlue + "##   ###    " + colorBlack + "$$              $$  $$   $$$  $$    $$  $$  $$    $$  $$    $$        $$ " + colorBlue + "    ###   ##"
-            + "\n" + colorBlue + "##   ###    " + colorBlack + " $$$$$$$  $$$$$$$    $$$$$$$$  $$$$$$   $$  $$    $$   $$$$$$$  $$$$$$$  " + colorBlue + "    ###   ##"
-            + "\n" + colorBlue + "##   #######" + colorBlack + "                           $$$                                           " + colorBlue + "#######   ##"
-            + "\n" + colorBlue + "##   #######                                                                         #######   ##"
-            + "\n" + colorBlue + "##                                                                                             ##"
-            + "\n" + colorBlue + "#################################################################################################"
-            + "\n" + colorBlue + "##                          by Rodrigo Blanco(151251) - May/2017 - v.1.0.0                     ##"
-            + "\n" + colorBlue + "#################################################################################################"
-            + "\n" + resetColor + "");
-
+                + "\n" + colorBlue + "#################################################################################################"
+                + "\n" + colorBlue + "##                                                                                             ##"
+                + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
+                + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
+                + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + " $$$$$$    $$$$$$$   $$$$$$   $$    $$      $$$$$$$    $$$$$$    $$$$$$$ " + colorBlue + "    ###   ##"
+                + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + "$$    $$  $$        $$    $$  $$    $$  $$  $$    $$        $$  $$       " + colorBlue + "    ###   ##"
+                + "\n" + colorBlue + "##          " + colorBlack + "$$$$$$$$   $$$$$$   $$    $$  $$    $$  $$  $$    $$   $$$$$$$   $$$$$$  " + colorBlue + "          ##"
+                + "\n" + colorBlue + "##   ###    " + colorBlack + "$$              $$  $$   $$$  $$    $$  $$  $$    $$  $$    $$        $$ " + colorBlue + "    ###   ##"
+                + "\n" + colorBlue + "##   ###    " + colorBlack + " $$$$$$$  $$$$$$$    $$$$$$$$  $$$$$$   $$  $$    $$   $$$$$$$  $$$$$$$  " + colorBlue + "    ###   ##"
+                + "\n" + colorBlue + "##   #######" + colorBlack + "                           $$$                                           " + colorBlue + "#######   ##"
+                + "\n" + colorBlue + "##   #######                                                                         #######   ##"
+                + "\n" + colorBlue + "##                                                                                             ##"
+                + "\n" + colorBlue + "#################################################################################################"
+                + "\n" + colorBlue + "##                          by Rodrigo Blanco(151251) - May/2017 - v.1.0.0                     ##"
+                + "\n" + colorBlue + "#################################################################################################"
+                + "\n" + resetColor + "");
     }
 
     public void showSaludo() {
         //Saludo al Salir del Juego.
         System.out.println(""
-            + "\n" + colorBlue + "    #############################################################################"
-            + "\n" + colorBlue + "   #" + colorMag + "                      ES UNA LASTIMA QUE TE VAYAS!!!                         #"                
-            + "\n" + colorBlue + "   ###############################################################################"
-            + "\n" + colorBlue + " ##                                                                               ##"
-            + "\n" + colorBlue + "##" + colorGreen + "            #####    #######   #######  #######  ###   #######    ###### " + colorBlue + "        ##"
-            + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##   ##      " + colorBlue + "        ##"
-            + "\n" + colorBlue + "##" + colorGreen + "          ###        ## ##     ##   ##  ###            ##   ##    ###    " + colorBlue + "        ##"
-            + "\n" + colorBlue + "##" + colorGreen + "          ###  ###   ######    #######  ###      ###   #######      ###  " + colorBlue + "        ##"
-            + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##        ## " + colorBlue + "        ##"
-            + "\n" + colorBlue + "##" + colorGreen + "           #######   ##   ##   ##   ##  #######  ###   ##   ##   ######  " + colorBlue + "        ##"
-            + "\n" + colorBlue + " ##                                                                               ##"
-            + "\n" + colorBlue + "   ###############################################################################"
-            + "\n" + colorBlue + "   #" + colorMag + "                              HASTA LA PROXIMA :D                            #"
-            + "\n" + colorBlue + "    #############################################################################"
-            + "\n" + resetColor + "");
-
+                + "\n" + colorBlue + "    #############################################################################"
+                + "\n" + colorBlue + "   #" + colorMag + "                      ES UNA LASTIMA QUE TE VAYAS!!!                         #"
+                + "\n" + colorBlue + "   ###############################################################################"
+                + "\n" + colorBlue + " ##                                                                               ##"
+                + "\n" + colorBlue + "##" + colorGreen + "            #####    #######   #######  #######  ###   #######    ###### " + colorBlue + "        ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##   ##      " + colorBlue + "        ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ###        ## ##     ##   ##  ###            ##   ##    ###    " + colorBlue + "        ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ###  ###   ######    #######  ###      ###   #######      ###  " + colorBlue + "        ##"
+                + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##        ## " + colorBlue + "        ##"
+                + "\n" + colorBlue + "##" + colorGreen + "           #######   ##   ##   ##   ##  #######  ###   ##   ##   ######  " + colorBlue + "        ##"
+                + "\n" + colorBlue + " ##                                                                               ##"
+                + "\n" + colorBlue + "   ###############################################################################"
+                + "\n" + colorBlue + "   #" + colorMag + "                              HASTA LA PROXIMA :D                            #"
+                + "\n" + colorBlue + "    #############################################################################"
+                + "\n" + resetColor + "");
     }
 
     //Cabecera Menu.
@@ -165,10 +158,11 @@ public class showMenu {
         //Centrar mensaje
         mensaje = centrarTituloMenu(mensaje, 54);
         mensaje = mensaje.replaceAll("#", " ");
-    
+
         switch (msjColor) {
             case "error":
-                msjColor = colorRed;;
+                msjColor = colorRed;
+                ;
                 break;
             case "":
                 msjColor = colorBlue;
@@ -178,10 +172,10 @@ public class showMenu {
                 break;
             case "negrita":
                 msjColor = colorBlack;
-                break;                
+                break;
             default:
                 msjColor = colorBlue;
-            }
+        }
 
         System.out.print(""
                 + "\n" + msjColor + ""
@@ -197,7 +191,7 @@ public class showMenu {
         ArrayList<String> listaOpciones = new ArrayList();
         int opcSelect;
 
-        listaOpciones.add("FIN");//0 
+        listaOpciones.add("Salir del Juego");//0 
         listaOpciones.add("Registro de Jugador"); //1
         listaOpciones.add("Jugar partida manual");//2
         listaOpciones.add("Jugar partida contra la computadora");//3
@@ -280,49 +274,48 @@ public class showMenu {
         }
 
     }
-    // 15 15 15 15
+
     public void mostrarListaJugadores(ArrayList<Jugador> unaListaJugadores) {
-                            
-        String pos; 
+
+        String pos;
         String linea;
         int espacios;
 
-        mostrarMensaje(padLString(" Posición",2) //11 
-                + padLString(" Alias",15)//21
-                + padLString(" Ganadas",2) //10
-                + padLString(" Perdidas",2)//11
+        mostrarMensaje(padLString(" Posición", 2) //11 
+                + padLString(" Alias", 15)//21
+                + padLString(" Ganadas", 2) //10
+                + padLString(" Perdidas", 2)//11
                 , "");
-                System.out.println("");
-                
+        System.out.println("");
+
         for (int i = 0; i < unaListaJugadores.size(); i++) {
-            
+
             pos = "-    " + Integer.toString(i + 1);
-            
+
             linea = (""
-            + padLStringGuion(pos, 14 - pos.length())
-            + padLStringGuion(unaListaJugadores.get(i).getAlias(),25 - unaListaJugadores.get(i).getAlias().length())
-            + padLStringGuion(Integer.toString(unaListaJugadores.get(i).getPartidas()[0]),(10 - (unaListaJugadores.get(i).getPartidas()[0])))
-            + padLStringGuion(Integer.toString(unaListaJugadores.get(i).getPartidas()[1]),(5 - (unaListaJugadores.get(i).getPartidas()[1])))
-                    );
+                    + padLStringGuion(pos, 14 - pos.length())
+                    + padLStringGuion(unaListaJugadores.get(i).getAlias(), 25 - unaListaJugadores.get(i).getAlias().length())
+                    + padLStringGuion(Integer.toString(unaListaJugadores.get(i).getPartidas()[0]), (10 - (unaListaJugadores.get(i).getPartidas()[0])))
+                    + padLStringGuion(Integer.toString(unaListaJugadores.get(i).getPartidas()[1]), (5 - (unaListaJugadores.get(i).getPartidas()[1]))));
 
             espacios = (54 - linea.length() + 2);
             linea = padLString(linea, espacios);
-            linea = (linea.substring(1,linea.length()));
+            linea = (linea.substring(1, linea.length()));
             linea = (colorBlue + "##" + linea + "#" + resetColor);
             System.out.println(linea);
         }
-        
+
         linea = (colorBlue + "##                                                      ##"
-                +"\n" + colorBlue + "##########################################################"
-                + "\n" + colorBlack + "\n");
-        System.out.println(linea);
+                + "\n" + colorBlue + "##########################################################"
+                + colorBlack);
+        System.out.print(linea);
     }
 
     /*
-        Seleccionar Jugadores para Partida:
-        -----------------------------------
-        Si no tengo al cantidad minima de jugadores en el sismtea da error y devuelve jugador=null
-        si tengo el minimo o mas retorno el jugador seleccionado.
+     Seleccionar Jugadores para Partida:
+     -----------------------------------
+     Si no tengo al cantidad minima de jugadores en el sismtea da error y devuelve jugador=null
+     si tengo el minimo o mas retorno el jugador seleccionado.
      */
     public Jugador seleccionarJugadoresPartida(String turno, ArrayList unaListaJugadores, Jugador otroJugador) {
         int numJugador = Integer.MIN_VALUE;//Numero del Jugador en la lista
@@ -331,8 +324,8 @@ public class showMenu {
         mostrarListaJugadores(unaListaJugadores);
 
         do {
-            mostrarMensaje("Digite el número del Jugador " + turno, colorBlack);
-            numJugador = this.leerInt("Opción: ");
+            mostrarMensaje("Digite el número del " + turno + " Jugador:", colorBlack);
+            numJugador = this.leerInt("\nOpción: ");
             unJugador = (Jugador) unaListaJugadores.get(numJugador - 1);
 
             if (otroJugador != null && unJugador.equals(otroJugador)) {
@@ -346,9 +339,9 @@ public class showMenu {
     }
 
     /*
-        Seleccionar Jugador:
-        -----------------------------------
-        Selección de jugador del sistema;
+     Seleccionar Jugador:
+     -----------------------------------
+     Selección de jugador del sistema;
      */
     public Jugador seleccionarJugador(ArrayList<Jugador> unaListaJugadores) {
         Jugador unJugador;
@@ -373,11 +366,11 @@ public class showMenu {
     }
 
     /*
-        Método para pedir datos de jugada.
+     Método para pedir datos de jugada.
      */
     public String ingresarMovimiento() {
         String retorno = null;
-        mostrarMensaje("Ingrese su Jugada:", colorGreen);
+        System.out.println(colorBlue + "Ingrese su Jugada:" + resetColor);
         retorno = this.tecladoS.nextLine();
         return retorno;
     }
@@ -419,7 +412,7 @@ public class showMenu {
         }
         return linea;
     }
-    
+
     public String padLString(String elTitulo, int espacios) {
 
         for (int i = 1; i < espacios; i++) {
@@ -493,9 +486,9 @@ public class showMenu {
             error = false;
             opcion = this.leerInt(mensaje);
             if (opcion < 1 || opcion > cantOpciones - 1) {
-                if(salir && opcion==0){
+                if (salir && opcion == 0) {
                     //salir
-                }else{
+                } else {
                     mostrarMensaje("Opción inválida", "error");
                     error = true;
                 }
@@ -503,5 +496,5 @@ public class showMenu {
         } while (error);
         return opcion;
     }
-    
+
 }

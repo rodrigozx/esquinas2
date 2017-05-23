@@ -1,9 +1,10 @@
-/*****************************************************
-    Clase: Partida
-    @author Rodrigo Blanco - 151251 - Programación II
-    **************************************************
-*/
-
+/**
+ * ***************************************************
+ * Clase: Partida
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
 package Dominio;
 
 import java.util.*;
@@ -17,23 +18,22 @@ public class Partida {
     private int turno;
     private boolean vsCpu;
 
-
     /* CONSTRUCTOR *************************************/
     public Partida() {
         this.jugador1 = null;
         this.jugador2 = null;
         this.turno = 1; //la partida siempre comienza con el turno para el jugador 1
-        this.tablero = null;
+        this.tablero = new Tablero();
         this.ganador = null;
         this.vsCpu = false;
     }
 
     /* CONSTRUCTOR POR PARAMETROS *************************************/
-    public Partida(Jugador jugador1, Jugador jugador2, int turno, Tablero elTablero, boolean versusCpu, int cantCubos) {
+    public Partida(Jugador jugador1, Jugador jugador2, int turno, boolean versusCpu, int cantCubos) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.turno = turno;
-        this.tablero = elTablero;
+        this.tablero = new Tablero();
         this.ganador = null;
         this.vsCpu = versusCpu;
     }
@@ -54,7 +54,6 @@ public class Partida {
     public void setJugador2(Jugador jugador2) {
         this.jugador2 = jugador2;
     }
-
 
     public int getTurno() {
         return this.turno;
@@ -80,55 +79,53 @@ public class Partida {
         this.ganador = ganador;
     }
 
- 
     /* METODOS *************************************/
     public int terminoPartida() {
         /*Valida el estado de la partida.
-          si alguno de los jugadores no tiene más fichas, entonces terminó la partida.
+         si alguno de los jugadores no tiene más cubos, entonces terminó la partida.
          0-No hay ganador
          1-Ganador Jugador1
          2-Ganador Jugador2
          */
         int estado = 0;
         if (!(this.tablero.getCantCubosJug1() == 0 && (this.tablero.getCantCubosJug2() == 0))) {
-              estado =  ganadorPartida();
-            }
-        
+            estado = ganadorPartida();
+        }
+
         // si el estado permanece en 0 entonces no hay ganador.
         return estado;
-        
+
     }
 
-     public int ganadorPartida(){
-        
+    public int ganadorPartida() {
+
         //calculo las fichas en el tablero
         int estado = 0;
-        
+
         return estado;
-     }
-     
+    }
+
     public void restaCubos(int cantCubos, boolean esResta) {
 
         int cantCubosActual;
         //Me fijo de quien es el turno
         if (this.getTurno() == 1) { //jugador 1
             cantCubosActual = this.getTablero().getCantCubosJug1();
-            if (esResta){
+            if (esResta) {
                 this.getTablero().setCantCubosJug1(cantCubosActual - cantCubos);
-            }else{ //si no los resta, los está sumando
+            } else { //si no los resta, los está sumando
                 this.getTablero().setCantCubosJug1(cantCubosActual + cantCubos);
             }
         } else { // es el jugador 2
             cantCubosActual = this.getTablero().getCantCubosJug2();
-            if (esResta){
+            if (esResta) {
                 this.getTablero().setCantCubosJug2(cantCubosActual - cantCubos);
-            }else{ //si no los resta, los está sumando
+            } else { //si no los resta, los está sumando
                 this.getTablero().setCantCubosJug2(cantCubosActual + cantCubos);
             }
         }
 
     }
-
 
     public Jugador getJugadorDeTurno(int turno) {
         Jugador elJugador;
@@ -218,7 +215,7 @@ public class Partida {
 
         lasCoordendas[0] = numFila;
         lasCoordendas[1] = laColumna - 1;
-       return lasCoordendas;
+        return lasCoordendas;
 
     }
 
@@ -253,8 +250,7 @@ public class Partida {
         /*
          Si no hay cubo en el lugar y el jugador tiene almenos 1 cubo
          */
-
         return retorno;
     }
-  
+
 }

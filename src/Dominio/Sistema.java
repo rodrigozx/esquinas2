@@ -1,9 +1,10 @@
-/*****************************************************
-    Clase: Sistema
-    @author Rodrigo Blanco - 151251 - Programación II
-    **************************************************
-*/
-
+/**
+ * ***************************************************
+ * Clase: Sistema
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
 package Dominio;
 
 import java.util.*;
@@ -50,8 +51,8 @@ public class Sistema {
     }
 
     /*
-        **********************************************
-        Método para ordenar Lista Jugadores según su ranking
+     **********************************************
+     Método para ordenar Lista Jugadores según su ranking
      */
     public ArrayList ordenarPorRanking() {
         //Internamente, utiliza el criterio definido en la instancia pasada como parámetro (CriterioDecdreciente)
@@ -73,9 +74,11 @@ public class Sistema {
         }
         return retorno;
     }
+
     //Método que devuelve cantidad de Jugadores registrados.
+
     public int numJugadoresRegistrados() {
         int retorno = this.getListaJugadores().size();
         return retorno;
-    }    
+    }
 }

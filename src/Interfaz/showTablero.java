@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class showTablero {
 
 //Recorro la matriz y dibujo
-    public void show(int[][] laMat) {
+    public static void show(int[][] laMat) {
         boolean paso = false;
 
         for (int i = 0; i < ((laMat.length * 2) + 1); i++) {
@@ -24,10 +24,8 @@ public class showTablero {
                 if (paso) {
                     borde(i, j, laMat);
                 }
-
             }
             System.out.println();
-
         }
     }
 
@@ -51,10 +49,9 @@ public class showTablero {
         mapLetras.put(4, "E ");
         mapLetras.put(5, "F ");
         System.out.print(((char) 27 + "[0m" )+ mapLetras.get(i));//resetea a color negro
-
     }
 
-    private void borde(int i, int j, int[][] mat) {
+    private static void borde(int i, int j, int[][] mat) {
         if (j == 0 && (i % 2 != 0)) {
             //  System.out.println();
             showTablero.abcIzquierda(i / 2);
@@ -83,10 +80,19 @@ public class showTablero {
         }
     }
     
-    public void impTorre(int Torre) {
+    public static void impTorre(int torre) {
         //Este método es llamado por impTablero por cada ficha en la matriz
         //así sabe que debe imprimir dependiendo del tipo del valor
-        
+        String impresTorre;
+        switch(torre){
+            case 0:
+                impresTorre = " ";
+                break;
+            default:
+                impresTorre = " ";
+                break;
+        }
+        System.out.print(impresTorre);
     }
 
 }

@@ -1,9 +1,10 @@
-/*****************************************************
-    Clase: Jugador
-    @author Rodrigo Blanco - 151251 - Programación II
-    **************************************************
-*/
-
+/**
+ * ***************************************************
+ * Clase: Jugador
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
 package Dominio;
 
 import java.util.*;
@@ -18,9 +19,7 @@ public class Jugador {
     /*Significado de posisiones en array de Partidas:
      pos = 0 -Partidas Ganadas.
      pos = 1 -Partidas Perdidas.*/
-
-
- /* CONSTRUCTOR POR DEFECTO *************************************/
+    /* CONSTRUCTOR POR DEFECTO *************************************/
     public Jugador() {
         this.alias = "Sin Alias";
         this.nombre = "Sin Nombre";
