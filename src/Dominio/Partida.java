@@ -159,10 +159,9 @@ public class Partida {
         if (this.turno == 2) {
             this.ganador = this.jugador1;
         }
-
     }
 
-    private int[] ingresarCoordenadas(String coordenada) {
+    public int[] ingresarCoordenadas(String coordenada) {
         /*Posiciones:
          0-Filas
          1-Columnas
@@ -170,8 +169,9 @@ public class Partida {
         int[] lasCoordendas = new int[2];
         int cantFilas = this.getTablero().getMatrizTablero().length;
         int cantColumnas = this.getTablero().getMatrizTablero()[0].length;
-        //Tomo el primero caracter y si es letra lo referencio a la Fila.
-        String retorno = "Coordenadas OK\n"; //Mensaje de salida.
+        
+        //Tomo el primer caracter y si es letra lo referencio a la Fila.
+        String retorno = "OK"; //Mensaje de salida.
         String laFila = null;
         int laColumna = Integer.MIN_VALUE;
         int numFila = 0;
@@ -196,7 +196,7 @@ public class Partida {
             }
         }
         if (!letraOk) {
-            retorno = "!!! El valor de la fila es Incorrecto !!! \n";
+            retorno = "!!! El valor de la fila es Incorrecto !!!";
         }
 
         //Valido el segundo caracter sea un número y que sea valido.
@@ -204,12 +204,11 @@ public class Partida {
             laColumna = Integer.parseInt(coordenada.trim().substring(1, 2));
 
         } catch (Exception e) {
-            retorno = retorno + " !!! El valor de la columna debe ser númerico !!! \n";
+            retorno = retorno + " !!! El valor de la columna debe ser númerico !!!";
             numOk = false;
-
         }
         if ((laColumna < 1) || (laColumna > cantColumnas)) {
-            retorno = " !!! El valor de la columna esta fuera de rango !!! \n";
+            retorno = " !!! El valor de la columna esta fuera de rango !!!";
             numOk = false;
         }
 

@@ -77,20 +77,27 @@ public class Tablero {
     }
 
    
-    public boolean colocarCubo(String jugada, int turno) {
+    public String colocarCubo(int fila, int columna, int turno) {
         /*
         Coloco cubo en la posición solicitada
         Devuelvo false si da error
         */
-        boolean jugadaOk;
-        
-        //valido la jugada 
-        jugadaOk = validarJugada(jugada, turno);
+        String retorno;
+        int cubo;
 
-        return jugadaOk;
+        //valido la jugada 
+        retorno = validarJugada(fila, columna, turno);
+
+        if (retorno.equals("OK")){
+            //coloco el cubo en la posición
+            cubo = turno * 10; //jugador 1 = 10, jugador 2 = 20
+            this.getMatrizTablero()[fila][columna] = cubo;
+        }
+        
+        return retorno;
     }
 
-    public boolean validarJugada(String jugada, int turno) {
+    public String validarJugada(int fila, int columna, int turno) {
         /*Este método valida la jugada contolando:
              - que no exista ganador.
              - que quien juega tenga cubos.
@@ -99,11 +106,17 @@ public class Tablero {
              - que no se forme un cuadrado de 2x2.
          */
         
-        boolean jugadaOk;
-        jugadaOk = false;
-        int[] coordenadas1;
-        int[] coordenadas2;
-        return jugadaOk;
+        String retorno;
+        
+        //No existe ganador y tienen cubos
+        if(this.cantCubosJug1>0 && this.getCantCubosJug2()>0){
+            retorno = "OK";
+        }else{
+            retorno = "FIN";
+        }
+        
+        return retorno;
+        
     }
 
     public void tableroInicial(){

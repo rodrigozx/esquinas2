@@ -185,7 +185,9 @@ public class Prueba {
     
     public static void pedirJugada(Sistema miSistema, Partida laPartida, showMenu elMenu){
         String jugada;
+        int[] lasCoordendas = new int[2];
         jugada = elMenu.ingresarMovimiento();
+        lasCoordendas = laPartida.ingresarCoordenadas(jugada);
     }
 }
  
