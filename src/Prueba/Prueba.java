@@ -23,12 +23,11 @@ public class Prueba {
         int dato = 0; //Por defecto se ejecuta el menú princiapl.
 
         //Carga del Menu Principal
-        boolean repetir; //True repite el menú
-        elMenu.showLogo(true);
-        repetir = true;
+        elMenu.showLogo();
+        boolean salir = false;
         
         do {
-            dato = elMenu.showMenuPrincipal(true, 4);
+            dato = elMenu.showMenuPrincipal(4); //existen 4 opciones
             switch (dato) {
 
                 //Registro de Jugador **********************************************************************
@@ -53,14 +52,14 @@ public class Prueba {
 
                 //Sale del programa **********************************************************************                    
                 case 0:
-                    elMenu.showSaludo(true);
-                    System.exit(1);
-                    repetir =false;
+                    elMenu.showSaludo();
+                    salir = true;
                     break;
+
                 default:
-                    repetir = true; //True Repite, False no repite menu principal.
+                    //No hace nada
             }
-        } while (repetir == true);
+        } while (salir != true);
     }
     
     public static void seleccionOpcionesRegistroJugador(Sistema miSistema, showMenu elMenu) {

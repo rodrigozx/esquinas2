@@ -107,47 +107,48 @@ public class showMenu {
         return retorno;
     }
 
-    public void showLogo(boolean isEnable) {
+    public void showLogo() {
 
-        if (isEnable) {
-            System.out.println(""
-                    + "\n" + colorBlue + "#################################################################################################"
-                    + "\n" + colorBlue + "##                                                                                             ##"
-                    + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
-                    + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
-                    + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + " $$$$$$    $$$$$$$   $$$$$$   $$    $$      $$$$$$$    $$$$$$    $$$$$$$ " + colorBlue + "    ###   ##"
-                    + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + "$$    $$  $$        $$    $$  $$    $$  $$  $$    $$        $$  $$       " + colorBlue + "    ###   ##"
-                    + "\n" + colorBlue + "##          " + colorBlack + "$$$$$$$$   $$$$$$   $$    $$  $$    $$  $$  $$    $$   $$$$$$$   $$$$$$  " + colorBlue + "          ##"
-                    + "\n" + colorBlue + "##   ###    " + colorBlack + "$$              $$  $$   $$$  $$    $$  $$  $$    $$  $$    $$        $$ " + colorBlue + "    ###   ##"
-                    + "\n" + colorBlue + "##   ###    " + colorBlack + " $$$$$$$  $$$$$$$    $$$$$$$$  $$$$$$   $$  $$    $$   $$$$$$$  $$$$$$$  " + colorBlue + "    ###   ##"
-                    + "\n" + colorBlue + "##   #######" + colorBlack + "                           $$$                                           " + colorBlue + "#######   ##"
-                    + "\n" + colorBlue + "##   #######                                                                         #######   ##"
-                    + "\n" + colorBlue + "##                                                                                             ##"
-                    + "\n" + colorBlue + "#################################################################################################"
-                    + "\n" + colorBlue + "##                          by Rodrigo Blanco(151251) - May/2017 - v.1.0.0                     ##"
-                    + "\n" + colorBlue + "#################################################################################################"
-                    + "\n" + resetColor + "");
-        }
+
+        System.out.println(""
+            + "\n" + colorBlue + "#################################################################################################"
+            + "\n" + colorBlue + "##                                                                                             ##"
+            + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
+            + "\n" + colorBlue + "##   " + colorRed + "#######" + colorBlack + "                                        $$                               " + colorBlue + "#######   ##"
+            + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + " $$$$$$    $$$$$$$   $$$$$$   $$    $$      $$$$$$$    $$$$$$    $$$$$$$ " + colorBlue + "    ###   ##"
+            + "\n" + colorBlue + "##   " + colorRed + "###    " + colorBlack + "$$    $$  $$        $$    $$  $$    $$  $$  $$    $$        $$  $$       " + colorBlue + "    ###   ##"
+            + "\n" + colorBlue + "##          " + colorBlack + "$$$$$$$$   $$$$$$   $$    $$  $$    $$  $$  $$    $$   $$$$$$$   $$$$$$  " + colorBlue + "          ##"
+            + "\n" + colorBlue + "##   ###    " + colorBlack + "$$              $$  $$   $$$  $$    $$  $$  $$    $$  $$    $$        $$ " + colorBlue + "    ###   ##"
+            + "\n" + colorBlue + "##   ###    " + colorBlack + " $$$$$$$  $$$$$$$    $$$$$$$$  $$$$$$   $$  $$    $$   $$$$$$$  $$$$$$$  " + colorBlue + "    ###   ##"
+            + "\n" + colorBlue + "##   #######" + colorBlack + "                           $$$                                           " + colorBlue + "#######   ##"
+            + "\n" + colorBlue + "##   #######                                                                         #######   ##"
+            + "\n" + colorBlue + "##                                                                                             ##"
+            + "\n" + colorBlue + "#################################################################################################"
+            + "\n" + colorBlue + "##                          by Rodrigo Blanco(151251) - May/2017 - v.1.0.0                     ##"
+            + "\n" + colorBlue + "#################################################################################################"
+            + "\n" + resetColor + "");
+
     }
 
-    public void showSaludo(boolean isEnable) {
+    public void showSaludo() {
         //Saludo al Salir del Juego.
-        if (isEnable) {
-            System.out.println(""
-                    + "\n" + colorBlue + "   ###############################################################################"
-                    + "\n" + colorBlue + " ##                                                                               ##"
-                    + "\n" + colorBlue + "##" + colorGreen + "            #####    #######   #######  #######  ###   #######    ###### " + colorBlue + "        ##"
-                    + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##   ##      " + colorBlue + "        ##"
-                    + "\n" + colorBlue + "##" + colorGreen + "          ###        ## ##     ##   ##  ###            ##   ##    ###    " + colorBlue + "        ##"
-                    + "\n" + colorBlue + "##" + colorGreen + "          ###  ###   ######    #######  ###      ###   #######      ###  " + colorBlue + "        ##"
-                    + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##        ## " + colorBlue + "        ##"
-                    + "\n" + colorBlue + "##" + colorGreen + "           #######   ##   ##   ##   ##  #######  ###   ##   ##   ######  " + colorBlue + "        ##"
-                    + "\n" + colorBlue + " ##                                                                               ##"
-                    + "\n" + colorBlue + "   ###############################################################################"
-                    + "\n" + colorBlue + "   #" + colorMag + "                              HASTA LA PROXIMA :)                             #"
-                    + "\n" + colorBlue + "    #############################################################################"
-                    + "\n" + resetColor + "");
-        }
+        System.out.println(""
+            + "\n" + colorBlue + "    #############################################################################"
+            + "\n" + colorBlue + "   #" + colorMag + "                      ES UNA LASTIMA QUE TE VAYAS!!!                         #"                
+            + "\n" + colorBlue + "   ###############################################################################"
+            + "\n" + colorBlue + " ##                                                                               ##"
+            + "\n" + colorBlue + "##" + colorGreen + "            #####    #######   #######  #######  ###   #######    ###### " + colorBlue + "        ##"
+            + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##   ##      " + colorBlue + "        ##"
+            + "\n" + colorBlue + "##" + colorGreen + "          ###        ## ##     ##   ##  ###            ##   ##    ###    " + colorBlue + "        ##"
+            + "\n" + colorBlue + "##" + colorGreen + "          ###  ###   ######    #######  ###      ###   #######      ###  " + colorBlue + "        ##"
+            + "\n" + colorBlue + "##" + colorGreen + "          ###   ##   ##   ##   ##   ##  ###      ###   ##   ##        ## " + colorBlue + "        ##"
+            + "\n" + colorBlue + "##" + colorGreen + "           #######   ##   ##   ##   ##  #######  ###   ##   ##   ######  " + colorBlue + "        ##"
+            + "\n" + colorBlue + " ##                                                                               ##"
+            + "\n" + colorBlue + "   ###############################################################################"
+            + "\n" + colorBlue + "   #" + colorMag + "                              HASTA LA PROXIMA :D                            #"
+            + "\n" + colorBlue + "    #############################################################################"
+            + "\n" + resetColor + "");
+
     }
 
     //Cabecera Menu.
@@ -189,7 +190,7 @@ public class showMenu {
                 + "\n" + msjColor + "##########################################################");
     }
 
-    public int showMenuPrincipal(boolean isEnable, int cantOpciones) {
+    public int showMenuPrincipal(int cantOpciones) {
         //Se define la cantidad de opciones que tiene el menú.
 
         String cabezal = "MENU PRINCIPAL";
@@ -259,17 +260,17 @@ public class showMenu {
         //Ranking de Jugadores
 
         System.out.println(""
-                + "\n" + colorBlue + "   ##################################################################################"
-                + "\n" + colorBlue + " ##                                                                                  ##"
-                + "\n" + colorBlue + "##" + colorGreen + "          #######   #######   ##    ##   ##   ##  ###   ##    ##    ######   " + colorBlue + "       ##"
-                + "\n" + colorBlue + "##" + colorGreen + "          ##   ##   ##   ##   ###   ##   ##  ##   ###   ###   ##   ###       " + colorBlue + "       ##"
-                + "\n" + colorBlue + "##" + colorGreen + "          ## ##     ##   ##   ## #  ##   ## ##          ## #  ##   ###       " + colorBlue + "       ##"
-                + "\n" + colorBlue + "##" + colorGreen + "          ######    #######   ##  # ##   #####    ###   ##  # ##   ###  ###  " + colorBlue + "       ##"
-                + "\n" + colorBlue + "##" + colorGreen + "          ##   ##   ##   ##   ##   ###   ##  ##   ###   ##   ###   ###   ##  " + colorBlue + "       ##"
-                + "\n" + colorBlue + "##" + colorGreen + "          ##   ##   ##   ##   ##    ##   ##   ##  ###   ##    ##    #######  " + colorBlue + "       ##"
-                + "\n" + colorBlue + " ##                                                                                  ##"
-                + "\n" + colorBlue + "   ##################################################################################"
-                + "\n" + resetColor + "");
+                + "\n" + colorBlue + "   #################################################################################"
+                + "\n" + colorBlue + " ##                                                                                 ##"
+                + "\n" + colorBlue + "##" + colorGreen + "         #######   #######   ##    ##   ##   ##  ###   ##    ##    ######   " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "         ##   ##   ##   ##   ###   ##   ##  ##   ###   ###   ##   ###       " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "         ## ##     ##   ##   ## #  ##   ## ##          ## #  ##   ###       " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "         ######    #######   ##  # ##   #####    ###   ##  # ##   ###  ###  " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "         ##   ##   ##   ##   ##   ###   ##  ##   ###   ##   ###   ###   ##  " + colorBlue + "       ##"
+                + "\n" + colorBlue + "##" + colorGreen + "         ##   ##   ##   ##   ##    ##   ##   ##  ###   ##    ##    #######  " + colorBlue + "       ##"
+                + "\n" + colorBlue + " ##                                                                                 ##"
+                + "\n" + colorBlue + "   #################################################################################"
+                + resetColor + "");
 
         if (unaListaJugadores.isEmpty()) {
             mostrarMensaje("No hay jugadores ingresados en el sistema !!!", "error");
@@ -279,14 +280,42 @@ public class showMenu {
         }
 
     }
-
+    // 15 15 15 15
     public void mostrarListaJugadores(ArrayList<Jugador> unaListaJugadores) {
-        mostrarMensaje("Posición  -  Alias  -  Ganadas  -  Perdidas", "");
+                            
+        String pos; 
+        String linea;
+        int espacios;
+
+        mostrarMensaje(padLString(" Posición",2) //11 
+                + padLString(" Alias",15)//21
+                + padLString(" Ganadas",2) //10
+                + padLString(" Perdidas",2)//11
+                , "");
+                System.out.println("");
+                
         for (int i = 0; i < unaListaJugadores.size(); i++) {
-            System.out.println("##    " + (i + 1) + "     -    " + unaListaJugadores.get(i).getAlias()
-                    + "   -    " + unaListaJugadores.get(i).getPartidas()[0]
-                    + "   -    " + unaListaJugadores.get(i).getPartidas()[1]);
+            
+            pos = "-    " + Integer.toString(i + 1);
+            
+            linea = (""
+            + padLStringGuion(pos, 14 - pos.length())
+            + padLStringGuion(unaListaJugadores.get(i).getAlias(),25 - unaListaJugadores.get(i).getAlias().length())
+            + padLStringGuion(Integer.toString(unaListaJugadores.get(i).getPartidas()[0]),(10 - (unaListaJugadores.get(i).getPartidas()[0])))
+            + padLStringGuion(Integer.toString(unaListaJugadores.get(i).getPartidas()[1]),(5 - (unaListaJugadores.get(i).getPartidas()[1])))
+                    );
+
+            espacios = (54 - linea.length() + 2);
+            linea = padLString(linea, espacios);
+            linea = (linea.substring(1,linea.length()));
+            linea = (colorBlue + "##" + linea + "#" + resetColor);
+            System.out.println(linea);
         }
+        
+        linea = (colorBlue + "##                                                      ##"
+                +"\n" + colorBlue + "##########################################################"
+                + "\n" + colorBlack + "\n");
+        System.out.println(linea);
     }
 
     /*
@@ -340,9 +369,7 @@ public class showMenu {
         } while (error);
 
         unJugador = (Jugador) unaListaJugadores.get(numJugador - 1);
-
         return unJugador;
-
     }
 
     /*
@@ -374,17 +401,25 @@ public class showMenu {
         return tituloCentrado.trim();
     }
 
-    public static String padRString(String elTitulo, int espacios) {
+    public String padRString(String elTitulo, int espacios) {
 
         for (int i = 1; i < espacios; i++) {
             //termino uno antes por el punto
             elTitulo = " ".concat(elTitulo);
         }
         elTitulo = "#".concat(elTitulo);
-
         return elTitulo;
     }
 
+    public String padLStringGuion(String linea, int espacios) {
+
+        for (int i = 1; i < espacios; i++) {
+            //termino uno antes por el punto
+            linea = linea.concat(" ");
+        }
+        return linea;
+    }
+    
     public String padLString(String elTitulo, int espacios) {
 
         for (int i = 1; i < espacios; i++) {
@@ -458,12 +493,15 @@ public class showMenu {
             error = false;
             opcion = this.leerInt(mensaje);
             if (opcion < 1 || opcion > cantOpciones - 1) {
-                mostrarMensaje("Opción inválida", "error");
-                error = true;
+                if(salir && opcion==0){
+                    //salir
+                }else{
+                    mostrarMensaje("Opción inválida", "error");
+                    error = true;
+                }
             }
         } while (error);
-
         return opcion;
     }
-
+    
 }
