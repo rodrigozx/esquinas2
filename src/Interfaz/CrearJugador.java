@@ -99,7 +99,7 @@ public class CrearJugador extends javax.swing.JFrame {
         jbAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("STOES - Crear Jugador");
+        setTitle("ESQUINAS - Crear Jugador");
         setMinimumSize(new java.awt.Dimension(900, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 600));

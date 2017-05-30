@@ -125,6 +125,8 @@ public class Ranking extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getAccessibleContext().setAccessibleName("ESQUINAS - Ranking");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

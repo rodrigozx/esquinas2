@@ -26,7 +26,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);//Ventana Centrada
         setResizable(false);//Impedir que se maximice
-        setTitle("STONES - Menú Principal");
+        setTitle("ESQUINAS - Menú Principal");
         
         //Seteo imagen de icono
         this.setIconImage(stonesIcon);
@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("STONES - Menú Principal");
+        setTitle("ESQUINAS - Menú Principal");
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setIconImages(getIconImages());
@@ -242,6 +242,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 // new MenuPrincipal().setVisible(true);
             }
