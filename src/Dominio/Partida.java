@@ -7,9 +7,11 @@
  */
 package Dominio;
 
+import java.io.Serializable;
 import java.util.*;
+import javax.swing.JOptionPane;
 
-public class Partida {
+public class Partida implements Serializable {
 
     private Tablero tablero;
     private Jugador jugador1;

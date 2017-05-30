@@ -7,9 +7,10 @@
  */
 package Dominio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Sistema {
+public class Sistema implements Serializable {
 
     //Atributos del Sistema
     private ArrayList<Jugador> listaJugadores;

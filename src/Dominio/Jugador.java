@@ -7,9 +7,10 @@
  */
 package Dominio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Jugador {
+public class Jugador implements Serializable {
 
     private String alias;
     private String nombre;

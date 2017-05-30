@@ -6,9 +6,10 @@
  */
 package Dominio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Tablero {
+public class Tablero implements Serializable {
 
     //Matríz de int (cubos)
     /*
