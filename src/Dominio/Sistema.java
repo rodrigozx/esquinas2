@@ -35,6 +35,10 @@ public class Sistema implements Serializable {
         this.listaJugadores = listaJugadores;
     }
 
+    public Jugador getJugador(int jugador) {
+        return this.listaJugadores.get(jugador);
+    }
+
     public Partida getPartida() {
         return partida;
     }

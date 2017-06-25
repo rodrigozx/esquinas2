@@ -1,3 +1,10 @@
+/** ***************************************************
+ * Clase: Ranking
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
+
 package Interfaz;
 
 import java.util.ArrayList;

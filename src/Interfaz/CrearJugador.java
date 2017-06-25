@@ -1,3 +1,10 @@
+/** ***************************************************
+ * Clase: CrearJugador
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
+
 package Interfaz;
 
 import javax.swing.JComboBox;
@@ -14,10 +21,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Rodrigo
- */
 public class CrearJugador extends javax.swing.JFrame {
 
     private Sistema Modelo;

@@ -1,8 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** ***************************************************
+ * Clase: SeleccionarJugadores
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
  */
+
 package Interfaz;
 
 import Dominio.Jugador;
@@ -19,10 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author frivera
- */
 public class SeleccionarJugadores extends javax.swing.JFrame {
 
     private Sistema Modelo;
@@ -213,7 +211,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     DefaultListModel dlmSeleccionar = new DefaultListModel();
     private void jButAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButAgregarActionPerformed
         /*
-         Accion al agregar un jugador a la segunda lista pinchando en la primera.
+         Acción al agregar un jugador a la segunda lista pinchando en la primera.
          */
         if (jListListaJugadores.getSelectedValue() != null) {
             if (dlmSeleccionar.getSize() < 2) {
@@ -231,13 +229,13 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private void jButJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButJugarActionPerformed
         //Accion al presionar el boton Jugar
         //Posición del jugador 1 en el arrayList.
-        Partida laPartida = new Partida( Modelo.getPartida().getJugador1(), Modelo.getPartida().getJugador2(),1,false,25);
+       Partida laPartida = new Partida((Jugador) dlmSeleccionar.get(0), (Jugador) dlmSeleccionar.get(1),1,false,25);
         Modelo.setPartida(laPartida);
-//        JFTablero vTablero = null;
-//        vTablero = new JFTablero(Modelo);
-//        vTablero.setSize(510, 645);
-//        vTablero.setTitle("STONE - Partida en Juego");
-//        vTablero.setVisible(true);
+        TableroJuego vTablero = null;
+        vTablero = new TableroJuego(Modelo);
+        vTablero.setSize(900, 600);
+        vTablero.setTitle("Esquinas - Partida en Juego");
+        vTablero.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButJugarActionPerformed
 
@@ -279,6 +277,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
 
             }

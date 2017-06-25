@@ -1,3 +1,9 @@
+/** ***************************************************
+ * Clase: MenuPrincipal
+ *
+ * @author Rodrigo Blanco - 151251 - Programación II
+ * *************************************************
+ */
 package Interfaz;
 
 import Dominio.*;
