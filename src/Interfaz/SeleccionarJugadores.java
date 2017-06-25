@@ -4,7 +4,6 @@
  * @author Rodrigo Blanco - 151251 - Programación II
  * *************************************************
  */
-
 package Interfaz;
 
 import Dominio.Jugador;
@@ -31,7 +30,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private ImageIcon expJugIco = new ImageIcon("src/Img/expJugIco.png");
 
     public SeleccionarJugadores(Dominio.Sistema elModelo) {
-       Modelo = elModelo;
+        Modelo = elModelo;
 
         //Primero seteo la imagen de fondo
         this.setContentPane(new JLabel(background));
@@ -39,36 +38,36 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);//Ventana Centrada
         setResizable(false);//Impedir que se maximice
-        setTitle("STONES - Importar/Exportar Jugadores");
-        
+        setTitle("ESQUINAS - Seleccinar Jugadores");
+
         //Seteo imagen de icono
         this.setIconImage(stonesIcon);
-        
-       //Seteo imagenes de los botones
+
+        //Seteo imagenes de los botones
         jButJugar.setIcon(jugarIco);
         jBAtras.setIcon(atrasIco);
 
         //seteo el fondo transparente
         jButJugar.setOpaque(false);
         jBAtras.setOpaque(false);
-        
+
         jButJugar.setContentAreaFilled(false);
         jBAtras.setContentAreaFilled(false);
 
         jButJugar.setBorderPainted(false);
         jBAtras.setBorderPainted(false);
-        
+
         //Sin texto
         jButJugar.setText("");
         jBAtras.setText("");
-        
+
         //tooltips de ayuda
-       jButJugar.setToolTipText("Presiona aquí para comenzar la partida!");
+        jButJugar.setToolTipText("Presiona aquí para comenzar la partida!");
         jBAtras.setToolTipText("Cliquea aquí para volver al Menú Principal");
-        
+
         jButJugar.setEnabled(true);
         jBAtras.setEnabled(true);
-        
+
         this.getJugadoresList(elModelo.getListaJugadores());
     }
 
@@ -229,10 +228,10 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private void jButJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButJugarActionPerformed
         //Accion al presionar el boton Jugar
         //Posición del jugador 1 en el arrayList.
-       Partida laPartida = new Partida((Jugador) dlmSeleccionar.get(0), (Jugador) dlmSeleccionar.get(1),1,false,25);
+        //Partida laPartida = new Partida((Jugador) dlmSeleccionar.get(0), (Jugador) dlmSeleccionar.get(1), 1, false, 25);
+        Partida laPartida = new Partida();
         Modelo.setPartida(laPartida);
-        TableroJuego vTablero = null;
-        vTablero = new TableroJuego(Modelo);
+        TableroJuego vTablero = new TableroJuego(Modelo);
         vTablero.setSize(900, 600);
         vTablero.setTitle("Esquinas - Partida en Juego");
         vTablero.setVisible(true);
@@ -285,7 +284,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     }
 
     private void habilitarJugar() {
-        if (dlmSeleccionar.getSize() == 2) {
+        if (dlmSeleccionar.getSize() == 2 || dlmSeleccionar.getSize()==1) {
             jButJugar.setEnabled(true);
         } else {
             jButJugar.setEnabled(false);
