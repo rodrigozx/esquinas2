@@ -16,6 +16,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -25,9 +26,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-
 
 public class TableroJuego extends javax.swing.JFrame {
 
@@ -35,34 +36,40 @@ public class TableroJuego extends javax.swing.JFrame {
     private Partida partida;
     private Tablero tablero;
     private int turnoActual = 1;
-    
+
     //Se cargan las imágenes
     private ImageIcon salirIco = new ImageIcon("src/Img/salir.png");
     private ImageIcon background = new ImageIcon("src/Img/background-partida.png");
     private ImageIcon atrasIco = new ImageIcon("src/Img/volver.png");
     private ImageIcon jugarIco = new ImageIcon("src/Img/jugar.png");
     
+    //Timer para turno
+    public Double timeLeft;
     private JButton[][] botones;
-    
-    public TableroJuego(Sistema elModelo) {
-        modelo = elModelo;
+
+    public TableroJuego(Sistema elModelo, Double defaultTimeLeft) {
         
+        //Timer para turno
+        this.timeLeft = defaultTimeLeft;
+        
+        modelo = elModelo;
+
         //Primero seteo la imagen de fondo
         setContentPane(new JLabel(background));
-        
+
         //Busco el Partida y Tablero del Sistem
         tablero = modelo.getPartida().getTablero();
         partida = modelo.getPartida();
-        
+
         initComponents();
         this.setVisible(true);
         setResizable(false);
         setLocationRelativeTo(null);//Ventana Centrada
-        
+
         //seteo el fondo transparente
         jBAbandonar.setOpaque(false);
-        jBAbandonar.setContentAreaFilled(false);        
-        
+        jBAbandonar.setContentAreaFilled(false);
+
         //Dejo los botones sin texto
         jBAbandonar.setText("");
 
@@ -71,14 +78,17 @@ public class TableroJuego extends javax.swing.JFrame {
         jLJugador2Status.setText(Integer.toString(tablero.getCantCubosJug2()));
         jLJugador1.setText(partida.getJugador1().getAlias());
         jLJugador2.setText(partida.getJugador2().getAlias());
-        
+
         //Siempre empieza jugando el Jugador 1
         turnoActual = partida.getTurno();
-        
+
         this.showTablero();
-        
+
         //Seteo abandonar
-        jBAbandonar.setIcon(salirIco);        
+        jBAbandonar.setIcon(salirIco);
+
+        //Comienzo el timer
+        timer.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -94,6 +104,7 @@ public class TableroJuego extends javax.swing.JFrame {
         jLJugador2Status = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLCubosAd = new javax.swing.JList<>();
+        jLTimer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -117,7 +128,7 @@ public class TableroJuego extends javax.swing.JFrame {
             .addGap(0, 420, Short.MAX_VALUE)
         );
 
-        jLJuega.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLJuega.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLJuega.setForeground(new java.awt.Color(153, 0, 51));
         jLJuega.setText("Turno de: ");
 
@@ -149,64 +160,76 @@ public class TableroJuego extends javax.swing.JFrame {
         jLJugador2Status.setForeground(new java.awt.Color(255, 255, 255));
         jLJugador2Status.setText("jLabel2");
 
+        jLCubosAd.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jScrollPane1.setViewportView(jLCubosAd);
+
+        jLTimer.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLTimer.setForeground(new java.awt.Color(255, 255, 255));
+        jLTimer.setText("00:00:00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLTimer)
+                    .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jBAbandonar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLJugador2)
-                                .addGap(139, 139, 139))
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLJugador1Status)
                                     .addComponent(jLJugador1))
-                                .addGap(33, 33, 33))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLJugador2Status)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLJuega, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                                .addGap(60, 60, 60))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLJugador2Status)
+                                    .addComponent(jLJugador2))
+                                .addGap(60, 60, 60))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLJuega, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jBAbandonar, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(118, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLJuega, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLJugador1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLJugador1Status)
-                                .addGap(80, 80, 80)
-                                .addComponent(jLJugador2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLJugador2Status)
-                                .addGap(51, 51, 51))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)))
-                        .addComponent(jBAbandonar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLJuega, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)))
+                        .addComponent(jLJugador1Status)
+                        .addGap(88, 88, 88)
+                        .addComponent(jLJugador2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLJugador2Status)
+                        .addGap(59, 59, 59)
+                        .addComponent(jBAbandonar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLTimer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,17 +240,17 @@ public class TableroJuego extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBAbandonarActionPerformed
 
-private void abandonar() {
+    private void abandonar() {
         // Acción del boton abandonar.
         if (JOptionPane.showConfirmDialog(null, "Desea Abandonar la Partida?",
                 "Confirmar Abandono", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
         }
-        
+
         //Abandona el Jugador 1 - gana el Jugador 2
         if (turnoActual == 1) {
             partida.setGanador(partida.getJugador2());
 
-        //Abandona el Jugador 2 - gana el Jugador 1
+            //Abandona el Jugador 2 - gana el Jugador 1
         } else {
             partida.setGanador(partida.getJugador1());
         }
@@ -247,8 +270,6 @@ private void abandonar() {
         dispose();
     }
 
-   
-    
     /**
      * @param args the command line arguments
      */
@@ -293,6 +314,7 @@ private void abandonar() {
     private javax.swing.JLabel jLJugador1Status;
     private javax.swing.JLabel jLJugador2;
     private javax.swing.JLabel jLJugador2Status;
+    private javax.swing.JLabel jLTimer;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelJuego;
     // End of variables declaration//GEN-END:variables
@@ -307,11 +329,11 @@ private void abandonar() {
         for (int i = 0; i < botones.length; i++) {
             for (int j = 0; j < botones[0].length; j++) {
                 JButton jButton = new JButton();
-                if( j==0 && i==0){
+                if (j == 0 && i == 0) {
                     jButton.setOpaque(false);
                     jButton.setContentAreaFilled(false);
                 }
-                
+
                 if ((i == 0 || j == 0)) {
                     if (i == 0 && j == 0) {
                         jButton.setText(Integer.toString(j));
@@ -355,7 +377,7 @@ private void abandonar() {
         mapLetras.put(6, "F");
         return mapLetras.get(i);
     }
-    
+
     private class ListenerBotonTablero implements ActionListener {
 
         private int x;
@@ -366,24 +388,25 @@ private void abandonar() {
             x = i;
             y = j;
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-     
+
             // cuando se presiona un botón, se ejecutará este método
             clickBotonMatriz(x, y);
         }
     }
 
     //Llenar el JCbox con La lista de jugadores
-    DefaultListModel dlmCuboAd = new DefaultListModel();    
-    
-    public void getCubosAd(String [] lista) {
+    DefaultListModel dlmCuboAd = new DefaultListModel();
+
+    public void getCubosAd(String[] lista) {
 
         jLCubosAd.removeAll();
         dlmCuboAd.clear();
-        String fila="";
-        String columna="";
-        
+        String fila = "";
+        String columna = "";
+
         for (int i = 1; i < lista.length; i++) {
             fila = lista[i].substring(0, 1);
             columna = lista[i].substring(1, 2);
@@ -392,15 +415,15 @@ private void abandonar() {
         }
         jLCubosAd.setModel(dlmCuboAd);
     }
-    
+
     private void clickBotonMatriz(int fila, int columna) {
-       
-       String retorno = "";
-       String primerValor = "";
-       String [] listaRetorno;       
-        
-       //Si es una casilla Libre del casillero
-       if (tablero.getMatrizTablero()[fila][columna] == 0) {
+
+        String retorno = "";
+        String primerValor = "";
+        String[] listaRetorno;
+
+        //Si es una casilla Libre del casillero
+        if (tablero.getMatrizTablero()[fila][columna] == 0) {
 
             //Coloco el cubo en el lugar seleccionado
             retorno = tablero.colocarCubo(fila, columna, turnoActual);
@@ -410,104 +433,104 @@ private void abandonar() {
             //Borro lista de cubos adicionales
             jLCubosAd.removeAll();
             dlmCuboAd.clear();
-            
-            switch(primerValor){
+
+            switch (primerValor) {
 
                 case "OK":
-                    
+
                     //Creo y muestro la lista de cubos adicionales.
                     listaRetorno = retorno.split("#");
                     getCubosAd(listaRetorno);
-                    
+
                     //Resto los cubos del jugador
                     partida.restaCubos(listaRetorno.length, true);
                     break;
-                
+
                 case "FIN":
                     //Si la jugada esta ok, entonces debo revisar si existe ganador
-                    JOptionPane.showMessageDialog(null, "Ganador: "+ partida.terminoPartida());
+                    JOptionPane.showMessageDialog(null, "Ganador: " + partida.terminoPartida());
                     break;
-                    
+
                 default:
-                    JOptionPane.showMessageDialog(null, retorno,"Jugada Incorrecta!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, retorno, "Jugada Incorrecta!", JOptionPane.WARNING_MESSAGE);
             }
-       }
+        }
         actualizarPanelJuego(primerValor);
         this.showTablero();
-    }   
+    }
 
-    private void renderContenidoBoton(JButton boton, int valor){
-        
+    private void renderContenidoBoton(JButton boton, int valor) {
+
         //Si tiene cubos ingresados
-        if (valor > 0){
-            
+        if (valor > 0) {
+
             //Jugador 1 (rojo)
-            if (valor <20){
+            if (valor < 20) {
                 //cantidad
                 valor = valor % 10;
-                switch (valor){
+                switch (valor) {
                     case 1:
-                        boton.setBackground(new Color(255,90,90));
+                        boton.setBackground(new Color(255, 90, 90));
                         break;
                     case 2:
-                        boton.setBackground(new Color(240,60,60));
+                        boton.setBackground(new Color(240, 60, 60));
                         break;
                     case 3:
-                        boton.setBackground(new Color(200,35,35));
+                        boton.setBackground(new Color(200, 35, 35));
                         break;
                     case 4:
-                        boton.setBackground(new Color(160,20,10));
+                        boton.setBackground(new Color(160, 20, 10));
                         break;
                     case 5:
-                        boton.setBackground(new Color(110,0,0));
+                        boton.setBackground(new Color(110, 0, 0));
                         break;
                     default:
-                        boton.setBackground(new Color(255,0,0));
+                        boton.setBackground(new Color(255, 0, 0));
                 }
                 boton.setText(Integer.toString(valor % 10));
-            
-            //Jugador 2 (azul)
-            }else{
+
+                //Jugador 2 (azul)
+            } else {
                 //cantidad
                 valor = valor % 10;
-                
-                switch (valor){
+
+                switch (valor) {
                     case 1:
-                        boton.setBackground(new Color(90,160,240));
+                        boton.setBackground(new Color(90, 160, 240));
                         break;
                     case 2:
-                        boton.setBackground(new Color(50,110,240));
+                        boton.setBackground(new Color(50, 110, 240));
                         break;
                     case 3:
-                        boton.setBackground(new Color(30,70,230));
+                        boton.setBackground(new Color(30, 70, 230));
                         break;
                     case 4:
-                        boton.setBackground(new Color(20,40,210));
+                        boton.setBackground(new Color(20, 40, 210));
                         break;
                     case 5:
-                        boton.setBackground(new Color(0,0,180));
+                        boton.setBackground(new Color(0, 0, 180));
                         break;
                     default:
-                        boton.setBackground(new Color(0,0,255));
+                        boton.setBackground(new Color(0, 0, 255));
                 }
                 boton.setText(Integer.toString(valor % 10));
             }
-            
-        //Si no tiene cubos, entonces está vacío
-        }else{
+
+            //Si no tiene cubos, entonces está vacío
+        } else {
             boton.setText("");
         }
         boton.setForeground(Color.yellow);
     }
-    
-    private void actualizarPanelJuego(String retorno){
+
+    private void actualizarPanelJuego(String retorno) {
 
         //Actualizo cantidad de cubos por jugadores
         jLJugador1Status.setText(Integer.toString(tablero.getCantCubosJug1()));
-        jLJugador2Status.setText(Integer.toString(tablero.getCantCubosJug2()));        
-        
+        jLJugador2Status.setText(Integer.toString(tablero.getCantCubosJug2()));
+
         //Si no hay Ganador.
-        if(partida.terminoPartida() == 0 && (retorno.toUpperCase().equals("OK")) ) {
+        if (partida.terminoPartida() == 0 && (retorno.toUpperCase().equals("OK"))) {
 
             partida.cambioTurno();
 
@@ -516,9 +539,9 @@ private void abandonar() {
 
             //Siempre empieza jugando el Jugador 1
             turnoActual = partida.getTurno();
-        }else{
-            if (retorno.toUpperCase().equals("FIN")){
-                JOptionPane.showMessageDialog(null, "Ganador: "+ partida.terminoPartida());
+        } else {
+            if (retorno.toUpperCase().equals("FIN")) {
+                JOptionPane.showMessageDialog(null, "Ganador: " + partida.terminoPartida());
                 MenuPrincipal vMenuPrinipal = new MenuPrincipal(modelo);
                 vMenuPrinipal.setTitle("ESQUINAS - Menú Principal");
                 vMenuPrinipal.setSize(900, 600);
@@ -527,5 +550,35 @@ private void abandonar() {
             }
         }
     }
- 
+
+    ActionListener countDown = new ActionListener() {
+
+        public void actionPerformed(ActionEvent e) {
+            timeLeft -= 100;
+            SimpleDateFormat df = new SimpleDateFormat("mm:ss:S");
+            jLTimer.setText(df.format(timeLeft));
+            if (timeLeft <= 0) {
+                timer.stop();
+            }
+        }
+    };
+    Timer timer = new Timer(100, countDown);
+
+//    //Timer para turno
+//    Timer timer = new Timer(1000, new TimerListener());
+//
+//    class TimerListener implements ActionListener{
+//        int elapsedSeconds = 30;
+//
+//        public void actionPerformed(ActionEvent evt){
+//            elapsedSeconds--;
+//            jLTimer.setText(elapsedSeconds);
+//            if(elapsedSeconds <= 0){
+//                timer.stop();
+//                wrong()
+//                // fill'er up here...
+//            }
+//        }
+//
+//    }    
 }

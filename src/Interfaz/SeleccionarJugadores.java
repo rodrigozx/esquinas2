@@ -24,7 +24,8 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private ImageIcon atrasIco = new ImageIcon("src/Img/volver.png");
     private ImageIcon jugarIco = new ImageIcon("src/Img/jugar.png");
     private ImageIcon expJugIco = new ImageIcon("src/Img/expJugIco.png");
-
+    private Double timeLeft;
+    
     public SeleccionarJugadores(Dominio.Sistema elModelo) {
         Modelo = elModelo;
 
@@ -81,6 +82,8 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         jButAgregar = new javax.swing.JButton();
         jButJugar = new javax.swing.JButton();
         jBAtras = new javax.swing.JButton();
+        jSTime = new javax.swing.JSlider();
+        jLTime = new javax.swing.JLabel();
 
         jButton2.setText(">");
 
@@ -125,55 +128,75 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
             }
         });
 
+        jSTime.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jSTime.setMaximum(60);
+        jSTime.setMinimum(10);
+        jSTime.setValue(30);
+        jSTime.setMaximumSize(new java.awt.Dimension(200, 16));
+        jSTime.setMinimumSize(new java.awt.Dimension(200, 16));
+        jSTime.setPreferredSize(new java.awt.Dimension(200, 20));
+        jSTime.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSTimeStateChanged(evt);
+            }
+        });
+
+        jLTime.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLTime.setForeground(new java.awt.Color(180, 180, 180));
+        jLTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLTime.setText("Segundos por turno: 30");
+        jLTime.setAlignmentX(0.5F);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBAtras)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(60, 60, 60)))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBAtras))
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(jButQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(54, 54, 54)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jButQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(55, 55, 55)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                            .addComponent(jLTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                            .addComponent(jSTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(190, 190, 190)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jButAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(54, 54, 54))))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jButQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)
+                        .addComponent(jLTime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBAtras))
-                    .addComponent(jButJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(108, 108, 108))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1)))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBAtras))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,7 +271,8 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         
         Partida laPartida = new Partida( player1, player2, 1, false, 25);
         Modelo.setPartida(laPartida);
-        TableroJuego vTablero = new TableroJuego(Modelo);
+
+        TableroJuego vTablero = new TableroJuego(Modelo, timeLeft);
         vTablero.setSize(900, 600);
         vTablero.setTitle("Esquinas - Partida en Juego");
         vTablero.setVisible(true);
@@ -257,12 +281,18 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
 
     //Acción Boton atras
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
+        
         MenuPrincipal vMenuPrinipal = new MenuPrincipal(Modelo);
         vMenuPrinipal.setSize(this.getSize());
         vMenuPrinipal.setVisible(true);
         dispose();
 
     }//GEN-LAST:event_jBAtrasActionPerformed
+
+    private void jSTimeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSTimeStateChanged
+        timeLeft = (jSTime.getValue()*0.1);
+        this.jLTime.setText("Segundos por turno: " + jSTime.getValue());
+    }//GEN-LAST:event_jSTimeStateChanged
 
     /**
      * @param args the command line arguments
@@ -315,9 +345,11 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private javax.swing.JButton jButJugar;
     private javax.swing.JButton jButQuitar;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLTime;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jListJugadoresSeleccionados;
     private javax.swing.JList jListListaJugadores;
+    private javax.swing.JSlider jSTime;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

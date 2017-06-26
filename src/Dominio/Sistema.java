@@ -15,18 +15,30 @@ public class Sistema implements Serializable {
     //Atributos del Sistema
     private ArrayList<Jugador> listaJugadores;
     private Partida partida;
-
+    private ArrayList<Partida> listaPartidasGuardadas;
+    
     //Constructor del Sistema
     public Sistema() {
         this.listaJugadores = new ArrayList();
-
+        this.listaPartidasGuardadas = new ArrayList();
         //La partida se crea al seleccionar nueva partida
         //this.partida = new Partida();
     }
 
-    /**
-     * *****************************************************
+    /*
+     **********************************************
+     Gets y Sets
      */
+
+    public ArrayList<Partida> getListaPartidasGuardadas() {
+        return listaPartidasGuardadas;
+    }
+
+    public void setListaPartidasGuardadas(ArrayList<Partida> listaPartidasGuardadas) {
+        this.listaPartidasGuardadas = listaPartidasGuardadas;
+    }
+    
+    
     public ArrayList<Jugador> getListaJugadores() {
         return listaJugadores;
     }
