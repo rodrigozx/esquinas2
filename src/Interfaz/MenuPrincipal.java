@@ -121,7 +121,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jbInfo.setText("Salir");
+        jbInfo.setText("Info");
         jbInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInfoActionPerformed(evt);
@@ -215,7 +215,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInfoActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Obligatorio II \n Programación II \n Rodrigo Blanco Lemos \n nro: 151251" );
     }//GEN-LAST:event_jbInfoActionPerformed
 
     /**
