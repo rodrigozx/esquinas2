@@ -33,7 +33,7 @@ public class Tablero implements Serializable {
 
     /* CONSTRUCTOR *************************************/
     public Tablero() {
-        this.matrizTablero = new int[6][6];
+        this.matrizTablero = new int[8][8];
     }
 
     /* GETS Y SETS *************************************/
@@ -74,26 +74,36 @@ public class Tablero implements Serializable {
          */
         String retorno;
         int cubo;
+        ArrayList <String> listaCubosAdicionales = new ArrayList();
         
         //valido la jugada 
-        retorno = validarJugada(fila, columna, turno);
-
+        retorno = validarJugada(fila, columna);
+        
+        System.out.println("validarJugada:" + retorno + " - turno: " + turno);
+        
         if (retorno.equals("OK")) {
             //coloco el cubo en la posición.
             cubo = (turno * 10) + 1;
             // 11 - significa 1 cubo del jugador 1
             // 21 - significa 1 cubo del jugador 2
             this.getMatrizTablero()[fila][columna] = cubo;
-            cubo = ingresoCubosEsquinas(fila, columna, turno,true);
-            System.out.println("cubos adicionales: " + Integer.toString(cubo));
+            listaCubosAdicionales = ingresoCubosEsquinas(fila, columna, turno,true);
+            
+            System.out.println("cubos adicionales: " + listaCubosAdicionales);
+            
         } else {
             //Si existe error al colorcar el cubo
+            //entonces la descripción del error está en el retorno...
         }
+            System.out.println("colocarCubo:" + retorno);
 
+        for (int i = 0; i < listaCubosAdicionales.size(); i++) {
+            retorno += "#" + listaCubosAdicionales.get(i);
+        }
         return retorno;
     }
 
-    public String validarJugada(int fila, int columna, int turno) {
+    public String validarJugada(int fila, int columna) {
         /*Este método valida la jugada contolando:
              - que no exista ganador.
              - que quien juega tenga cubos.
@@ -123,8 +133,8 @@ public class Tablero implements Serializable {
     }
 
     public void tableroInicial() {
-        for (int i = 0; i < this.matrizTablero.length; i++) {
-            for (int j = 0; j < this.matrizTablero[i].length; j++) {
+        for (int i = 1; i < this.matrizTablero.length-1; i++) {
+            for (int j = 1; j < this.matrizTablero[i].length -1; j++) {
                 this.matrizTablero[i][j] = 0;
             }
         }
@@ -202,16 +212,17 @@ public class Tablero implements Serializable {
 
     public int casillaOcupada(int fila, int columna) {
         int retorno = 0;
-        if ((fila >= 0) && (fila < (this.getMatrizTablero().length)) && (columna >= 0) && (columna < (this.getMatrizTablero().length))) {
+        if ((fila >= 1) && (fila < (this.getMatrizTablero().length-1)) && (columna >= 1) && (columna < (this.getMatrizTablero().length-1))) {
             if (this.getMatrizTablero()[fila][columna] > 0) {
                 retorno = 1;
             }
         }
         return retorno;
     }
-    public int ingresoCubosEsquinas(int fila, int columna, int turno, boolean esJugada){
+    public ArrayList <String> ingresoCubosEsquinas(int fila, int columna, int turno, boolean esJugada){
         
-        int cubosIngresados = 0;
+        ArrayList <String> listaCubosAdicionales = new ArrayList();
+//        int cubosIngresados = 0;
         boolean hayTorre = true;
         
         //Si esJugada == false, es para calcular posible cubos a ingresar
@@ -230,18 +241,20 @@ public class Tablero implements Serializable {
                     if((casillaOcupada(i,columna-1)>0)){
                         //Si tiene, es una esquina
                         //Sumo un cubo a esa esquina
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
                             setCuboAdicional(i,columna,turno);
+                            listaCubosAdicionales.add( Integer.toString(i) + Integer.toString(columna));
                         }
                     }
                     //Reviso la columna posterior de esa fila
                     if((casillaOcupada(i,columna+1)>0)){
                         //Si tiene, esuna esquina
                         //Sumo un cubo a esa esquina     
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){                        
-                            setCuboAdicional(i,columna,turno);                        
+                            setCuboAdicional(i,columna,turno);
+                            listaCubosAdicionales.add( Integer.toString(i) + Integer.toString(columna));                            
                         }
                     }
                 }
@@ -264,18 +277,20 @@ public class Tablero implements Serializable {
                     if((casillaOcupada(i,columna-1)>0)){
                         //Si tiene, esuna esquina
                         //Sumo un cubo a esa esquina
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
-                            setCuboAdicional(i,columna,turno);                            
+                            setCuboAdicional(i,columna,turno);
+                            listaCubosAdicionales.add( Integer.toString(i) + Integer.toString(columna));                            
                         }                        
                     }
                     //Reviso la columna posterior de esa fila
                     if((casillaOcupada(i,columna+1)>0)){
                         //Si tiene, esuna esquina
                         //Sumo un cubo a esa esquina     
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
-                            setCuboAdicional(i,columna,turno);                              
+                            setCuboAdicional(i,columna,turno);
+                            listaCubosAdicionales.add( Integer.toString(i) + Integer.toString(columna));                            
                         }                        
                     }
                 }
@@ -298,18 +313,20 @@ public class Tablero implements Serializable {
                     if((casillaOcupada(fila-1,j)>0)){
                         //Si tiene, es una esquina
                         //Sumo un cubo a esa esquina
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
                             setCuboAdicional(fila,j,turno);
+                            listaCubosAdicionales.add( Integer.toString(fila) + Integer.toString(j));
                         }                        
                     }
                     //Reviso la fila posterior de esa columna
                     if((casillaOcupada(fila+1,j)>0)){
                         //Si tiene, es una esquina
                         //Sumo un cubo a esa esquina     
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
                             setCuboAdicional(fila,j,turno);
+                            listaCubosAdicionales.add( Integer.toString(fila) + Integer.toString(j));                            
                         }                        
                     }
                 }
@@ -333,39 +350,49 @@ public class Tablero implements Serializable {
                     if((casillaOcupada(fila-1,j)>0)){
                         //Si tiene, es una esquina
                         //Sumo un cubo a esa esquina
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
                             setCuboAdicional(fila,j,turno);
+                            listaCubosAdicionales.add( Integer.toString(fila) + Integer.toString(j));                            
                         }                        
                     }
                     //Reviso la fila posterior de esa columna
                     if((casillaOcupada(fila+1,j)>0)){
                         //Si tiene, es una esquina
                         //Sumo un cubo a esa esquina     
-                        cubosIngresados++;
+//                        cubosIngresados++;
                         if(esJugada){
-                            setCuboAdicional(fila,j,turno);                                                    
+                            setCuboAdicional(fila,j,turno);
+                            listaCubosAdicionales.add( Integer.toString(fila) + Integer.toString(j));                            
                         }                        
                     }
                 }
             }
         }
-        return cubosIngresados;
+        return listaCubosAdicionales;
     }
     
-    public void jugadaCpu(){
+    public String jugadaCpu(){
         int maximo;
         maximo=0;
         String control;
-        int cantCalc;
+        String retorno = "";
+        
+        ArrayList <String> listaCubosAdicionales = new ArrayList();
         for (int i = 0; i < this.getMatrizTablero().length; i++) {
             for (int j = 0; j < this.getMatrizTablero().length; j++) {
                control = this.controlCuadrados(i, j);
                if ((control).equals("ok")){
-                   cantCalc = this.ingresoCubosEsquinas(i, maximo, j, true);
+                   listaCubosAdicionales = this.ingresoCubosEsquinas(i, maximo, j, true);
                }
             }
         }
+        
+        for (int i = 0; i < listaCubosAdicionales.size(); i++) {
+            retorno+= "#" + listaCubosAdicionales.get(i);
+        }
+       
+        return retorno;
     }
     
     public void setCuboAdicional(int fila, int columna, int turno){

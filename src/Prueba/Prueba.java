@@ -11,7 +11,7 @@ public class Prueba {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
  
-       // Modelo = Persistencia.ArchSistema.recuperar();
+        Modelo = Persistencia.ArchSistema.recuperar();
         MenuPrincipal vMenuPrincipal = new MenuPrincipal(Modelo);
         vMenuPrincipal.setVisible(true);
     }

@@ -89,7 +89,9 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         jButton2.setText(">");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 600));
         setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 600));
 
@@ -187,7 +189,6 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     public void getJugadoresList(ArrayList<Jugador> unaListaJugadores) {
 
         jListListaJugadores.removeAll();
-
         for (int i = 0; i < unaListaJugadores.size(); i++) {
             dlmListaJugadores.addElement(unaListaJugadores.get(i).getAlias());
         }
@@ -225,11 +226,31 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButAgregarActionPerformed
 
+    private Jugador jugadorEnLista(String alias){
+                
+        ArrayList <Jugador> lista = new ArrayList();
+        lista = Modelo.getListaJugadores();
+        boolean encontrado = false;
+        Jugador elJugador = null;
+        
+        for (int i = 0; i < lista.size() && !encontrado; i++) {
+            if (lista.get(i).getAlias().equals(alias)){
+                elJugador = lista.get(i);
+                encontrado = true;
+            }
+        }
+        return elJugador;
+    }
+    
     private void jButJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButJugarActionPerformed
+        
         //Accion al presionar el boton Jugar
-        //Posición del jugador 1 en el arrayList.
-        //Partida laPartida = new Partida((Jugador) dlmSeleccionar.get(0), (Jugador) dlmSeleccionar.get(1), 1, false, 25);
-        Partida laPartida = new Partida();
+        //Busco el jugador 1 en la lista original
+        Jugador player1 = jugadorEnLista(dlmSeleccionar.get(0).toString());
+        //Busco el jugador 2 en la lista original
+        Jugador player2 = jugadorEnLista(dlmSeleccionar.get(1).toString());
+        
+        Partida laPartida = new Partida( player1, player2, 1, false, 25);
         Modelo.setPartida(laPartida);
         TableroJuego vTablero = new TableroJuego(Modelo);
         vTablero.setSize(900, 600);

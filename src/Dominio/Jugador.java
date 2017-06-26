@@ -20,6 +20,7 @@ public class Jugador implements Serializable {
     /*Significado de posisiones en array de Partidas:
      pos = 0 -Partidas Ganadas.
      pos = 1 -Partidas Perdidas.*/
+    
     /* CONSTRUCTOR POR DEFECTO *************************************/
     public Jugador() {
         this.alias = "Sin Alias";
