@@ -10,11 +10,7 @@ import Dominio.Jugador;
 import Dominio.Partida;
 import Dominio.Sistema;
 import java.awt.Image;
-import java.awt.MenuComponent;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -325,4 +321,5 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
 }

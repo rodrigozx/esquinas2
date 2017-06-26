@@ -57,6 +57,7 @@ public class TableroJuego extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         setResizable(false);
+        setLocationRelativeTo(null);//Ventana Centrada
         
         //seteo el fondo transparente
         jBAbandonar.setOpaque(false);
@@ -169,11 +170,11 @@ public class TableroJuego extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLJugador2)
                                 .addGap(139, 139, 139))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLJugador1Status)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLJugador1)
-                                    .addGap(139, 139, 139)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLJugador1Status)
+                                    .addComponent(jLJugador1))
+                                .addGap(33, 33, 33))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLJugador2Status)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
