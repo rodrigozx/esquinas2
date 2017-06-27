@@ -11,8 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import Dominio.Jugador;
 import Dominio.Sistema;
-import Excepciones.*;
-import Persistencia.*;
 import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.io.IOException;

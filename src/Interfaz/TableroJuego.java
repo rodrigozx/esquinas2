@@ -46,7 +46,7 @@ public class TableroJuego extends javax.swing.JFrame {
     //Timer para turno
     public Double timeLeft;
     private JButton[][] botones;
-
+    
     public TableroJuego(Sistema elModelo, Double defaultTimeLeft) {
         
         //Timer para turno
@@ -255,10 +255,18 @@ public class TableroJuego extends javax.swing.JFrame {
         //Abandona el Jugador 1 - gana el Jugador 2
         if (turnoActual == 1) {
             partida.setGanador(partida.getJugador2());
-
-            //Abandona el Jugador 2 - gana el Jugador 1
+            //le sumo una partida ganada al jugador 2
+            partida.getJugador2().setPartidas(partida.getJugador2().getPartidas()[0] + 1, partida.getJugador2().getPartidas()[1]);
+            //le sumo una partida perdida al jugador 1
+            partida.getJugador1().setPartidas(partida.getJugador1().getPartidas()[0], partida.getJugador1().getPartidas()[1] + 1);
+            
+        //Abandona el Jugador 2 - gana el Jugador 1
         } else {
             partida.setGanador(partida.getJugador1());
+            //le sumo una partida ganada al jugador 1
+            partida.getJugador1().setPartidas(partida.getJugador1().getPartidas()[0] + 1, partida.getJugador1().getPartidas()[1]);
+            //le sumo una partida perdida al jugador 2
+            partida.getJugador2().setPartidas(partida.getJugador2().getPartidas()[0], partida.getJugador2().getPartidas()[1] + 1);
         }
 
         //Guardamos el modelo para persistir el Ranking de los jugadores.
@@ -426,46 +434,70 @@ public class TableroJuego extends javax.swing.JFrame {
     private void clickBotonMatriz(int fila, int columna) {
 
         String retorno = "";
-        String primerValor = "";
-        String[] listaRetorno;
+
 
         //Si es una casilla Libre del casillero
         if (tablero.getMatrizTablero()[fila][columna] == 0) {
 
             //Coloco el cubo en el lugar seleccionado
             retorno = tablero.colocarCubo(fila, columna, turnoActual);
-            listaRetorno = retorno.split("#");
-            primerValor = listaRetorno[0];
-
-            //Borro lista de cubos adicionales
-            jLCubosAd.removeAll();
-            dlmCuboAd.clear();
-
-            switch (primerValor) {
-
-                case "OK":
-
-                    //Creo y muestro la lista de cubos adicionales.
-                    listaRetorno = retorno.split("#");
-                    getCubosAd(listaRetorno);
-
-                    //Resto los cubos del jugador
-                    partida.restaCubos(listaRetorno.length, true);
-                    break;
-
-                case "FIN":
-                    //Si la jugada esta ok, entonces debo revisar si existe ganador
-                    JOptionPane.showMessageDialog(null, "Ganador: " + partida.terminoPartida());
-                    break;
-
-                default:
-                    JOptionPane.showMessageDialog(null, retorno, "Jugada Incorrecta!", JOptionPane.WARNING_MESSAGE);
-            }
+            valoresRetornoJugadoa(retorno);
         }
-        actualizarPanelJuego(primerValor);
-        this.showTablero();
+        
+        //Si esta jugando vs CPU y ya jugo su turno, entonces juega CPU.
+        System.out.println(turnoActual + " " + partida.getJugador2().getAlias());
+        if (turnoActual == 2 && partida.getJugador2().getAlias().equals("CPU")){
+            String jugadaCPU;
+            jugadaCPU = modelo.getPartida().getTablero().jugadaCpu();
+            System.out.println(jugadaCPU);
+            valoresRetornoJugadoa( jugadaCPU);
+        }
     }
 
+    private void valoresRetornoJugadoa( String retorno){
+       String primerValor = "";
+       String[] listaRetorno;             
+       listaRetorno = retorno.split("#");
+       primerValor = listaRetorno[0];
+
+       //Borro lista de cubos adicionales
+       jLCubosAd.removeAll();
+       dlmCuboAd.clear();
+
+       switch (primerValor) {
+
+           case "OK":
+               //Creo y muestro la lista de cubos adicionales.
+               listaRetorno = retorno.split("#");
+               getCubosAd(listaRetorno);
+
+               //Resto los cubos del jugador
+               partida.restaCubos(listaRetorno.length, true);
+               break;
+
+           case "FIN":
+               //Si la jugada esta ok, entonces debo revisar si existe ganador
+               int puntosJ1 = partida.getTablero().getPuntosJugador(partida.getJugador1());
+               int puntosJ2 = partida.getTablero().getPuntosJugador(partida.getJugador2());
+               if (puntosJ1>puntosJ2){
+                   partida.setGanador(partida.getJugador2());
+                   JOptionPane.showMessageDialog(null, "Ganador: " + partida.getJugador1().getAlias() + " puntos: "+ Integer.toString(puntosJ1) + "\n" 
+                                                    + "Perdedor: " + partida.getJugador2().getAlias() + " puntos: "+ Integer.toString(puntosJ2));
+               }else{
+                   partida.setGanador(partida.getJugador2());
+                 JOptionPane.showMessageDialog(null, "Ganador: " + partida.getJugador2().getAlias() + " puntos: "+ Integer.toString(puntosJ2) + "\n"
+                                                   + "Perdedor: " + partida.getJugador1().getAlias() + " puntos: "+ Integer.toString(puntosJ1));
+               }
+               JOptionPane.showMessageDialog(null, "Ganador: " + partida.terminoPartida());
+               break;
+
+           default:
+               JOptionPane.showMessageDialog(null, retorno, "Jugada Incorrecta!", JOptionPane.WARNING_MESSAGE);
+       }
+        actualizarPanelJuego(primerValor);
+        this.showTablero();       
+   }
+    
     private void renderContenidoBoton(JButton boton, int valor) {
 
         //Si tiene cubos ingresados

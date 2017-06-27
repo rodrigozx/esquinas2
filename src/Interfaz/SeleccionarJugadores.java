@@ -72,7 +72,6 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListJugadoresSeleccionados = new javax.swing.JList();
@@ -84,8 +83,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         jBAtras = new javax.swing.JButton();
         jSTime = new javax.swing.JSlider();
         jLTime = new javax.swing.JLabel();
-
-        jButton2.setText(">");
+        jCBvsCPU = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -94,6 +92,8 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(900, 600));
 
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione los jugadores y luego pulse Jugar.");
 
         jScrollPane1.setViewportView(jListJugadoresSeleccionados);
@@ -147,56 +147,73 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         jLTime.setText("Segundos por turno: 30");
         jLTime.setAlignmentX(0.5F);
 
+        jCBvsCPU.setBackground(new java.awt.Color(0, 0, 0));
+        jCBvsCPU.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jCBvsCPU.setForeground(new java.awt.Color(255, 255, 255));
+        jCBvsCPU.setText("Vs. CPU");
+        jCBvsCPU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBvsCPUActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBAtras))
-                .addGap(60, 60, 60)
+                .addGap(120, 120, 120)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jBAtras)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jCBvsCPU)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jButQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(54, 54, 54)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(jButQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(54, 54, 54)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                            .addComponent(jSTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                                .addComponent(jSTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
+                .addGap(91, 91, 91)
+                .addComponent(jCBvsCPU)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
-                                .addComponent(jButQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
+                                .addComponent(jButQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addComponent(jLTime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel1)))
+                        .addComponent(jSTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBAtras))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,10 +283,18 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         //Accion al presionar el boton Jugar
         //Busco el jugador 1 en la lista original
         Jugador player1 = jugadorEnLista(dlmSeleccionar.get(0).toString());
-        //Busco el jugador 2 en la lista original
-        Jugador player2 = jugadorEnLista(dlmSeleccionar.get(1).toString());
+        Jugador player2;
         
-        Partida laPartida = new Partida( player1, player2, 1, false, 25);
+        if(jCBvsCPU.isSelected()){
+            Jugador cpu = new Jugador();
+            cpu.setAlias("CPU");
+            cpu.setNombre("CPU");
+            player2 = cpu;
+        }else{
+            //Busco el jugador 2 en la lista original
+            player2 = jugadorEnLista(dlmSeleccionar.get(1).toString());            
+        }
+        Partida laPartida = new Partida( player1, player2, 1,jCBvsCPU.isSelected() , 25);
         Modelo.setPartida(laPartida);
 
         TableroJuego vTablero = new TableroJuego(Modelo, timeLeft);
@@ -293,6 +318,10 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
         timeLeft = (jSTime.getValue()*0.1);
         this.jLTime.setText("Segundos por turno: " + jSTime.getValue());
     }//GEN-LAST:event_jSTimeStateChanged
+
+    private void jCBvsCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBvsCPUActionPerformed
+        habilitarJugar();
+    }//GEN-LAST:event_jCBvsCPUActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,7 +360,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     }
 
     private void habilitarJugar() {
-        if (dlmSeleccionar.getSize() == 2 || dlmSeleccionar.getSize()==1) {
+        if (((dlmSeleccionar.getSize() == 2) && (!jCBvsCPU.isSelected())) || ((dlmSeleccionar.getSize()==1) && jCBvsCPU.isSelected())) {
             jButJugar.setEnabled(true);
         } else {
             jButJugar.setEnabled(false);
@@ -344,7 +373,7 @@ public class SeleccionarJugadores extends javax.swing.JFrame {
     private javax.swing.JButton jButAgregar;
     private javax.swing.JButton jButJugar;
     private javax.swing.JButton jButQuitar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCBvsCPU;
     private javax.swing.JLabel jLTime;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jListJugadoresSeleccionados;

@@ -79,8 +79,6 @@ public class Tablero implements Serializable {
         //valido la jugada 
         retorno = validarJugada(fila, columna);
         
-        System.out.println("validarJugada:" + retorno + " - turno: " + turno);
-        
         if (retorno.equals("OK")) {
             //coloco el cubo en la posición.
             cubo = (turno * 10) + 1;
@@ -89,14 +87,10 @@ public class Tablero implements Serializable {
             this.getMatrizTablero()[fila][columna] = cubo;
             listaCubosAdicionales = ingresoCubosEsquinas(fila, columna, turno,true);
             
-            System.out.println("cubos adicionales: " + listaCubosAdicionales);
-            
         } else {
             //Si existe error al colorcar el cubo
             //entonces la descripción del error está en el retorno...
         }
-            System.out.println("colocarCubo:" + retorno);
-
         for (int i = 0; i < listaCubosAdicionales.size(); i++) {
             retorno += "#" + listaCubosAdicionales.get(i);
         }
@@ -114,7 +108,7 @@ public class Tablero implements Serializable {
         String retorno;
 
         //No existe ganador y tienen cubos
-        if (this.cantCubosJug1 > 0 && this.getCantCubosJug2() > 0) {
+        if (this.getCantCubosJug1() > 0 && this.getCantCubosJug2() > 0) {
             retorno = "OK";
 
             //Si el valor de la casilla no es mayor a 0
@@ -382,7 +376,7 @@ public class Tablero implements Serializable {
         for (int i = 0; i < this.getMatrizTablero().length; i++) {
             for (int j = 0; j < this.getMatrizTablero().length; j++) {
                control = this.controlCuadrados(i, j);
-               if ((control).equals("ok")){
+               if ((control).equals("OK")){
                    listaCubosAdicionales = this.ingresoCubosEsquinas(i, maximo, j, true);
                }
             }
